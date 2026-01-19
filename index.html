@@ -21,7 +21,7 @@
       --border:#e2e8f0;
       --shadow: 0 10px 30px rgba(2, 8, 23, .08);
       --radius: 18px;
-      --max: 1080px;
+      --max: 980px;
       --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     }
     *{box-sizing:border-box}
@@ -30,53 +30,61 @@
       font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", Arial, "Apple Color Emoji","Segoe UI Emoji";
       color:var(--text);
       background:
-        radial-gradient(900px 400px at 15% -10%, rgba(14,165,233,.18), transparent 60%),
-        radial-gradient(900px 420px at 100% 10%, rgba(34,197,94,.12), transparent 55%),
+        radial-gradient(900px 400px at 15% -10%, rgba(14,165,233,.14), transparent 60%),
+        radial-gradient(900px 420px at 100% 10%, rgba(34,197,94,.10), transparent 55%),
         var(--bg);
-      line-height:1.55;
+      line-height:1.6;
     }
     a{color:inherit}
-    .wrap{max-width:var(--max); margin:0 auto; padding:24px}
+    .wrap{max-width:var(--max); margin:0 auto; padding:22px}
     .topbar{
       position:sticky; top:0; z-index:20;
       backdrop-filter: blur(10px);
-      background: rgba(246,249,252,.7);
-      border-bottom:1px solid rgba(226,232,240,.8);
+      background: rgba(246,249,252,.75);
+      border-bottom:1px solid rgba(226,232,240,.85);
     }
     .topbar .wrap{
       display:flex; align-items:center; justify-content:space-between;
-      padding:14px 24px;
+      padding:12px 22px;
+      gap:10px;
     }
     .brand{
       display:flex; gap:10px; align-items:center;
-      font-weight:800;
-      letter-spacing:.5px;
+      font-weight:900;
+      letter-spacing:.3px;
+      font-size:14px;
     }
     .dot{
-      width:12px; height:12px; border-radius:999px;
+      width:10px; height:10px; border-radius:999px;
       background:linear-gradient(135deg, var(--brand), var(--brand2));
-      box-shadow: 0 6px 18px rgba(14,165,233,.25);
+      box-shadow: 0 6px 18px rgba(14,165,233,.20);
+      flex:0 0 auto;
     }
-    nav{display:flex; gap:14px; align-items:center; flex-wrap:wrap; justify-content:flex-end}
+    nav{display:flex; gap:8px; align-items:center; flex-wrap:wrap; justify-content:flex-end}
     nav a{
       text-decoration:none;
-      font-size:14px;
+      font-size:13px;
       color:var(--muted);
-      padding:8px 10px;
+      padding:7px 9px;
       border-radius:999px;
     }
     nav a:hover{background:rgba(14,165,233,.10); color:var(--text)}
+    @media (max-width: 900px){
+      nav{display:none}
+    }
+
     .btn{
       display:inline-flex; align-items:center; justify-content:center;
       gap:8px;
       border:1px solid var(--border);
       background: var(--card);
-      padding:12px 14px;
+      padding:10px 12px;
       border-radius:12px;
       text-decoration:none;
-      font-weight:700;
+      font-weight:800;
       cursor:pointer;
-      transition: transform .06s ease, box-shadow .06s ease, background .2s ease;
+      transition: transform .06s ease, box-shadow .06s ease, background .2s ease, opacity .2s ease;
+      font-size:14px;
     }
     .btn:hover{transform: translateY(-1px); box-shadow: 0 12px 24px rgba(2,8,23,.08)}
     .btn.primary{
@@ -84,27 +92,19 @@
       background: linear-gradient(135deg, var(--brand), #38bdf8);
       color: #fff;
     }
-    .btn.primary:hover{box-shadow: 0 18px 40px rgba(14,165,233,.25)}
+    .btn.primary:hover{box-shadow: 0 18px 40px rgba(14,165,233,.22)}
     .btn.green{
       border-color: transparent;
       background: linear-gradient(135deg, var(--brand2), #86efac);
       color:#052e16;
     }
-    .hero{
-      padding:28px 0 10px;
+    .btn:disabled{
+      opacity:.55;
+      cursor:not-allowed;
+      transform:none;
+      box-shadow:none;
     }
-    .grid{
-      display:grid;
-      gap:18px;
-    }
-    .heroGrid{
-      grid-template-columns: 1.2fr .8fr;
-      align-items:stretch;
-    }
-    @media (max-width: 900px){
-      .heroGrid{grid-template-columns: 1fr}
-      nav{display:none}
-    }
+
     .card{
       background:var(--card);
       border:1px solid var(--border);
@@ -112,53 +112,63 @@
       box-shadow: var(--shadow);
       overflow:hidden;
     }
-    .heroCard{
-      padding:22px;
-    }
+
+    header.hero{padding:18px 0 8px}
+    .heroCard{padding:20px}
+
     .kicker{
       display:inline-flex;
       gap:10px;
       align-items:center;
-      font-size:13px;
+      font-size:12px;
       color:var(--muted);
       background: rgba(14,165,233,.08);
-      border:1px solid rgba(14,165,233,.18);
+      border:1px solid rgba(14,165,233,.16);
       padding:6px 10px;
       border-radius:999px;
-      font-weight:700;
+      font-weight:800;
     }
+
     h1{
-      margin:12px 0 10px;
-      font-size: 34px;
-      line-height:1.18;
+      margin:12px 0 8px;
+      font-size: 28px;
+      line-height:1.22;
       letter-spacing:.2px;
     }
     @media (max-width: 520px){
-      h1{font-size:28px}
+      h1{font-size:24px}
     }
+
     .sub{
-      margin:0 0 16px;
+      margin:0 0 14px;
       color:var(--muted);
-      font-size:16px;
+      font-size:14px;
+      font-weight:600;
     }
+
     .pillRow{
-      display:flex; gap:10px; flex-wrap:wrap;
-      margin:16px 0 18px;
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:10px;
+      margin:14px 0 14px;
+    }
+    @media (max-width: 720px){
+      .pillRow{grid-template-columns: 1fr}
     }
     .pill{
-      flex: 0 0 auto;
       border:1px solid var(--border);
       background: #fff;
       border-radius: 14px;
       padding:10px 12px;
-      min-width: 150px;
     }
-    .pill .t{font-size:12px; color:var(--muted); font-weight:700}
-    .pill .v{font-size:16px; font-weight:900; margin-top:2px}
+    .pill .t{font-size:12px; color:var(--muted); font-weight:800}
+    .pill .v{font-size:15px; font-weight:900; margin-top:2px}
+
     .ctaRow{
       display:flex; gap:10px; flex-wrap:wrap;
-      margin-top: 12px;
+      margin-top: 10px;
     }
+
     .notice{
       margin-top:12px;
       padding:10px 12px;
@@ -166,81 +176,45 @@
       border:1px dashed rgba(2,8,23,.18);
       background: rgba(2,8,23,.03);
       color:var(--muted);
-      font-size:14px;
-    }
-    .qrCard{
-      padding:18px;
-      display:flex;
-      flex-direction:column;
-      gap:14px;
-    }
-    .qrBox{
-      border:1px solid var(--border);
-      border-radius: 16px;
-      padding:14px;
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-      align-items:center;
-      background: linear-gradient(180deg, rgba(14,165,233,.06), rgba(34,197,94,.05));
-    }
-    .qrBox img{
-      width: 220px;
-      height: 220px;
-      object-fit: contain;
-      background:#fff;
-      border-radius: 14px;
-      border: 1px solid rgba(226,232,240,.9);
-      padding:10px;
-    }
-    .qrTip{
       font-size:13px;
-      color:var(--muted);
-      text-align:center;
+      font-weight:650;
     }
-    section{padding:18px 0}
+
+    section{padding:14px 0}
     .secTitle{
       display:flex;
       align-items:flex-end;
       justify-content:space-between;
       gap:10px;
-      margin: 8px 0 12px;
+      margin: 8px 0 10px;
     }
     .secTitle h2{
       margin:0;
-      font-size:22px;
+      font-size:18px;
       letter-spacing:.2px;
     }
     .secTitle .hint{
       color:var(--muted);
-      font-size:13px;
+      font-size:12px;
+      font-weight:650;
     }
-    .cards3{
-      grid-template-columns: repeat(3, 1fr);
-    }
+
+    .grid{display:grid; gap:12px}
+    .cards3{grid-template-columns: repeat(3, 1fr)}
     @media (max-width: 900px){
       .cards3{grid-template-columns: 1fr}
     }
-    .infoCard{
-      padding:16px;
-    }
-    .infoCard h3{
-      margin:0 0 6px;
-      font-size:16px;
-    }
-    .infoCard p{
-      margin:0;
-      color:var(--muted);
-      font-size:14px;
-    }
-    .timeline{
-      padding: 10px 16px 16px;
-    }
+
+    .infoCard{padding:14px}
+    .infoCard h3{margin:0 0 6px; font-size:15px}
+    .infoCard p{margin:0; color:var(--muted); font-size:13px; font-weight:650}
+
+    .timeline{padding: 10px 14px 14px}
     .tlItem{
       display:grid;
-      grid-template-columns: 110px 1fr;
-      gap:14px;
-      padding:12px 0;
+      grid-template-columns: 98px 1fr;
+      gap:12px;
+      padding:10px 0;
       border-top:1px solid var(--border);
     }
     .tlItem:first-child{border-top:none}
@@ -248,99 +222,98 @@
       font-family: var(--mono);
       font-weight:900;
       color:#0b1220;
-      font-size:14px;
+      font-size:13px;
     }
     .tlItem .desc{
       color:var(--muted);
-      font-size:14px;
-      font-weight:600;
+      font-size:13px;
+      font-weight:700;
     }
-    .twoCol{
-      grid-template-columns: 1fr 1fr;
-      align-items:start;
-    }
+
+    .twoCol{grid-template-columns: 1fr 1fr; align-items:start}
     @media (max-width: 900px){
       .twoCol{grid-template-columns:1fr}
     }
-    .list{
-      margin:0; padding-left:18px; color:var(--muted); font-weight:600;
-    }
-    .list li{margin:8px 0}
-    details{
-      border-top:1px solid var(--border);
-      padding:10px 0;
-    }
+
+    .list{margin:0; padding-left:18px; color:var(--muted); font-weight:700; font-size:13px}
+    .list li{margin:7px 0}
+
+    details{border-top:1px solid var(--border); padding:10px 0}
     details:first-child{border-top:none}
     summary{
       cursor:pointer;
       list-style:none;
       font-weight:900;
-      padding:6px 0;
+      padding:4px 0;
+      font-size:14px;
     }
     summary::-webkit-details-marker{display:none}
-    details p{
-      margin:6px 0 0;
-      color:var(--muted);
-      font-weight:600;
-    }
+    details p{margin:6px 0 0; color:var(--muted); font-weight:700; font-size:13px}
+
     .mapBox{
       border:1px solid var(--border);
       border-radius: 16px;
       overflow:hidden;
       background:#fff;
     }
-    iframe{width:100%; height:320px; border:0}
-    footer{
-      padding:22px 0 40px;
-      color:var(--muted);
-      font-size:13px;
-    }
-    .footCard{
-      padding:16px;
+    iframe{width:100%; height:300px; border:0}
+
+    .muted{color:var(--muted)}
+    .linkBox{
+      border:1px solid var(--border);
+      background:#fff;
+      border-radius:14px;
+      padding:12px;
       display:flex;
-      gap:12px;
+      gap:10px;
+      align-items:center;
+      flex-wrap:wrap;
+      justify-content:space-between;
+    }
+    .linkText{
+      font-family: var(--mono);
+      font-size:12px;
+      color:#0b1220;
+      font-weight:900;
+      word-break:break-all;
+    }
+
+    footer{padding:18px 0 36px; color:var(--muted); font-size:12px}
+    .footCard{
+      padding:14px;
+      display:flex;
+      gap:10px;
       flex-wrap:wrap;
       align-items:center;
       justify-content:space-between;
-    }
-    .muted{color:var(--muted)}
-    .tag{
-      display:inline-flex; gap:8px; align-items:center;
-      border:1px solid var(--border);
-      padding:8px 10px;
-      border-radius:999px;
-      background:#fff;
-      font-weight:800;
-      color:#0b1220;
-      font-size:13px;
     }
   </style>
 </head>
 
 <body>
-  <!-- Topbar -->
   <div class="topbar">
     <div class="wrap">
       <div class="brand" aria-label="網站標題">
         <span class="dot" aria-hidden="true"></span>
         <span id="siteName">活動官網</span>
       </div>
+
       <nav aria-label="導覽">
-        <a href="#highlights">活動亮點</a>
+        <a href="#highlights">亮點</a>
         <a href="#schedule">流程</a>
         <a href="#register">報名</a>
         <a href="#rules">規則</a>
-        <a href="#awards">評審與獎項</a>
+        <a href="#awards">獎項</a>
         <a href="#location">地點</a>
         <a href="#contact">聯絡</a>
       </nav>
-      <a class="btn primary" href="#register">立即報名</a>
+
+      <a class="btn primary" href="#register">報名</a>
     </div>
   </div>
 
-  <!-- Hero -->
   <header class="hero">
-    <div class="wrap grid heroGrid">
+    <div class="wrap">
       <div class="card heroCard">
         <div class="kicker" id="kicker">現場提供底圖｜11:30 頒獎</div>
         <h1 id="title">乾淨世界「我愛我家」兒童著色畫比賽</h1>
@@ -365,7 +338,7 @@
 
         <div class="ctaRow">
           <a class="btn primary" id="regBtn" href="#" target="_blank" rel="noopener">立即報名</a>
-          <button class="btn green" id="icsBtn" type="button">加入行事曆（下載 .ics）</button>
+          <button class="btn green" id="icsBtn" type="button">加入行事曆</button>
           <a class="btn" id="mapBtn" href="#" target="_blank" rel="noopener">開啟地圖</a>
         </div>
 
@@ -373,46 +346,24 @@
           收件截止：10:30（作品繳交截止）｜頒獎時間：11:30（公布並頒獎）
         </div>
       </div>
-
-      <div class="card qrCard" id="register">
-        <div class="secTitle" style="margin:0 0 8px">
-          <h2 style="font-size:18px">報名入口</h2>
-          <span class="hint">掃碼或點按鈕</span>
-        </div>
-
-        <div class="qrBox">
-          <img src="assets/qr.png" alt="報名 QR Code（請替換 assets/qr.png）" />
-          <div class="tag">清楚報名</div>
-          <div class="qrTip" id="qrTip">
-            若掃不到，可改用上方「立即報名」按鈕。
-          </div>
-        </div>
-
-        <div class="muted" style="font-weight:700; font-size:14px">
-          <div>✅ 資格：限臺南市民</div>
-          <div>✅ 名額：幼兒園組 25 名｜國小 1–2 年級組 25 名（額滿即止）</div>
-          <div>✅ 畫材：自備（色鉛筆／彩色筆／蠟筆／水彩皆可）</div>
-        </div>
-      </div>
     </div>
   </header>
 
   <main>
-    <!-- Highlights -->
     <section id="highlights">
       <div class="wrap">
         <div class="secTitle">
           <h2>活動亮點</h2>
-          <div class="hint">讓家長一看就安心</div>
+          <div class="hint">精簡呈現，讓人看得舒服</div>
         </div>
 
         <div class="grid cards3">
           <div class="card infoCard">
             <h3>現場提供底圖</h3>
-            <p>不用先準備作品，來現場拿底圖直接畫。</p>
+            <p>來現場領取底圖，直接開始創作。</p>
           </div>
           <div class="card infoCard">
-            <h3>流程清楚、時間固定</h3>
+            <h3>流程清楚</h3>
             <p>10:30 收件截止，11:30 公布並頒獎。</p>
           </div>
           <div class="card infoCard">
@@ -423,12 +374,11 @@
       </div>
     </section>
 
-    <!-- Schedule -->
     <section id="schedule">
       <div class="wrap">
         <div class="secTitle">
           <h2>當日流程</h2>
-          <div class="hint">一目了然的時間軸</div>
+          <div class="hint">一目了然</div>
         </div>
 
         <div class="card timeline">
@@ -452,48 +402,60 @@
       </div>
     </section>
 
-    <!-- Registration -->
-    <section aria-label="報名資訊">
+    <section id="register" aria-label="報名資訊">
       <div class="wrap">
         <div class="secTitle">
-          <h2>報名資訊</h2>
-          <div class="hint">簡單、清楚、好理解</div>
+          <h2>報名（使用連結網址）</h2>
+          <div class="hint">不使用 QR Code</div>
         </div>
 
-        <div class="grid twoCol">
-          <div class="card infoCard">
-            <h3>報名資格與名額</h3>
-            <ul class="list">
-              <li>限臺南市民（額滿即止）</li>
-              <li>幼兒園組：25 名</li>
-              <li>國小低年級組（1–2 年級）：25 名</li>
-            </ul>
+        <div class="card infoCard">
+          <div class="ctaRow" style="margin-top:0">
+            <a class="btn primary" id="regBtn2" href="#" target="_blank" rel="noopener">立即報名</a>
+            <button class="btn" id="copyLinkBtn" type="button">複製報名網址</button>
           </div>
 
-          <div class="card infoCard">
-            <h3>請先準備</h3>
-            <ul class="list">
-              <li>畫材自備：鉛筆、彩色筆、色鉛筆、水彩等皆可</li>
-              <li>當天提早到場報到，避免卡到收件截止</li>
-              <li>請確定能到再報名（名額珍貴）</li>
-            </ul>
+          <div style="height:10px"></div>
+
+          <div class="linkBox" role="group" aria-label="報名網址">
+            <div class="muted" style="font-weight:800; font-size:13px">報名網址</div>
+            <a class="linkText" id="regUrlText" href="#" target="_blank" rel="noopener">#</a>
           </div>
+
+          <div class="grid twoCol" style="margin-top:12px">
+            <div class="card" style="border:1px solid var(--border); border-radius:14px; padding:12px; box-shadow:none">
+              <div class="muted" style="font-weight:900; font-size:13px; margin-bottom:6px">資格與名額</div>
+              <ul class="list">
+                <li>限臺南市民（額滿即止）</li>
+                <li>幼兒園組：25 名</li>
+                <li>國小低年級組（1–2 年級）：25 名</li>
+              </ul>
+            </div>
+
+            <div class="card" style="border:1px solid var(--border); border-radius:14px; padding:12px; box-shadow:none">
+              <div class="muted" style="font-weight:900; font-size:13px; margin-bottom:6px">畫材</div>
+              <ul class="list">
+                <li>自備：鉛筆、彩色筆、色鉛筆、水彩等皆可</li>
+                <li>建議提早到場，避免卡到 10:30 截止</li>
+              </ul>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
 
-    <!-- Rules -->
     <section id="rules">
       <div class="wrap">
         <div class="secTitle">
           <h2>組別規則（點開查看）</h2>
-          <div class="hint">版面乾淨、但資訊完整</div>
+          <div class="hint">需要時才展開，不佔版面</div>
         </div>
 
-        <div class="card" style="padding:12px 16px">
+        <div class="card" style="padding:10px 14px">
           <details>
             <summary>幼兒園組：家長可適度協助，但不得代畫</summary>
-            <p>以孩子為主完成作品；家長可在旁協助引導，但不可以直接代畫。</p>
+            <p>以孩子為主完成作品；家長可在旁引導，但不可直接代畫。</p>
           </details>
 
           <details>
@@ -503,29 +465,28 @@
 
           <details>
             <summary>作品繳交：10:30 前完成並繳交</summary>
-            <p>逾時將影響評選與收件；建議提早完成並確認繳交成功。</p>
+            <p>逾時將影響收件；建議提早完成並確認繳交成功。</p>
           </details>
 
           <details>
             <summary>畫材：自備（蠟筆／彩色筆／色鉛筆／水彩皆可）</summary>
-            <p>請依孩子習慣準備；現場提供底圖，但畫材需自備。</p>
+            <p>現場提供底圖；畫材請依孩子習慣準備。</p>
           </details>
         </div>
       </div>
     </section>
 
-    <!-- Awards -->
     <section id="awards">
       <div class="wrap">
         <div class="secTitle">
           <h2>評審與獎項</h2>
-          <div class="hint">像演講頁的「講者/內容」那種正式感</div>
+          <div class="hint">資訊保留、呈現更乾淨</div>
         </div>
 
         <div class="grid twoCol">
           <div class="card infoCard">
             <h3>評審</h3>
-            <p class="muted" style="font-weight:800">青草國小｜曾文欽 校長</p>
+            <p class="muted" style="font-weight:900">青草國小｜曾文欽 校長</p>
 
             <div style="height:10px"></div>
             <h3>評分重點</h3>
@@ -535,7 +496,7 @@
               <li>創意</li>
               <li>主題符合度</li>
             </ul>
-            <p class="muted" style="margin-top:10px; font-weight:700">同分時：以「整潔完成度」優先。</p>
+            <p class="muted" style="margin-top:10px; font-weight:800">同分時：以「整潔完成度」優先。</p>
           </div>
 
           <div class="card infoCard">
@@ -547,32 +508,31 @@
               <li>佳作：禮券 300 元（各組 2 名）</li>
               <li>參加獎：完成作品即可獲得（數量有限，送完為止）</li>
             </ul>
-            <p class="muted" style="margin-top:10px; font-weight:700">頒獎時間：11:30（公布並頒獎）</p>
+            <p class="muted" style="margin-top:10px; font-weight:800">頒獎時間：11:30（公布並頒獎）</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Location -->
     <section id="location">
       <div class="wrap">
         <div class="secTitle">
-          <h2>地點與交通</h2>
-          <div class="hint">地址一鍵打開地圖</div>
+          <h2>地點</h2>
+          <div class="hint">地址可複製、可直接開地圖</div>
         </div>
 
         <div class="grid twoCol">
           <div class="card infoCard">
             <h3>活動地點</h3>
             <p class="muted" style="font-weight:900" id="placeFull">彰南里活動中心｜大禮堂</p>
-            <p class="muted" style="font-weight:800; margin-top:8px" id="addressText">臺南市南區新建路 12 號</p>
+            <p class="muted" style="font-weight:900; margin-top:8px" id="addressText">臺南市南區新建路 12 號</p>
 
-            <div class="ctaRow" style="margin-top:14px">
-              <a class="btn" id="copyAddrBtn" href="javascript:void(0)">複製地址</a>
+            <div class="ctaRow" style="margin-top:12px">
+              <button class="btn" id="copyAddrBtn" type="button">複製地址</button>
               <a class="btn primary" id="mapBtn2" href="#" target="_blank" rel="noopener">用 Google 地圖開啟</a>
             </div>
 
-            <div class="notice" style="margin-top:14px">
+            <div class="notice" style="margin-top:12px">
               建議提早到場，避免卡到 10:30 收件截止。
             </div>
           </div>
@@ -590,30 +550,31 @@
       </div>
     </section>
 
-    <!-- Contact -->
     <section id="contact">
       <div class="wrap">
         <div class="secTitle">
           <h2>主辦 / 協辦 / 聯絡</h2>
-          <div class="hint">資訊完整更像正式活動頁</div>
+          <div class="hint">精簡但完整</div>
         </div>
 
         <div class="card infoCard">
           <div class="grid twoCol">
             <div>
               <h3>主辦單位</h3>
-              <p class="muted" style="font-weight:800" id="hostText">乾淨世界推廣團隊</p>
+              <p class="muted" style="font-weight:900" id="hostText">乾淨世界推廣團隊</p>
+
               <div style="height:10px"></div>
               <h3>協辦單位</h3>
-              <p class="muted" style="font-weight:800" id="cohostText">彰南里活動中心</p>
+              <p class="muted" style="font-weight:900" id="cohostText">彰南里活動中心</p>
             </div>
 
             <div>
               <h3>洽詢電話</h3>
-              <p class="muted" style="font-weight:900; font-size:18px" id="phoneText">陳小姐｜0913-837-389</p>
+              <p class="muted" style="font-weight:900; font-size:16px" id="phoneText">陳小姐｜0913-837-389</p>
+
               <div style="height:10px"></div>
-              <h3>小提醒</h3>
-              <p class="muted" style="font-weight:700">如臨時無法到場，建議盡早取消，讓名額留給需要的家庭。</p>
+              <h3>提醒</h3>
+              <p class="muted" style="font-weight:800">如臨時無法到場，建議盡早取消，讓名額留給需要的家庭。</p>
             </div>
           </div>
         </div>
@@ -625,7 +586,7 @@
         <div class="card footCard">
           <div>
             <div style="font-weight:900; color:#0b1220">乾淨世界「我愛我家」兒童著色畫比賽</div>
-            <div class="muted">本頁為一頁式活動官網｜可用於 Netlify / GitHub Pages 發佈</div>
+            <div class="muted" style="font-weight:700">一頁式活動官網｜可用 GitHub Pages / Netlify 發佈</div>
           </div>
           <div class="muted">© <span id="year"></span></div>
         </div>
@@ -643,6 +604,7 @@
 
       dateText: "2026/03/15（日）",
       timeText: "09:00–12:00",
+
       // ICS 需要用 24 小時制時間 + 時區（台灣 Asia/Taipei）
       startISO: "2026-03-15T09:00:00+08:00",
       endISO:   "2026-03-15T12:00:00+08:00",
@@ -650,7 +612,7 @@
       place: "彰南里活動中心｜大禮堂",
       address: "臺南市南區新建路 12 號",
 
-      // 這裡放你的報名網址（把 # 改成你的表單連結）
+      // ★把 # 換成你的報名連結（例如 Google 表單 / 你自己的表單網址）
       registerUrl: "#",
 
       // Google Map 搜尋用（通常用地址就可以）
@@ -660,59 +622,98 @@
       cohost: "彰南里活動中心",
       phone: "陳小姐｜0913-837-389",
 
-      // 可選：備註（會顯示在首屏提醒框 & 行事曆描述）
       notice: "收件截止：10:30（作品繳交截止）｜頒獎時間：11:30（公布並頒獎）"
     };
 
-    // ====== 套用資料到頁面 ======
     const $ = (id) => document.getElementById(id);
 
     $("siteName").textContent = EVENT.siteName;
     $("title").textContent = EVENT.title;
     $("kicker").textContent = EVENT.kicker;
     $("subtitle").textContent = EVENT.subtitle;
+
     $("dateText").textContent = EVENT.dateText;
     $("timeText").textContent = EVENT.timeText;
     $("placeText").textContent = EVENT.place;
+
     $("placeFull").textContent = EVENT.place;
     $("addressText").textContent = EVENT.address;
-    $("notice").textContent = EVENT.notice;
+
     $("hostText").textContent = EVENT.host;
     $("cohostText").textContent = EVENT.cohost;
     $("phoneText").textContent = EVENT.phone;
-    $("year").textContent = new Date().getFullYear();
 
-    // 報名連結
-    const regBtns = [$("regBtn")];
-    regBtns.forEach(b => {
-      b.href = EVENT.registerUrl;
-      if (EVENT.registerUrl && EVENT.registerUrl !== "#") b.style.opacity = "1";
-      else b.style.opacity = "0.75";
-    });
+    $("notice").textContent = EVENT.notice;
+    $("year").textContent = new Date().getFullYear();
 
     // 地圖
     const mapUrl = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(EVENT.mapQuery);
     $("mapBtn").href = mapUrl;
     $("mapBtn2").href = mapUrl;
-
-    // 嵌入地圖（用 query 方式）
     $("mapFrame").src = "https://www.google.com/maps?q=" + encodeURIComponent(EVENT.mapQuery) + "&output=embed";
+
+    // 報名連結
+    const regBtns = [$("regBtn"), $("regBtn2")];
+    const regUrlText = $("regUrlText");
+    const copyLinkBtn = $("copyLinkBtn");
+
+    function setRegistrationUI(){
+      const url = (EVENT.registerUrl || "").trim();
+
+      if (!url || url === "#") {
+        regBtns.forEach(b => {
+          b.href = "#";
+          b.setAttribute("aria-disabled", "true");
+          b.addEventListener("click", (e)=>e.preventDefault());
+          b.style.opacity = "0.6";
+        });
+        regUrlText.textContent = "（尚未設定報名網址）";
+        regUrlText.href = "#";
+        copyLinkBtn.disabled = true;
+        copyLinkBtn.textContent = "請先設定報名網址";
+        return;
+      }
+
+      regBtns.forEach(b => {
+        b.href = url;
+        b.style.opacity = "1";
+      });
+
+      regUrlText.textContent = url;
+      regUrlText.href = url;
+
+      copyLinkBtn.disabled = false;
+      copyLinkBtn.textContent = "複製報名網址";
+    }
+    setRegistrationUI();
 
     // 複製地址
     $("copyAddrBtn").addEventListener("click", async () => {
       try{
         await navigator.clipboard.writeText(EVENT.address);
         $("copyAddrBtn").textContent = "已複製 ✅";
-        setTimeout(()=> $("copyAddrBtn").textContent = "複製地址", 1400);
+        setTimeout(()=> $("copyAddrBtn").textContent = "複製地址", 1200);
       }catch(e){
         alert("複製失敗，請手動複製：\n" + EVENT.address);
+      }
+    });
+
+    // 複製報名連結
+    copyLinkBtn.addEventListener("click", async () => {
+      const url = (EVENT.registerUrl || "").trim();
+      if (!url || url === "#") return;
+      try{
+        await navigator.clipboard.writeText(url);
+        copyLinkBtn.textContent = "已複製 ✅";
+        setTimeout(()=> copyLinkBtn.textContent = "複製報名網址", 1200);
+      }catch(e){
+        alert("複製失敗，請手動複製：\n" + url);
       }
     });
 
     // ====== 下載 .ics（加入行事曆）======
     function pad(n){ return String(n).padStart(2,"0"); }
     function toICSDate(dt){
-      // dt: Date object in local time; output: YYYYMMDDTHHMMSS
       return dt.getFullYear()
         + pad(dt.getMonth()+1)
         + pad(dt.getDate())
@@ -725,8 +726,9 @@
       const start = new Date(EVENT.startISO);
       const end = new Date(EVENT.endISO);
 
-      // iCalendar 以「浮動時間」搭配 TZID（台北）較適合給台灣使用
       const uid = "cleanworld-" + start.getTime() + "@event";
+      const regLine = (EVENT.registerUrl && EVENT.registerUrl !== "#") ? ("\\n報名：" + EVENT.registerUrl) : "";
+
       const ics =
 `BEGIN:VCALENDAR
 VERSION:2.0
@@ -740,7 +742,7 @@ DTSTART;TZID=Asia/Taipei:${toICSDate(start)}
 DTEND;TZID=Asia/Taipei:${toICSDate(end)}
 SUMMARY:${EVENT.title}
 LOCATION:${EVENT.place}（${EVENT.address}）
-DESCRIPTION:${EVENT.kicker}\\n${EVENT.notice}\\n報名：${EVENT.registerUrl}
+DESCRIPTION:${EVENT.kicker}\\n${EVENT.notice}${regLine}
 END:VEVENT
 END:VCALENDAR`;
 
