@@ -2,75 +2,351 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>報名完成｜感謝你</title>
-  <meta name="theme-color" content="#fb7185" />
-  <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Pixel（可選）：用 localStorage 讀取，這樣你只要在 index.html 設一次 -->
-  <script>
-    (function(){
-      const PIXEL_ID = localStorage.getItem("PIXEL_ID") || "";
-      if(!PIXEL_ID) return;
-      !function(f,b,e,v,n,t,s){
-        if(f.fbq)return; n=f.fbq=function(){n.callMethod?
-        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-        if(!f._fbq)f._fbq=n; n.push=n; n.loaded=!0; n.version='2.0';
-        n.queue=[]; t=b.createElement(e); t.async=!0;
-        t.src=v; s=b.getElementsByTagName(e)[0];
-        s.parentNode.insertBefore(t,s)
-      }(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', PIXEL_ID);
-      fbq('track', 'PageView');
-      fbq('track', 'CompleteRegistration');
-    })();
-  </script>
+  <meta name="description" content="報名完成！已收到你的資料。" />
+  <meta property="og:title" content="報名完成｜感謝你" />
+  <meta property="og:description" content="已收到你的資料，請保留報名序號以便查詢。" />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#fb7185" />
+
+  <style>
+    :root{
+      --bg:#fff7ed;
+      --card:#ffffff;
+      --text:#1f2937;
+      --muted:#6b7280;
+
+      --brand:#fb7185;
+      --brand2:#60a5fa;
+      --brand3:#fbbf24;
+
+      --shadow: 0 12px 26px rgba(31,41,55,.10);
+      --radius: 22px;
+      --max: 980px;
+
+      --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", Arial;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: var(--font);
+      color: var(--text);
+      line-height: 1.65;
+      background:
+        radial-gradient(900px 420px at 15% -10%, rgba(251,113,133,.18), transparent 60%),
+        radial-gradient(900px 420px at 100% 10%, rgba(96,165,250,.16), transparent 55%),
+        radial-gradient(700px 360px at 40% 105%, rgba(251,191,36,.18), transparent 50%),
+        var(--bg);
+    }
+    a{color:inherit}
+    .wrap{max-width:var(--max); margin:0 auto; padding:22px}
+    @media (max-width: 520px){ .wrap{padding:18px} }
+
+    .topbar{
+      position:sticky; top:0; z-index:30;
+      backdrop-filter: blur(10px);
+      background: rgba(255,247,237,.82);
+      border-bottom: 1px solid rgba(31,41,55,.08);
+    }
+    .topbar .wrap{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:12px 22px;
+      gap:10px;
+    }
+    .brand{
+      display:flex; gap:10px; align-items:center;
+      font-weight: 950;
+      letter-spacing: .2px;
+      font-size: 14px;
+    }
+    .logoDot{
+      width:14px; height:14px; border-radius:999px;
+      background: conic-gradient(from 180deg, var(--brand), var(--brand3), var(--brand2), var(--brand));
+      box-shadow: 0 10px 18px rgba(251,113,133,.18);
+      border: 2px solid rgba(255,255,255,.95);
+      flex:0 0 auto;
+    }
+
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:8px;
+      border: 1px solid rgba(31,41,55,.10);
+      background: var(--card);
+      padding:10px 12px;
+      border-radius: 14px;
+      text-decoration:none;
+      font-weight:950;
+      cursor:pointer;
+      transition: transform .06s ease, box-shadow .12s ease, opacity .2s ease, filter .2s ease;
+      font-size:14px;
+      user-select:none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .btn:hover{transform: translateY(-1px); box-shadow: 0 14px 26px rgba(31,41,55,.10)}
+    .btn.primary{
+      border-color: transparent;
+      background: linear-gradient(135deg, var(--brand), var(--brand3));
+      color: #1f2937;
+    }
+    .btn.primary:hover{filter:saturate(1.05)}
+    .btn:disabled{opacity:.55; cursor:not-allowed; transform:none; box-shadow:none}
+
+    .card{
+      background: var(--card);
+      border: 1px solid rgba(31,41,55,.10);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .hero{padding: 18px 0 8px}
+    .heroCard{padding: 20px}
+    .kicker{
+      display:inline-flex; gap:10px; align-items:center;
+      font-size:12px;
+      color: var(--text);
+      background: rgba(251,113,133,.12);
+      border: 1px solid rgba(251,113,133,.20);
+      padding:6px 10px;
+      border-radius:999px;
+      font-weight:950;
+    }
+    .kicker .spark{
+      width:10px; height:10px; border-radius:999px;
+      background: radial-gradient(circle at 30% 30%, #fff, rgba(255,255,255,.2) 35%, transparent 60%),
+                  linear-gradient(135deg, var(--brand2), var(--brand3));
+      box-shadow: 0 10px 16px rgba(96,165,250,.18);
+    }
+    h1{margin:12px 0 8px; font-size: 30px; line-height: 1.2}
+    @media (max-width: 520px){ h1{font-size:24px} }
+    .sub{margin:0 0 14px; color: var(--muted); font-size:14px; font-weight:800}
+
+    .grid{display:grid; gap:12px}
+    .pill{
+      border: 1px solid rgba(251,191,36,.60);
+      background: #fff;
+      border-radius: 18px;
+      padding:12px 12px;
+      box-shadow: 0 10px 18px rgba(31,41,55,.06);
+      position: relative;
+    }
+    .pill:before{
+      content:"";
+      position:absolute;
+      inset:-1px;
+      border-radius: 18px;
+      pointer-events:none;
+      background:
+        radial-gradient(10px 10px at 12% 18%, rgba(251,113,133,.26), transparent 60%),
+        radial-gradient(10px 10px at 88% 22%, rgba(96,165,250,.22), transparent 60%),
+        radial-gradient(12px 12px at 80% 88%, rgba(251,191,36,.22), transparent 60%);
+      opacity:.9;
+      mix-blend-mode: multiply;
+    }
+    .pill .t{font-size:12px; color: var(--muted); font-weight:950}
+    .pill .v{font-size:16px; font-weight:950; margin-top:4px}
+    .rid{
+      font-family: var(--mono);
+      letter-spacing: .6px;
+      display:inline-block;
+      padding:6px 10px;
+      border-radius: 12px;
+      border: 1px dashed rgba(31,41,55,.18);
+      background: rgba(255,255,255,.65);
+    }
+
+    .notice{
+      margin-top:12px;
+      padding:12px 12px;
+      border-radius:18px;
+      border: 1px dashed rgba(31,41,55,.18);
+      background: rgba(255,255,255,.62);
+      color: var(--muted);
+      font-size:13px;
+      font-weight:850;
+    }
+
+    .twoCol{grid-template-columns: 1fr 1fr; align-items:start}
+    @media (max-width: 900px){ .twoCol{grid-template-columns: 1fr} }
+
+    footer{padding:18px 0 36px; color:var(--muted); font-size:12px}
+    .footCard{padding:14px; display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between}
+
+    .toast{
+      position: fixed;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%);
+      background: rgba(17,24,39,.92);
+      color: #fff;
+      padding: 10px 12px;
+      border-radius: 999px;
+      font-weight: 900;
+      font-size: 13px;
+      display:none;
+      z-index: 50;
+      max-width: min(92vw, 520px);
+      text-align:center;
+    }
+    .toast.show{display:block}
+  </style>
 </head>
 
-<body class="bg-amber-50 text-slate-900">
-  <div class="mx-auto max-w-xl px-4 py-14">
-    <div class="rounded-2xl bg-white p-8 shadow-sm ring-1 ring-slate-200 text-center">
-      <div class="mx-auto mb-4 grid h-12 w-12 place-items-center rounded-full bg-emerald-50 ring-1 ring-emerald-200">
-        <span class="text-emerald-700 text-xl font-black">✓</span>
+<body>
+  <div class="topbar">
+    <div class="wrap">
+      <div class="brand">
+        <span class="logoDot" aria-hidden="true"></span>
+        <span id="siteName">活動報名</span>
       </div>
-
-      <h1 class="text-2xl font-bold">報名完成</h1>
-      <p class="mt-3 text-slate-600">已收到你的資料，請留意活動前 3–5 天來電確認。</p>
-
-      <div class="mt-5 rounded-xl bg-slate-50 p-4 ring-1 ring-slate-200 text-left">
-        <div class="text-xs font-semibold text-slate-500">報名序號</div>
-        <div class="mt-1 font-mono text-lg font-bold" id="rid">（載入中）</div>
-        <div class="mt-2 text-xs text-slate-500">若需查詢或更正，可提供此序號給工作人員。</div>
-      </div>
-
-      <div class="mt-6 grid gap-3 sm:grid-cols-2">
-        <a href="/" class="inline-flex items-center justify-center rounded-xl bg-slate-900 px-4 py-3 text-sm font-semibold text-white hover:bg-slate-800">
-          繼續報名
-        </a>
-
-        <button id="closeBtn" type="button"
-          class="inline-flex items-center justify-center rounded-xl bg-white px-4 py-3 text-sm font-semibold text-slate-900 ring-1 ring-slate-200 hover:bg-slate-50">
-          結束本頁
-        </button>
-      </div>
-
-      <p class="mt-4 text-xs text-slate-500" id="closeHint"></p>
+      <a class="btn" id="backBtn" href="./">回到報名頁</a>
     </div>
   </div>
 
+  <header class="hero">
+    <div class="wrap">
+      <div class="card heroCard">
+        <div class="kicker"><span class="spark" aria-hidden="true"></span>報名完成</div>
+        <h1>謝謝你，我們已收到資料！</h1>
+        <p class="sub">請保留「報名序號」，若需查詢或聯繫主辦可提供此序號。</p>
+
+        <div class="grid twoCol">
+          <div class="pill">
+            <div class="t">你的報名序號</div>
+            <div class="v"><span class="rid" id="ridText">（讀取中…）</span></div>
+            <div style="height:10px"></div>
+            <div style="display:flex; gap:10px; flex-wrap:wrap">
+              <button class="btn primary" id="copyBtn" type="button">複製序號</button>
+              <a class="btn" id="openLineBtn" href="#" target="_blank" rel="noopener">傳給家人（複製訊息）</a>
+            </div>
+          </div>
+
+          <div class="pill">
+            <div class="t">接下來你可以做什麼</div>
+            <div class="v" style="font-size:14px; font-weight:950; line-height:1.55">
+              1) 截圖此頁或複製序號保存<br/>
+              2) 活動前請留意主辦通知<br/>
+              3) 若臨時無法到場，建議盡早取消，讓名額留給其他家庭
+            </div>
+          </div>
+        </div>
+
+        <div class="notice">
+          小提醒：若你是從 Facebook/LINE 連結進來，請不要關閉瀏覽器太快，避免頁面尚未顯示序號。
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <div class="wrap">
+        <div class="card heroCard">
+          <div class="grid twoCol">
+            <div>
+              <div style="font-weight:950">聯絡方式</div>
+              <div class="sub" style="margin-top:6px">
+                如需詢問或取消，請直接聯繫主辦（並提供報名序號）。
+              </div>
+            </div>
+            <div>
+              <div style="font-weight:950">回到報名頁</div>
+              <div class="sub" style="margin-top:6px">
+                若你要替另一位孩子報名，可回到報名頁重新填寫。
+              </div>
+              <div style="height:10px"></div>
+              <a class="btn primary" href="./" id="againBtn">再報名一位</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="wrap">
+        <div class="card footCard">
+          <div>
+            <div style="font-weight:950; color:#111827" id="footerName">活動報名</div>
+            <div class="muted" style="font-weight:800">感謝你的參與</div>
+          </div>
+          <div class="muted">© <span id="year"></span></div>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <div class="toast" id="toast">已複製</div>
+
   <script>
+    // 你可以在這裡改活動名稱（會顯示在頁首/頁尾與分享訊息）
+    const EVENT_NAME = "乾淨世界「我愛我家」兒童著色畫比賽";
+
+    const $ = (id) => document.getElementById(id);
+
+    $("siteName").textContent = "活動報名";
+    $("footerName").textContent = "活動報名";
+    $("year").textContent = new Date().getFullYear();
+
+    // 讀取 rid
     const p = new URLSearchParams(location.search);
     const rid = p.get("rid") || "";
-    document.getElementById("rid").textContent = rid ? rid : "（無）";
+    $("ridText").textContent = rid ? rid : "（未取得序號）";
 
-    document.getElementById("closeBtn").addEventListener("click", ()=>{
-      // 有些手機瀏覽器不允許關閉分頁（不是你做錯）
-      window.close();
-      setTimeout(()=>{
-        document.getElementById("closeHint").textContent =
-          "若無法自動關閉：請用瀏覽器右上角「X」或返回鍵離開即可。";
-      }, 300);
+    // 回到報名頁（若你不是部署在根目錄，改這裡）
+    const HOME_URL = "./";
+
+    $("backBtn").href = HOME_URL;
+    $("againBtn").href = HOME_URL;
+
+    // Toast
+    function toast(msg){
+      const t = $("toast");
+      t.textContent = msg;
+      t.classList.add("show");
+      clearTimeout(toast._timer);
+      toast._timer = setTimeout(() => t.classList.remove("show"), 1600);
+    }
+
+    // Copy rid
+    $("copyBtn").addEventListener("click", async () => {
+      try{
+        const text = rid ? rid : $("ridText").textContent;
+        await navigator.clipboard.writeText(text);
+        toast("已複製報名序號");
+      }catch(e){
+        // fallback
+        const range = document.createRange();
+        range.selectNode($("ridText"));
+        const sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+        toast("請手動複製序號");
+      }
     });
+
+    // 產生可分享訊息（點「傳給家人」會先複製文字，並開新分頁）
+    (function bindShare(){
+      const shareText =
+`我已完成報名：${EVENT_NAME}
+報名序號：${rid || "（請看截圖）"}`;
+
+      // 點擊後嘗試複製 shareText（不要求一定成功）
+      $("openLineBtn").addEventListener("click", async (ev) => {
+        ev.preventDefault();
+        try{
+          await navigator.clipboard.writeText(shareText);
+          toast("已複製分享訊息");
+        }catch(e){
+          toast("可直接截圖分享");
+        }
+        // 開空白頁（讓使用者自行貼到 LINE/FB）
+        window.open("about:blank", "_blank", "noopener");
+      });
+    })();
   </script>
 </body>
 </html>
+
