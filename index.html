@@ -3,13 +3,37 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>乾淨世界我愛我家兒童著色畫比賽官網</title>
+  <title>活動報名</title>
 
-  <meta name="description" content="乾淨世界我愛我家兒童著色畫比賽官網｜2026/03/15（日）｜彰南里活動中心 大禮堂｜現場提供底圖｜11:40 公布並頒獎" />
-  <meta property="og:title" content="乾淨世界我愛我家兒童著色畫比賽官網" />
-  <meta property="og:description" content="2026/03/14（六）｜彰南里活動中心 大禮堂｜現場提供底圖｜11:40 公布並頒獎" />
+  <meta name="description" content="活動報名｜填完即送出，資料會寫入 Google Sheet" />
+  <meta property="og:title" content="活動報名" />
+  <meta property="og:description" content="填完即送出，資料會寫入 Google Sheet" />
   <meta property="og:type" content="website" />
   <meta name="theme-color" content="#0ea5e9" />
+
+  <script>
+    // ✅ 只要改 PIXEL_ID（沒有就留空），其它不用動
+    const GAS_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbxDlJ8o8unlRefrLvJM22lPN7E4Z-TevdkT2Lq1O9ROunLKSVKliq8qylOo_jj-FyyDzQ/exec";
+    const THANKS_URL = "/thanks";
+    const PIXEL_ID = ""; // 例如 "1059276802371134"；沒有就留空 ""
+  </script>
+
+  <!-- Meta Pixel（可選） -->
+  <script>
+    (function loadPixel(){
+      if(!PIXEL_ID) return;
+      !function(f,b,e,v,n,t,s){
+        if(f.fbq)return; n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n; n.push=n; n.loaded=!0; n.version='2.0';
+        n.queue=[]; t=b.createElement(e); t.async=!0;
+        t.src=v; s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)
+      }(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', PIXEL_ID);
+      fbq('track', 'PageView');
+    })();
+  </script>
 
   <style>
     :root{
@@ -28,7 +52,7 @@
     *{box-sizing:border-box}
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", Arial, "Apple Color Emoji","Segoe UI Emoji";
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", Arial;
       color:var(--text);
       background:
         radial-gradient(900px 400px at 15% -10%, rgba(14,165,233,.14), transparent 60%),
@@ -36,7 +60,6 @@
         var(--bg);
       line-height:1.6;
     }
-    a{color:inherit}
     .wrap{max-width:var(--max); margin:0 auto; padding:22px}
 
     .topbar{
@@ -71,9 +94,7 @@
       border-radius:999px;
     }
     nav a:hover{background:rgba(14,165,233,.10); color:var(--text)}
-    @media (max-width: 900px){
-      nav{display:none}
-    }
+    @media (max-width: 900px){ nav{display:none} }
 
     .btn{
       display:inline-flex; align-items:center; justify-content:center;
@@ -95,12 +116,7 @@
       color: #fff;
     }
     .btn.primary:hover{box-shadow: 0 18px 40px rgba(14,165,233,.22)}
-    .btn:disabled{
-      opacity:.55;
-      cursor:not-allowed;
-      transform:none;
-      box-shadow:none;
-    }
+    .btn:disabled{opacity:.55; cursor:not-allowed; transform:none; box-shadow:none}
 
     .card{
       background:var(--card);
@@ -125,23 +141,9 @@
       border-radius:999px;
       font-weight:800;
     }
-
-    h1{
-      margin:12px 0 8px;
-      font-size: 28px;
-      line-height:1.22;
-      letter-spacing:.2px;
-    }
-    @media (max-width: 520px){
-      h1{font-size:24px}
-    }
-
-    .sub{
-      margin:0 0 14px;
-      color:var(--muted);
-      font-size:14px;
-      font-weight:600;
-    }
+    h1{margin:12px 0 8px; font-size: 28px; line-height:1.22; letter-spacing:.2px}
+    @media (max-width: 520px){ h1{font-size:24px} }
+    .sub{margin:0 0 14px; color:var(--muted); font-size:14px; font-weight:600}
 
     .heroPhoto{
       width:100%;
@@ -153,9 +155,7 @@
       background:#fff;
       display:block;
     }
-    @media (max-width: 520px){
-      .heroPhoto{ height:200px; }
-    }
+    @media (max-width: 520px){ .heroPhoto{ height:200px; } }
 
     .pillRow{
       display:grid;
@@ -163,9 +163,7 @@
       gap:10px;
       margin:14px 0 14px;
     }
-    @media (max-width: 720px){
-      .pillRow{grid-template-columns: 1fr}
-    }
+    @media (max-width: 720px){ .pillRow{grid-template-columns: 1fr} }
     .pill{
       border:1px solid var(--border);
       background: #fff;
@@ -174,11 +172,6 @@
     }
     .pill .t{font-size:12px; color:var(--muted); font-weight:800}
     .pill .v{font-size:15px; font-weight:900; margin-top:2px}
-
-    .ctaRow{
-      display:flex; gap:10px; flex-wrap:wrap;
-      margin-top: 10px;
-    }
 
     .notice{
       margin-top:12px;
@@ -192,153 +185,82 @@
     }
 
     section{padding:14px 0}
-    .secTitle{
-      display:flex;
-      align-items:flex-end;
-      justify-content:space-between;
-      gap:10px;
-      margin: 8px 0 10px;
-    }
-    .secTitle h2{
-      margin:0;
-      font-size:18px;
-      letter-spacing:.2px;
-    }
-    .secTitle .hint{
-      color:var(--muted);
-      font-size:12px;
-      font-weight:650;
-    }
-
-    .grid{display:grid; gap:12px}
-    .cards3{grid-template-columns: repeat(3, 1fr)}
-    @media (max-width: 900px){
-      .cards3{grid-template-columns: 1fr}
-    }
+    .secTitle{display:flex; align-items:flex-end; justify-content:space-between; gap:10px; margin:8px 0 10px}
+    .secTitle h2{margin:0; font-size:18px; letter-spacing:.2px}
+    .secTitle .hint{color:var(--muted); font-size:12px; font-weight:650}
 
     .infoCard{padding:14px}
-    .infoCard h3{margin:0 0 6px; font-size:15px}
-    .infoCard p{margin:0; color:var(--muted); font-size:13px; font-weight:650}
-
-    .timeline{padding: 10px 14px 14px}
-    .tlItem{
-      display:grid;
-      grid-template-columns: 98px 1fr;
-      gap:12px;
-      padding:10px 0;
-      border-top:1px solid var(--border);
-    }
-    .tlItem:first-child{border-top:none}
-    .time{
-      font-family: var(--mono);
-      font-weight:900;
-      color:#0b1220;
-      font-size:13px;
-    }
-    .tlItem .desc{
-      color:var(--muted);
-      font-size:13px;
-      font-weight:700;
-    }
-
+    .grid{display:grid; gap:12px}
     .twoCol{grid-template-columns: 1fr 1fr; align-items:start}
-    @media (max-width: 900px){
-      .twoCol{grid-template-columns:1fr}
-    }
+    @media (max-width: 900px){ .twoCol{grid-template-columns:1fr} }
 
-    .list{margin:0; padding-left:18px; color:var(--muted); font-weight:700; font-size:13px}
-    .list li{margin:7px 0}
-
-    details{border-top:1px solid var(--border); padding:10px 0}
-    details:first-child{border-top:none}
-    summary{
-      cursor:pointer;
-      list-style:none;
-      font-weight:900;
-      padding:4px 0;
+    .field{
+      width:100%;
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:10px 12px;
       font-size:14px;
-    }
-    summary::-webkit-details-marker{display:none}
-    details p{margin:6px 0 0; color:var(--muted); font-weight:700; font-size:13px}
-
-    .mapBox{
-      border:1px solid var(--border);
-      border-radius: 16px;
-      overflow:hidden;
+      font-weight:650;
+      outline:none;
       background:#fff;
     }
-    iframe{width:100%; height:300px; border:0}
+    .field:focus{border-color: rgba(14,165,233,.6); box-shadow: 0 0 0 3px rgba(14,165,233,.12)}
+    .label{display:block; font-size:13px; font-weight:900; margin:10px 0 6px}
+    .help{font-size:12px; color:var(--muted); font-weight:650; margin-top:6px}
 
+    .radioRow{display:grid; gap:8px; margin-top:8px}
+    .radioItem{
+      display:flex; gap:10px; align-items:flex-start;
+      padding:10px 12px;
+      border:1px solid var(--border);
+      border-radius:12px;
+      background:#fff;
+    }
+    .radioItem input{margin-top:2px}
+
+    .checkRow{
+      display:flex; gap:10px; align-items:flex-start;
+      padding:10px 12px;
+      border:1px dashed rgba(2,8,23,.18);
+      border-radius:12px;
+      background: rgba(2,8,23,.03);
+      margin-top:12px;
+    }
+
+    .ctaRow{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
     .muted{color:var(--muted)}
-
-    .linkBox{
-      border:1px solid var(--border);
-      background:#fff;
-      border-radius:14px;
-      padding:12px;
-      display:flex;
-      gap:10px;
-      align-items:center;
-      flex-wrap:wrap;
-      justify-content:space-between;
-    }
-    .linkText{
-      font-family: var(--mono);
-      font-size:12px;
-      color:#0b1220;
-      font-weight:900;
-      word-break:break-all;
-      text-decoration:none;
-    }
-    .linkText:hover{ text-decoration:underline; }
-
     footer{padding:18px 0 36px; color:var(--muted); font-size:12px}
-    .footCard{
-      padding:14px;
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      align-items:center;
-      justify-content:space-between;
-    }
+    .footCard{padding:14px; display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between}
   </style>
 </head>
 
 <body>
   <div class="topbar">
     <div class="wrap">
-      <div class="brand" aria-label="網站標題">
+      <div class="brand">
         <span class="dot" aria-hidden="true"></span>
-        <span id="siteName">乾淨世界我愛我家兒童著色畫比賽官網</span>
+        <span id="siteName">活動報名</span>
       </div>
-
       <nav aria-label="導覽">
-        <a href="#highlights">亮點</a>
-        <a href="#schedule">流程</a>
         <a href="#register">報名</a>
         <a href="#rules">規則</a>
-        <a href="#awards">獎項</a>
-        <a href="#location">地點</a>
         <a href="#contact">聯絡</a>
       </nav>
-
-      <a class="btn primary" href="#register">報名</a>
+      <a class="btn primary" href="#register">立即報名</a>
     </div>
   </div>
 
   <header class="hero">
     <div class="wrap">
       <div class="card heroCard">
-        <div class="kicker" id="kicker">現場提供底圖｜11:40 公布並頒獎</div>
-        <h1 id="title">乾淨世界「我愛我家」兒童著色畫比賽</h1>
-        <p class="sub" id="subtitle">
-          活動資訊、流程與規則都在這裡。請確定能到再報名（額滿即止）。
-        </p>
+        <div class="kicker" id="kicker">填完即送出｜資料寫入 Google Sheet</div>
+        <h1 id="title">活動報名</h1>
+        <p class="sub" id="subtitle">請確定能到再報名（額滿即止）。</p>
 
-        <!-- ★圖片：你的 GitHub 結構是 assets/photo.png，這樣寫是正確的 -->
-        <img class="heroPhoto" src="assets/photo.png" alt="活動圖片" loading="lazy" />
+        <!-- ✅ 圖片固定用 assets/poster.jpg（你換檔就會換圖） -->
+        <img class="heroPhoto" src="assets/poster.jpg" alt="活動海報" loading="lazy" />
 
-        <div class="pillRow" aria-label="活動關鍵資訊">
+        <div class="pillRow">
           <div class="pill">
             <div class="t">日期</div>
             <div class="v" id="dateText">2026/03/14（六）</div>
@@ -353,108 +275,88 @@
           </div>
         </div>
 
-        <div class="ctaRow">
-          <a class="btn primary" id="regBtnTop" href="#" target="_blank" rel="noopener">立即報名</a>
-          <a class="btn" id="mapBtn" href="#" target="_blank" rel="noopener">開啟地圖</a>
-        </div>
-
-        <div class="notice" id="notice">
-          收件截止：10:30（作品繳交截止）｜公布並頒獎：11:40
-        </div>
+        <div class="notice" id="notice">提醒：作品繳交截止 10:30｜公布並頒獎 11:40</div>
       </div>
     </div>
   </header>
 
   <main>
-    <section id="highlights">
-      <div class="wrap">
-        <div class="secTitle">
-          <h2>活動亮點</h2>
-        </div>
-
-        <div class="grid cards3">
-          <div class="card infoCard">
-            <h3>現場提供底圖</h3>
-            <p>來現場領取底圖，直接開始創作。</p>
-          </div>
-          <div class="card infoCard">
-            <h3>流程清楚</h3>
-            <p>10:30 收件截止，11:40 公布並頒獎。</p>
-          </div>
-          <div class="card infoCard">
-            <h3>完成就有參加獎</h3>
-            <p>參加獎數量有限，送完為止。</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="schedule">
-      <div class="wrap">
-        <div class="secTitle">
-          <h2>當日流程</h2>
-        </div>
-
-        <div class="card timeline">
-          <div class="tlItem">
-            <div class="time">09:00</div>
-            <div class="desc">報到、領取底圖（開始創作）</div>
-          </div>
-          <div class="tlItem">
-            <div class="time">10:30</div>
-            <div class="desc">收件截止（作品繳交截止）</div>
-          </div>
-          <div class="tlItem">
-            <div class="time">11:40</div>
-            <div class="desc">公布並頒獎</div>
-          </div>
-          <div class="tlItem">
-            <div class="time">12:00</div>
-            <div class="desc">活動結束</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 報名：同時提供按鈕 + 可點網址 + 可複製 -->
-    <section id="register" aria-label="報名資訊">
+    <section id="register">
       <div class="wrap">
         <div class="secTitle">
           <h2>報名</h2>
+          <div class="hint">填完即完成送出</div>
         </div>
 
         <div class="card infoCard">
-          <div class="ctaRow" style="margin-top:0">
-            <a class="btn primary" id="regBtn" href="#" target="_blank" rel="noopener">立即報名</a>
-            <button class="btn" id="copyLinkBtn" type="button">複製報名網址</button>
-          </div>
+          <form id="signupForm" class="grid" autocomplete="on">
+            <!-- 固定欄位（給 GAS / Sheet） -->
+            <input type="hidden" name="活動代碼" id="event_code" />
+            <input type="hidden" name="活動名稱" id="event_name" />
+            <input type="hidden" name="報名序號" id="reg_id" />
+            <input type="hidden" name="備註" id="note_hidden" />
 
-          <div style="height:10px"></div>
+            <label class="label">家長姓名（必填）</label>
+            <input class="field" name="家長姓名" required />
 
-          <div class="linkBox" role="group" aria-label="報名網址">
-            <div class="muted" style="font-weight:800; font-size:13px">報名網址（可點）</div>
-            <a class="linkText" id="regUrlText" href="#" target="_blank" rel="noopener">#</a>
-          </div>
+            <label class="label">聯絡電話（手機）（必填）</label>
+            <input class="field" name="聯絡電話（手機）" required inputmode="tel" />
 
-          <div class="grid twoCol" style="margin-top:12px">
-            <div class="card" style="border:1px solid var(--border); border-radius:14px; padding:12px; box-shadow:none">
-              <div class="muted" style="font-weight:900; font-size:13px; margin-bottom:6px">資格與名額</div>
-              <ul class="list">
-                <li>限臺南市民（額滿即止）</li>
-                <li>幼兒園組：25 名</li>
-                <li>國小低年級組（1–2 年級）：25 名</li>
-              </ul>
+            <label class="label">孩子姓名（必填）</label>
+            <input class="field" name="孩子姓名" required />
+
+            <label class="label">孩子年級／年齡（必填）</label>
+            <select class="field" name="孩子年級／年齡" required>
+              <option value="">請選擇</option>
+              <option>幼兒園</option>
+              <option>國小一年級</option>
+              <option>國小二年級</option>
+            </select>
+
+            <label class="label">參賽組別（必填）</label>
+            <div class="radioRow" role="group" aria-label="參賽組別">
+              <label class="radioItem">
+                <input type="radio" name="參賽組別" value="幼兒組" required />
+                <div><b>幼兒組</b><div class="help">家長可適度協助，但不得代畫。</div></div>
+              </label>
+              <label class="radioItem">
+                <input type="radio" name="參賽組別" value="國小低年級組" required />
+                <div><b>國小低年級組</b><div class="help">家長請勿動手協助。</div></div>
+              </label>
             </div>
 
-            <div class="card" style="border:1px solid var(--border); border-radius:14px; padding:12px; box-shadow:none">
-              <div class="muted" style="font-weight:900; font-size:13px; margin-bottom:6px">畫材</div>
-              <ul class="list">
-                <li>自備：鉛筆、彩色筆、色鉛筆、水彩等皆可</li>
-                <li>建議提早到場，避免卡到 10:30 截止</li>
-              </ul>
-            </div>
-          </div>
+            <label class="label">是否能全程參與（9:00–12:00）（必填）</label>
+            <select class="field" name="是否能全程參與（9:00–12:00）" required id="full_join">
+              <option value="">請選擇</option>
+              <option>是，我能全程參與</option>
+              <option>否（請勿報名）</option>
+            </select>
+            <div class="help">若選「否」，系統會阻止送出（避免佔名額）。</div>
 
+            <label class="label">就讀學校（選填）</label>
+            <input class="field" name="就讀學校" />
+
+            <label class="label">是否為台南市民（必填）</label>
+            <select class="field" name="是否為台南市民" required>
+              <option value="">請選擇</option>
+              <option>是</option>
+              <option>否</option>
+            </select>
+
+            <label class="checkRow">
+              <input type="checkbox" required />
+              <div><b>我同意</b>活動期間之拍照記錄，僅作為活動紀錄與非商業用途。</div>
+            </label>
+
+            <div class="ctaRow">
+              <button class="btn primary" id="submitBtn" type="submit">送出報名</button>
+              <span class="muted" id="submitHint" style="font-weight:800; font-size:13px"></span>
+            </div>
+          </form>
+
+          <div class="notice" style="margin-top:12px">
+            名額有限（額滿即止）。若臨時無法到場，建議盡早取消，讓名額留給需要的家庭。
+          </div>
         </div>
       </div>
     </section>
@@ -462,101 +364,13 @@
     <section id="rules">
       <div class="wrap">
         <div class="secTitle">
-          <h2>組別規則 </h2>
+          <h2>規則提醒</h2>
         </div>
-
-        <div class="card" style="padding:10px 14px">
-          <details>
-            <summary>幼兒園組：家長可適度協助，但不得代畫</summary>
-            <p>以孩子為主完成作品；家長可在旁引導，但不可直接代畫。</p>
-          </details>
-
-          <details>
-            <summary>國小低年級組（1–2 年級）：家長請勿動手協助</summary>
-            <p>由孩子獨立完成作品，家長可陪同但不介入創作。</p>
-          </details>
-
-          <details>
-            <summary>作品繳交：10:30 前完成並繳交</summary>
-            <p>逾時將影響收件；建議提早完成並確認繳交成功。</p>
-          </details>
-
-          <details>
-            <summary>畫材：自備（蠟筆／彩色筆／色鉛筆／水彩皆可）</summary>
-            <p>現場提供底圖；畫材請依孩子習慣準備。</p>
-          </details>
-        </div>
-      </div>
-    </section>
-
-    <section id="awards">
-      <div class="wrap">
-        <div class="secTitle">
-          <h2>評審與獎項</h2>
-        </div>
-
-        <div class="grid twoCol">
-          <div class="card infoCard">
-            <h3>評審</h3>
-            <p class="muted" style="font-weight:900">青草國小｜曾文欽 校長</p>
-
-            <div style="height:10px"></div>
-            <h3>評分重點</h3>
-            <ul class="list">
-              <li>配色美感</li>
-              <li>整潔完成度</li>
-              <li>創意</li>
-              <li>主題符合度</li>
-            </ul>
-            <p class="muted" style="margin-top:10px; font-weight:800">同分時：以「整潔完成度」優先。</p>
-          </div>
-
-          <div class="card infoCard">
-            <h3>獎項（分組）</h3>
-            <ul class="list">
-              <li>金獎：禮券 1,500 元（各組 1 名）</li>
-              <li>銀獎：禮券 1,000 元（各組 1 名）</li>
-              <li>銅獎：禮券 500 元（各組 1 名）</li>
-              <li>佳作：禮券 300 元（各組 2 名）</li>
-              <li>參加獎：完成作品即可獲得（數量有限，送完為止）</li>
-            </ul>
-            <p class="muted" style="margin-top:10px; font-weight:800">公布並頒獎：11:40</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="location">
-      <div class="wrap">
-        <div class="secTitle">
-          <h2>地點</h2>
-          <div class="hint">地址可複製、可直接開地圖</div>
-        </div>
-
-        <div class="grid twoCol">
-          <div class="card infoCard">
-            <h3>活動地點</h3>
-            <p class="muted" style="font-weight:900" id="placeFull">彰南里活動中心｜大禮堂</p>
-            <p class="muted" style="font-weight:900; margin-top:8px" id="addressText">臺南市南區新建路 12 號</p>
-
-            <div class="ctaRow" style="margin-top:12px">
-              <button class="btn" id="copyAddrBtn" type="button">複製地址</button>
-              <a class="btn primary" id="mapBtn2" href="#" target="_blank" rel="noopener">用 Google 地圖開啟</a>
-            </div>
-
-            <div class="notice" style="margin-top:12px">
-              建議提早到場，避免卡到 10:30 收件截止。
-            </div>
-          </div>
-
-          <div class="mapBox">
-            <iframe
-              id="mapFrame"
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-              src=""
-              title="Google 地圖">
-            </iframe>
+        <div class="card infoCard">
+          <div class="muted" style="font-weight:800; font-size:13px">
+            ・幼兒組：家長可適度協助，但不得代畫<br/>
+            ・國小低年級組：家長請勿動手協助<br/>
+            ・作品繳交截止：10:30（逾時將影響收件）
           </div>
         </div>
       </div>
@@ -565,27 +379,21 @@
     <section id="contact">
       <div class="wrap">
         <div class="secTitle">
-          <h2>主辦 / 協辦 / 聯絡</h2>
+          <h2>聯絡</h2>
         </div>
-
         <div class="card infoCard">
           <div class="grid twoCol">
             <div>
-              <h3>主辦單位</h3>
-              <p class="muted" style="font-weight:900" id="hostText">乾淨校園推廣團隊</p>
-
+              <div style="font-weight:900">主辦單位</div>
+              <div class="muted" id="hostText" style="font-weight:800">乾淨校園推廣團隊</div>
               <div style="height:10px"></div>
-              <h3>協辦單位</h3>
-              <p class="muted" style="font-weight:900" id="cohostText">彰南里活動中心</p>
+              <div style="font-weight:900">協辦單位</div>
+              <div class="muted" id="cohostText" style="font-weight:800">彰南里活動中心</div>
             </div>
-
             <div>
-              <h3>洽詢電話</h3>
-              <p class="muted" style="font-weight:900; font-size:16px" id="phoneText">陳小姐｜0913-837-389</p>
-
-              <div style="height:10px"></div>
-              <h3>提醒</h3>
-              <p class="muted" style="font-weight:800">如臨時無法到場，建議盡早取消，讓名額留給需要的家庭。</p>
+              <div style="font-weight:900">洽詢電話</div>
+              <div class="muted" id="phoneText" style="font-weight:900; font-size:16px">陳小姐｜0913-837-389</div>
+              <div class="help">如臨時無法到場，建議盡早取消，讓名額留給需要的家庭。</div>
             </div>
           </div>
         </div>
@@ -596,8 +404,8 @@
       <div class="wrap">
         <div class="card footCard">
           <div>
-            <div style="font-weight:900; color:#0b1220">乾淨世界我愛我家兒童著色畫比賽官網</div>
-            <div class="muted" style="font-weight:700">一頁式活動官網｜GitHub Pages 發佈</div>
+            <div style="font-weight:900; color:#0b1220" id="footerName">活動報名</div>
+            <div class="muted" style="font-weight:700">一頁式報名網站</div>
           </div>
           <div class="muted">© <span id="year"></span></div>
         </div>
@@ -606,35 +414,29 @@
   </main>
 
   <script>
-    // ====== 只改這裡：活動資料（改完就能用）======
+    // ====== 活動內容（你未來換活動，只要改這一段就好）======
     const EVENT = {
-      siteName: "乾淨世界我愛我家兒童著色畫比賽官網",
+      siteName: "活動報名",
       title: "乾淨世界「我愛我家」兒童著色畫比賽",
-      kicker: "現場提供底圖｜11:40 公布並頒獎",
-      subtitle: "活動資訊、流程與規則都在這裡。請確定能到再報名（額滿即止）。",
+      kicker: "填完即送出｜資料寫入 Google Sheet",
+      subtitle: "請確定能到再報名（額滿即止）。",
 
       dateText: "2026/03/14（六）",
       timeText: "09:00–12:00",
-
       place: "彰南里活動中心｜大禮堂",
-      address: "臺南市南區新建路 12 號",
-
-      // ★把 # 換成你的報名連結（例如 Google 表單 / 你自己的表單網址）
-      registerUrl: "#",
-
-      // Google Map 搜尋用（通常用地址就可以）
-      mapQuery: "臺南市南區新建路 12 號 彰南里活動中心",
 
       host: "乾淨校園推廣團隊",
       cohost: "彰南里活動中心",
       phone: "陳小姐｜0913-837-389",
 
-      notice: "收件截止：10:30（作品繳交截止）｜公布並頒獎：11:40"
+      notice: "提醒：作品繳交截止 10:30｜公布並頒獎 11:40",
+
+      // ✅ 給 Sheet 的活動代碼（方便篩選）
+      eventCode: "CW-ILOVEHOME-20260314"
     };
 
     const $ = (id) => document.getElementById(id);
 
-    // 顯示文字
     $("siteName").textContent = EVENT.siteName;
     $("title").textContent = EVENT.title;
     $("kicker").textContent = EVENT.kicker;
@@ -644,82 +446,91 @@
     $("timeText").textContent = EVENT.timeText;
     $("placeText").textContent = EVENT.place;
 
-    $("placeFull").textContent = EVENT.place;
-    $("addressText").textContent = EVENT.address;
-
     $("hostText").textContent = EVENT.host;
     $("cohostText").textContent = EVENT.cohost;
     $("phoneText").textContent = EVENT.phone;
 
     $("notice").textContent = EVENT.notice;
+
+    $("footerName").textContent = EVENT.siteName;
     $("year").textContent = new Date().getFullYear();
 
-    // 地圖
-    const mapUrl = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(EVENT.mapQuery);
-    $("mapBtn").href = mapUrl;
-    $("mapBtn2").href = mapUrl;
-    $("mapFrame").src = "https://www.google.com/maps?q=" + encodeURIComponent(EVENT.mapQuery) + "&output=embed";
-
-    // 報名連結（按鈕 + 可點網址 + 複製）
-    const regBtns = [ $("regBtnTop"), $("regBtn") ];
-    const regUrlText = $("regUrlText");
-    const copyLinkBtn = $("copyLinkBtn");
-
-    function setRegistrationUI(){
-      const url = (EVENT.registerUrl || "").trim();
-
-      if (!url || url === "#") {
-        regBtns.forEach(b => {
-          b.href = "#";
-          b.style.opacity = "0.6";
-          b.addEventListener("click", (e)=>e.preventDefault());
-        });
-        regUrlText.textContent = "（尚未設定報名網址）";
-        regUrlText.href = "#";
-        copyLinkBtn.disabled = true;
-        copyLinkBtn.textContent = "請先設定報名網址";
-        return;
-      }
-
-      regBtns.forEach(b => {
-        b.href = url;
-        b.style.opacity = "1";
-      });
-
-      regUrlText.textContent = url;
-      regUrlText.href = url;
-
-      copyLinkBtn.disabled = false;
-      copyLinkBtn.textContent = "複製報名網址";
+    // ====== 送出：防重複 + 報名序號 + UTM/追蹤寫入備註 ======
+    function makeRegId() {
+      const s = Math.random().toString(16).slice(2, 10).toUpperCase();
+      return `TNN-${s}`;
     }
-    setRegistrationUI();
 
-    // 複製報名連結
-    copyLinkBtn.addEventListener("click", async () => {
-      const url = (EVENT.registerUrl || "").trim();
-      if (!url || url === "#") return;
-      try{
-        await navigator.clipboard.writeText(url);
-        copyLinkBtn.textContent = "已複製 ✅";
-        setTimeout(()=> copyLinkBtn.textContent = "複製報名網址", 1200);
-      }catch(e){
-        alert("複製失敗，請手動複製：\n" + url);
-      }
-    });
+    function getTrackingNote() {
+      const p = new URLSearchParams(location.search);
+      const keys = ["utm_source","utm_medium","utm_campaign","utm_content","utm_term","fbclid"];
+      const parts = [];
+      keys.forEach(k => {
+        const v = p.get(k);
+        if (v) parts.push(`${k}=${v}`);
+      });
+      const ref = document.referrer || "";
+      if (ref) parts.push(`ref=${ref}`);
+      if (parts.length === 0) return "";
+      return `【追蹤】${parts.join(";")}`;
+    }
 
-    // 複製地址
-    $("copyAddrBtn").addEventListener("click", async () => {
-      try{
-        await navigator.clipboard.writeText(EVENT.address);
-        $("copyAddrBtn").textContent = "已複製 ✅";
-        setTimeout(()=> $("copyAddrBtn").textContent = "複製地址", 1200);
-      }catch(e){
-        alert("複製失敗，請手動複製：\n" + EVENT.address);
-      }
-    });
+    (function bindSubmit(){
+      const form = $("signupForm");
+      if (!form) return;
+
+      // 固定欄位
+      $("event_code").value = EVENT.eventCode || "";
+      $("event_name").value = EVENT.title || "";
+
+      form.addEventListener("submit", async (ev) => {
+        ev.preventDefault();
+
+        // 若選「否（請勿報名）」直接擋下
+        const full = $("full_join").value || "";
+        if (full.startsWith("否")) {
+          alert("這場活動需要能全程參與（9:00–12:00），因此此選項無法完成報名，謝謝你的理解。");
+          return;
+        }
+
+        if (form.dataset.submitting === "1") return;
+        form.dataset.submitting = "1";
+
+        const btn = $("submitBtn");
+        const hint = $("submitHint");
+        const oldText = btn.textContent;
+
+        btn.disabled = true;
+        btn.textContent = "送出中…";
+        hint.textContent = "請稍等，正在送出資料";
+
+        try {
+          // 報名序號
+          if (!$("reg_id").value) $("reg_id").value = makeRegId();
+          const rid = $("reg_id").value;
+
+          // 追蹤字串塞進備註（hidden）
+          const tracking = getTrackingNote();
+          if (tracking) $("note_hidden").value = tracking;
+
+          // 送到 GAS（寫入 Sheet）
+          const fd = new FormData(form);
+          await fetch(GAS_WEBAPP_URL, { method:"POST", body: fd, mode:"no-cors" });
+
+          // Pixel：完成報名（可選）
+          if (window.fbq) fbq("track", "CompleteRegistration");
+
+          // 跳感謝頁
+          location.href = `${THANKS_URL}?rid=${encodeURIComponent(rid)}`;
+        } catch (e) {
+          alert("送出失敗，請稍後再試一次。");
+          btn.disabled = false;
+          btn.textContent = oldText;
+          hint.textContent = "";
+          form.dataset.submitting = "0";
+        }
+      });
+    })();
   </script>
 </body>
 </html>
-
-
-
