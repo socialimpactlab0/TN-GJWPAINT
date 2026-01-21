@@ -7,9 +7,13 @@
 
   <meta name="description" content="乾淨世界我愛我家兒童著色畫比賽官網｜報名、流程、辦法、獎項與地點資訊" />
   <meta property="og:title" content="乾淨世界我愛我家兒童著色畫比賽官網" />
-  <meta property="og:description" content="：報名、流程、參加辦法（可展開）、獎項與地點" />
+  <meta property="og:description" content="報名、流程、參加辦法（可展開）、獎項與地點" />
   <meta property="og:type" content="website" />
   <meta name="theme-color" content="#0ea5e9" />
+
+  <!-- 預連接加速 Google 地圖載入 -->
+  <link rel="preconnect" href="https://www.google.com" />
+  <link rel="preconnect" href="https://maps.googleapis.com" />
 
   <style>
     :root{
@@ -28,34 +32,49 @@
     *{box-sizing:border-box}
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", Arial;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
       color:var(--text);
       background:
         radial-gradient(900px 400px at 15% -10%, rgba(14,165,233,.14), transparent 60%),
         radial-gradient(900px 420px at 100% 10%, rgba(34,197,94,.10), transparent 55%),
         var(--bg);
       line-height:1.6;
+      -webkit-text-size-adjust: 100%;
     }
     a{color:inherit}
-    .wrap{max-width:var(--max); margin:0 auto; padding:22px}
+    .wrap{max-width:var(--max); margin:0 auto; padding:16px}
+    
+    @media (min-width: 600px){
+      .wrap{padding:22px}
+    }
 
+    /* ===== 頂部導覽列 ===== */
     .topbar{
       position:sticky; top:0; z-index:30;
       backdrop-filter: blur(10px);
-      background: rgba(246,249,252,.80);
+      -webkit-backdrop-filter: blur(10px);
+      background: rgba(246,249,252,.85);
       border-bottom:1px solid rgba(226,232,240,.85);
     }
     .topbar .wrap{
       display:flex; align-items:center; justify-content:space-between;
-      padding:12px 22px;
-      gap:10px;
+      padding:10px 16px;
+      gap:8px;
+    }
+    @media (min-width: 600px){
+      .topbar .wrap{padding:12px 22px; gap:10px}
     }
     .brand{
-      display:flex; gap:10px; align-items:center;
+      display:flex; gap:8px; align-items:center;
       font-weight:900;
       letter-spacing:.3px;
-      font-size:14px;
+      font-size:13px;
       white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    @media (min-width: 600px){
+      .brand{font-size:14px; gap:10px}
     }
     .dot{
       width:10px; height:10px; border-radius:999px;
@@ -63,45 +82,110 @@
       box-shadow: 0 6px 18px rgba(14,165,233,.20);
       flex:0 0 auto;
     }
-    nav{display:flex; gap:8px; align-items:center; flex-wrap:wrap; justify-content:flex-end}
-    nav a{
+    
+    /* 桌面版導覽 */
+    nav.desktop{display:none; gap:8px; align-items:center; flex-wrap:wrap; justify-content:flex-end}
+    nav.desktop a{
       text-decoration:none;
       font-size:13px;
       color:var(--muted);
       padding:7px 9px;
       border-radius:999px;
     }
-    nav a:hover{background:rgba(14,165,233,.10); color:var(--text)}
-    @media (max-width: 900px){
-      nav{display:none}
+    nav.desktop a:hover{background:rgba(14,165,233,.10); color:var(--text)}
+    @media (min-width: 900px){
+      nav.desktop{display:flex}
+    }
+
+    /* 手機版漢堡選單 */
+    .menuBtn{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      width:40px;
+      height:40px;
+      border:1px solid var(--border);
+      background:var(--card);
+      border-radius:10px;
+      cursor:pointer;
+      font-size:18px;
+    }
+    @media (min-width: 900px){
+      .menuBtn{display:none}
+    }
+    
+    .mobileNav{
+      display:none;
+      position:fixed;
+      top:0; left:0; right:0; bottom:0;
+      background:rgba(2,8,23,.5);
+      z-index:40;
+      padding:16px;
+    }
+    .mobileNav.show{display:flex; align-items:flex-start; justify-content:center; padding-top:60px}
+    .mobileNavCard{
+      background:var(--card);
+      border-radius:16px;
+      padding:16px;
+      width:100%;
+      max-width:320px;
+      box-shadow: 0 20px 60px rgba(2,8,23,.25);
+    }
+    .mobileNavCard a{
+      display:block;
+      padding:12px 16px;
+      text-decoration:none;
+      font-weight:700;
+      font-size:15px;
+      border-radius:10px;
+      color:var(--text);
+    }
+    .mobileNavCard a:hover, .mobileNavCard a:active{
+      background:rgba(14,165,233,.10);
+    }
+    .mobileNavClose{
+      display:block;
+      width:100%;
+      margin-top:12px;
+      padding:12px;
+      border:1px solid var(--border);
+      background:var(--card);
+      border-radius:10px;
+      font-weight:800;
+      font-size:14px;
+      cursor:pointer;
+      text-align:center;
     }
 
     .btn{
       display:inline-flex; align-items:center; justify-content:center;
-      gap:8px;
+      gap:6px;
       border:1px solid var(--border);
       background: var(--card);
-      padding:10px 12px;
+      padding:10px 14px;
       border-radius:12px;
       text-decoration:none;
       font-weight:800;
       cursor:pointer;
-      transition: transform .06s ease, box-shadow .06s ease, background .2s ease, opacity .2s ease;
+      transition: transform .1s ease, box-shadow .1s ease;
       font-size:14px;
+      -webkit-tap-highlight-color: transparent;
     }
-    .btn:hover{transform: translateY(-1px); box-shadow: 0 12px 24px rgba(2,8,23,.08)}
+    .btn:hover{transform: translateY(-1px); box-shadow: 0 8px 20px rgba(2,8,23,.08)}
+    .btn:active{transform: scale(0.98)}
     .btn.primary{
       border-color: transparent;
       background: linear-gradient(135deg, var(--brand), #38bdf8);
       color: #fff;
     }
-    .btn.primary:hover{box-shadow: 0 18px 40px rgba(14,165,233,.22)}
+    .btn.primary:hover{box-shadow: 0 12px 30px rgba(14,165,233,.22)}
     .btn:disabled{
       opacity:.55;
       cursor:not-allowed;
       transform:none;
       box-shadow:none;
     }
+    .btn.sm{padding:8px 12px; font-size:13px}
 
     .card{
       background:var(--card);
@@ -111,75 +195,129 @@
       overflow:hidden;
     }
 
-    header.hero{padding:18px 0 8px}
-    .heroCard{padding:20px}
+    /* ===== Hero 區塊 ===== */
+    header.hero{padding:12px 0 8px}
+    @media (min-width: 600px){
+      header.hero{padding:18px 0 8px}
+    }
+    .heroCard{padding:16px}
+    @media (min-width: 600px){
+      .heroCard{padding:20px}
+    }
 
     .kicker{
       display:inline-flex;
-      gap:10px;
+      gap:8px;
       align-items:center;
-      font-size:12px;
+      font-size:11px;
       color:var(--muted);
       background: rgba(14,165,233,.08);
       border:1px solid rgba(14,165,233,.16);
-      padding:6px 10px;
+      padding:5px 10px;
       border-radius:999px;
       font-weight:800;
     }
+    @media (min-width: 600px){
+      .kicker{font-size:12px; padding:6px 10px}
+    }
 
     h1{
-      margin:12px 0 8px;
-      font-size: 28px;
-      line-height:1.22;
+      margin:10px 0 6px;
+      font-size: 22px;
+      line-height:1.3;
       letter-spacing:.2px;
     }
-    @media (max-width: 520px){
-      h1{font-size:24px}
+    @media (min-width: 600px){
+      h1{font-size:28px; margin:12px 0 8px}
     }
 
     .sub{
-      margin:0 0 14px;
+      margin:0 0 12px;
       color:var(--muted);
-      font-size:14px;
+      font-size:13px;
       font-weight:650;
+    }
+    @media (min-width: 600px){
+      .sub{font-size:14px; margin:0 0 14px}
     }
 
     .heroLayout{
       display:grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap:12px;
+      grid-template-columns: 1fr;
+      gap:16px;
       align-items:start;
     }
-    @media (max-width: 900px){
-      .heroLayout{grid-template-columns:1fr}
+    @media (min-width: 768px){
+      .heroLayout{
+        grid-template-columns: 1fr 1fr;
+        gap:20px;
+      }
+    }
+    @media (min-width: 900px){
+      .heroLayout{
+        grid-template-columns: 1.2fr .8fr;
+      }
     }
 
+    /* 海報圖片優化 */
+    .posterWrap{
+      position:relative;
+      width:100%;
+      max-width:400px;
+      margin:0 auto;
+    }
+    @media (min-width: 768px){
+      .posterWrap{max-width:none; margin:0}
+    }
     .poster{
       width:100%;
-      border-radius:16px;
+      height:auto;
+      border-radius:12px;
       border:1px solid var(--border);
-      background:#fff;
+      background:#f0f0f0;
       display:block;
       cursor:zoom-in;
+      aspect-ratio: 3 / 4;
+      object-fit:cover;
+    }
+    @media (min-width: 600px){
+      .poster{border-radius:16px}
     }
 
     .pillRow{
       display:grid;
-      grid-template-columns: 1fr;
-      gap:10px;
+      grid-template-columns: 1fr 1fr;
+      gap:8px;
       margin:0 0 12px;
+    }
+    .pillRow .pill:last-child{
+      grid-column: 1 / -1;
+    }
+    @media (min-width: 600px){
+      .pillRow{
+        grid-template-columns: 1fr;
+        gap:10px;
+      }
+      .pillRow .pill:last-child{
+        grid-column: auto;
+      }
     }
     .pill{
       border:1px solid var(--border);
       background: #fff;
-      border-radius: 14px;
+      border-radius: 12px;
       padding:10px 12px;
     }
-    .pill .t{font-size:12px; color:var(--muted); font-weight:800}
-    .pill .v{font-size:15px; font-weight:900; margin-top:2px}
+    .pill .t{font-size:11px; color:var(--muted); font-weight:800}
+    .pill .v{font-size:14px; font-weight:900; margin-top:2px}
+    @media (min-width: 600px){
+      .pill{border-radius:14px}
+      .pill .t{font-size:12px}
+      .pill .v{font-size:15px}
+    }
 
     .ctaRow{
-      display:flex; gap:10px; flex-wrap:wrap;
+      display:flex; gap:8px; flex-wrap:wrap;
       margin-top: 10px;
       align-items:center;
     }
@@ -187,15 +325,22 @@
     .notice{
       margin-top:12px;
       padding:10px 12px;
-      border-radius:14px;
+      border-radius:12px;
       border:1px dashed rgba(2,8,23,.18);
       background: rgba(2,8,23,.03);
       color:var(--muted);
-      font-size:13px;
+      font-size:12px;
       font-weight:700;
     }
+    @media (min-width: 600px){
+      .notice{font-size:13px; border-radius:14px}
+    }
 
-    section{padding:14px 0}
+    /* ===== 區塊共用 ===== */
+    section{padding:12px 0}
+    @media (min-width: 600px){
+      section{padding:14px 0}
+    }
     .secTitle{
       display:flex;
       align-items:flex-end;
@@ -205,36 +350,46 @@
     }
     .secTitle h2{
       margin:0;
-      font-size:18px;
+      font-size:17px;
       letter-spacing:.2px;
+    }
+    @media (min-width: 600px){
+      .secTitle h2{font-size:18px}
     }
     .secTitle .hint{
       color:var(--muted);
-      font-size:12px;
+      font-size:11px;
       font-weight:650;
+    }
+    @media (min-width: 600px){
+      .secTitle .hint{font-size:12px}
     }
 
     .grid{display:grid; gap:12px}
-    .cards3{grid-template-columns: repeat(3, 1fr)}
-    @media (max-width: 900px){
-      .cards3{grid-template-columns: 1fr}
+    .cards3{grid-template-columns: 1fr}
+    @media (min-width: 600px){
+      .cards3{grid-template-columns: repeat(3, 1fr)}
     }
-    .twoCol{grid-template-columns: 1fr 1fr; align-items:start}
-    @media (max-width: 900px){
-      .twoCol{grid-template-columns:1fr}
+    .twoCol{grid-template-columns: 1fr; align-items:start}
+    @media (min-width: 768px){
+      .twoCol{grid-template-columns: 1fr 1fr}
     }
 
     .infoCard{padding:14px}
     .infoCard h3{margin:0 0 6px; font-size:15px}
     .infoCard p{margin:0; color:var(--muted); font-size:13px; font-weight:650}
 
+    /* ===== 時間軸 ===== */
     .timeline{padding: 10px 14px 14px}
     .tlItem{
       display:grid;
-      grid-template-columns: 98px 1fr;
-      gap:12px;
+      grid-template-columns: 70px 1fr;
+      gap:10px;
       padding:10px 0;
       border-top:1px solid var(--border);
+    }
+    @media (min-width: 600px){
+      .tlItem{grid-template-columns: 98px 1fr; gap:12px}
     }
     .tlItem:first-child{border-top:none}
     .time{
@@ -252,82 +407,109 @@
     .list{margin:0; padding-left:18px; color:var(--muted); font-weight:700; font-size:13px}
     .list li{margin:7px 0}
 
+    /* ===== 折疊區 ===== */
     details{border-top:1px solid var(--border); padding:10px 0}
     details:first-child{border-top:none}
     summary{
       cursor:pointer;
       list-style:none;
       font-weight:900;
-      padding:4px 0;
+      padding:6px 0;
       font-size:14px;
+      display:flex;
+      align-items:center;
+      gap:8px;
     }
     summary::-webkit-details-marker{display:none}
-    details p, details ul{margin:6px 0 0; color:var(--muted); font-weight:700; font-size:13px}
+    summary::before{
+      content:"＋";
+      font-size:12px;
+      color:var(--muted);
+      width:20px;
+      text-align:center;
+    }
+    details[open] summary::before{
+      content:"－";
+    }
+    details p, details ul{margin:6px 0 0 28px; color:var(--muted); font-weight:700; font-size:13px}
     .tag{
       display:inline-flex;
       align-items:center;
       gap:6px;
       padding:2px 8px;
       border-radius:999px;
-      font-size:11px;
+      font-size:10px;
       font-weight:900;
       border:1px solid rgba(244,63,94,.25);
       background: rgba(244,63,94,.08);
       color:#9f1239;
-      margin-left:8px;
-      vertical-align:middle;
+      margin-left:auto;
+    }
+    @media (min-width: 600px){
+      .tag{font-size:11px}
     }
 
+    /* ===== 地圖 ===== */
     .mapBox{
       border:1px solid var(--border);
-      border-radius: 16px;
+      border-radius: 12px;
       overflow:hidden;
-      background:#fff;
+      background:#f0f0f0;
+      min-height:200px;
     }
-    iframe{width:100%; height:300px; border:0}
+    @media (min-width: 600px){
+      .mapBox{border-radius:16px; min-height:300px}
+    }
+    .mapBox iframe{
+      width:100%; 
+      height:250px; 
+      border:0;
+      display:block;
+    }
+    @media (min-width: 600px){
+      .mapBox iframe{height:300px}
+    }
 
     .muted{color:var(--muted)}
 
-    .linkBox{
-      border:1px solid var(--border);
-      background:#fff;
-      border-radius:14px;
-      padding:12px;
-      display:flex;
-      gap:10px;
-      align-items:center;
-      flex-wrap:wrap;
-      justify-content:space-between;
-    }
-    .linkText{
-      font-family: var(--mono);
-      font-size:12px;
-      color:#0b1220;
-      font-weight:900;
-      word-break:break-all;
-      text-decoration:none;
-    }
-    .linkText:hover{ text-decoration:underline; }
-
-    /* 表單 */
+    /* ===== 表單 ===== */
     .formGrid{display:grid; gap:12px}
     .field label{display:block; font-weight:900; font-size:13px; margin-bottom:6px}
     .field input, .field select, .field textarea{
       width:100%;
       border:1px solid var(--border);
-      border-radius:12px;
-      padding:10px 12px;
-      font-size:14px;
+      border-radius:10px;
+      padding:12px;
+      font-size:16px; /* 防止 iOS 放大 */
       background:#fff;
       outline:none;
+      -webkit-appearance: none;
+      appearance: none;
     }
-    .field textarea{min-height:90px; resize:vertical}
+    .field select{
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23475569' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 36px;
+    }
+    .field input:focus, .field select:focus, .field textarea:focus{
+      border-color: var(--brand);
+      box-shadow: 0 0 0 3px rgba(14,165,233,.15);
+    }
+    @media (min-width: 600px){
+      .field input, .field select, .field textarea{
+        border-radius:12px;
+        font-size:14px;
+        padding:10px 12px;
+      }
+    }
+    .field textarea{min-height:80px; resize:vertical}
     .field small{display:block; margin-top:6px; color:var(--muted); font-weight:650; font-size:12px}
     .inlineAlert{
       display:none;
       margin-top:10px;
       padding:10px 12px;
-      border-radius:14px;
+      border-radius:12px;
       border:1px dashed rgba(244,63,94,.35);
       background: rgba(244,63,94,.06);
       color:#9f1239;
@@ -340,7 +522,7 @@
       display:none;
       margin-top:10px;
       padding:10px 12px;
-      border-radius:14px;
+      border-radius:12px;
       border:1px solid rgba(14,165,233,.20);
       background: rgba(14,165,233,.06);
       color: var(--muted);
@@ -349,41 +531,61 @@
     }
     .progress.show{display:block}
 
-    /* 海報放大 */
+    /* ===== 報名提示卡（手機版置頂） ===== */
+    .registerTips{
+      order: -1;
+      margin-bottom: 12px;
+    }
+    @media (min-width: 768px){
+      .registerTips{
+        order: 0;
+        margin-bottom: 0;
+      }
+    }
+
+    /* ===== 海報放大 Modal ===== */
     .modal{
       position:fixed; inset:0;
-      background: rgba(2,8,23,.60);
+      background: rgba(2,8,23,.70);
       display:none;
       align-items:center; justify-content:center;
-      padding:18px;
+      padding:12px;
       z-index:50;
     }
     .modal.show{display:flex}
     .modalCard{
-      max-width: 980px;
+      max-width: 500px;
       width: 100%;
-      border-radius: 18px;
+      border-radius: 16px;
       overflow:hidden;
       background:#fff;
       border:1px solid rgba(226,232,240,.9);
       box-shadow: 0 30px 80px rgba(2,8,23,.35);
+    }
+    @media (min-width: 600px){
+      .modalCard{max-width:700px; border-radius:18px}
+    }
+    @media (min-width: 900px){
+      .modalCard{max-width:980px}
     }
     .modalTop{
       display:flex; align-items:center; justify-content:space-between;
       padding:10px 12px;
       border-bottom:1px solid var(--border);
     }
-    .modalTop .t{font-weight:900}
+    .modalTop .t{font-weight:900; font-size:14px}
     .modalImg{width:100%; display:block}
     .iconBtn{
       border:1px solid var(--border);
       background:#fff;
-      border-radius:12px;
-      padding:8px 10px;
+      border-radius:10px;
+      padding:8px 12px;
       cursor:pointer;
       font-weight:900;
+      font-size:13px;
     }
 
+    /* ===== Footer ===== */
     footer{padding:18px 0 36px; color:var(--muted); font-size:12px}
     .footCard{
       padding:14px;
@@ -393,18 +595,62 @@
       align-items:center;
       justify-content:space-between;
     }
+
+    /* ===== 底部固定報名按鈕（手機版） ===== */
+    .fixedCta{
+      display:flex;
+      position:fixed;
+      bottom:0; left:0; right:0;
+      padding:12px 16px;
+      background:rgba(255,255,255,.95);
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
+      border-top:1px solid var(--border);
+      z-index:25;
+      gap:10px;
+    }
+    .fixedCta .btn{flex:1; justify-content:center}
+    @media (min-width: 768px){
+      .fixedCta{display:none}
+    }
+    
+    /* 為底部固定按鈕留空間 */
+    body{padding-bottom:70px}
+    @media (min-width: 768px){
+      body{padding-bottom:0}
+    }
+
+    
+    /* 桌機右上 CTA：手機版改用底部固定按鈕，避免重複 */
+    .desktopCTA{display:inline-flex}
+    @media (max-width: 767px){
+      .desktopCTA{display:none}
+    }
+
+/* ===== 載入優化：骨架屏 ===== */
+    .skeleton{
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: skeleton 1.5s infinite;
+    }
+    @keyframes skeleton{
+      0%{background-position: 200% 0}
+      100%{background-position: -200% 0}
+    }
   </style>
 </head>
 
 <body>
+  <!-- 頂部導覽列 -->
   <div class="topbar">
     <div class="wrap">
       <div class="brand" aria-label="網站標題">
         <span class="dot" aria-hidden="true"></span>
-        <span id="siteName">乾淨世界我愛我家兒童著色畫比賽官網</span>
+        <span id="siteName">乾淨世界我愛我家兒童著色畫比賽</span>
       </div>
 
-      <nav aria-label="導覽">
+      <!-- 桌面版導覽 -->
+      <nav class="desktop" aria-label="導覽">
         <a href="#highlights">亮點</a>
         <a href="#schedule">流程</a>
         <a href="#register">報名</a>
@@ -413,10 +659,29 @@
         <a href="#location">地點</a>
         <a href="#contact">聯絡</a>
       </nav>
-          <a class="btn primary" href="#register" aria-label="立即報名（跳到報名區）">立即報名</a>
+
+      <!-- 手機版選單按鈕 -->
+      <button class="menuBtn" id="menuBtn" type="button" aria-label="開啟選單">☰</button>
+
+      <a class="btn primary sm desktopCTA" href="#register" aria-label="立即報名">立即報名</a>
     </div>
   </div>
 
+  <!-- 手機版導覽選單 -->
+  <div class="mobileNav" id="mobileNav" aria-hidden="true">
+    <div class="mobileNavCard">
+      <a href="#highlights">活動亮點</a>
+      <a href="#schedule">當日流程</a>
+      <a href="#register">立即報名</a>
+      <a href="#rules">參加辦法</a>
+      <a href="#awards">獎項說明</a>
+      <a href="#location">活動地點</a>
+      <a href="#contact">聯絡我們</a>
+      <button class="mobileNavClose" id="mobileNavClose" type="button">關閉選單</button>
+    </div>
+  </div>
+
+  <!-- Hero 區塊 -->
   <header class="hero">
     <div class="wrap">
       <div class="card heroCard">
@@ -425,11 +690,22 @@
         <p class="sub" id="subtitle">活動資訊、流程與規則都在這裡。請確定能到再報名（額滿即止）。</p>
 
         <div class="heroLayout">
-          <div>
-            <img class="poster" id="posterImg" src="./assets/photo.png?v=20260314" alt="活動海報（點擊可放大）" loading="lazy" />
-            <div class="notice">收件截止：10:30（作品繳交截止）｜公布並頒獎：11:40</div>
+          <!-- 海報 -->
+          <div class="posterWrap">
+            <img 
+              class="poster" 
+              id="posterImg" 
+              src="./assets/photo.png?v=20260314" 
+              alt="活動海報（點擊可放大）" 
+              loading="eager"
+              width="600"
+              height="800"
+              fetchpriority="high"
+            />
+            <div class="notice">收件截止：10:30｜公布並頒獎：11:40</div>
           </div>
 
+          <!-- 活動資訊 -->
           <div>
             <div class="pillRow" aria-label="活動關鍵資訊">
               <div class="pill">
@@ -450,14 +726,14 @@
               <a class="btn primary" href="#register">立即報名</a>
               <a class="btn" id="mapBtnTop" href="#" target="_blank" rel="noopener">開啟地圖</a>
             </div>
-
-            <div style="height:10px"></div>
+          </div>
         </div>
       </div>
     </div>
   </header>
 
   <main>
+    <!-- 活動亮點 -->
     <section id="highlights">
       <div class="wrap">
         <div class="secTitle">
@@ -482,6 +758,7 @@
       </div>
     </section>
 
+    <!-- 當日流程 -->
     <section id="schedule">
       <div class="wrap">
         <div class="secTitle">
@@ -510,19 +787,38 @@
       </div>
     </section>
 
-    <!-- 報名（左表單、右重點三行） -->
+    <!-- 報名區塊 -->
     <section id="register">
       <div class="wrap">
         <div class="secTitle">
           <h2>報名</h2>
-          <div class="hint">按鈕＋網址都可用（不使用 QR）</div>
+          <div class="hint">填完送出即可</div>
         </div>
 
         <div class="grid twoCol">
-          <!-- 左：表單 -->
+          <!-- 報名提示（手機版會移到上面） -->
+          <div class="card infoCard registerTips">
+            <h3>報名前先看這三點</h3>
+            <ul class="list">
+              <li><b>名額</b>：幼兒園組 25 人／國小低年級組 25 人（額滿為止）</li>
+              <li><b>收件截止</b>：10:30 前繳交作品，逾時不列入評審</li>
+              <li><b>家長協助</b>：幼兒園可適度協助但不得代畫；國小低年級不得動手協助</li>
+            </ul>
+
+            <div class="notice" style="margin-top:12px">
+              完整規則請看下方「參加辦法」區塊。
+            </div>
+
+            <div class="ctaRow" style="margin-top:12px">
+              <a class="btn sm" href="#rules">參加辦法</a>
+              <a class="btn sm" href="#awards">獎項</a>
+              <a class="btn sm" href="#location">地點</a>
+            </div>
+          </div>
+
+          <!-- 表單 -->
           <div class="card infoCard">
             <form id="signupForm" class="formGrid" autocomplete="on">
-              <!-- 固定欄位（給 GAS / Sheet） -->
               <input type="hidden" name="活動代碼" id="event_code" />
               <input type="hidden" name="活動名稱" id="event_name" />
               <input type="hidden" name="報名序號" id="reg_id" />
@@ -536,8 +832,8 @@
                   <option>是（我能全程參與）</option>
                   <option>否（我可能無法全程，請先不要報名）</option>
                 </select>
-                <small>為避免佔名額，無法全程參與者請勿報名。</small>
-                <div class="inlineAlert" id="fullJoinAlert">這場活動需要全程參與：若你可能無法全程，建議先不要報名，謝謝你。</div>
+                <small>無法全程參與者請勿報名，避免佔用名額。</small>
+                <div class="inlineAlert" id="fullJoinAlert">這場活動需要全程參與，若無法配合建議先不要報名。</div>
               </div>
 
               <div class="field">
@@ -551,12 +847,12 @@
 
               <div class="field">
                 <label for="parent_name">家長姓名（必填）</label>
-                <input id="parent_name" name="家長姓名" type="text" required placeholder="例如：王小明" />
+                <input id="parent_name" name="家長姓名" type="text" required placeholder="例如：王小明" autocomplete="name" />
               </div>
 
               <div class="field">
                 <label for="phone">聯絡手機（必填）</label>
-                <input id="phone" name="聯絡手機" type="tel" inputmode="tel" required placeholder="例如：0912-345-678" />
+                <input id="phone" name="聯絡手機" type="tel" inputmode="tel" required placeholder="例如：0912-345-678" autocomplete="tel" />
               </div>
 
               <div class="field">
@@ -580,7 +876,7 @@
 
               <div class="field">
                 <label for="note">備註（可填）</label>
-                <textarea id="note" name="備註（家長）" placeholder="例如：需要無障礙動線 / 其他提醒"></textarea>
+                <textarea id="note" name="備註（家長）" placeholder="例如：需要無障礙動線"></textarea>
               </div>
 
               <div class="ctaRow" style="margin-top:4px">
@@ -588,43 +884,23 @@
                 <span class="muted" id="submitHint" style="font-weight:900; font-size:13px"></span>
               </div>
 
-              <div class="progress" id="progress">送出中…請稍等（寫入成功才會顯示完成頁）</div>
+              <div class="progress" id="progress">送出中…請稍等</div>
 
-              <div class="muted" style="font-weight:800; font-size:12px; margin-top:6px">
+              <div class="muted" style="font-weight:700; font-size:12px; margin-top:6px">
                 填寫資料僅用於活動聯絡，不作其他用途。
               </div>
             </form>
-          </div>
-
-          <!-- 右：重點三行 + 快速連結 -->
-          <div class="card infoCard">
-            <h3>報名前先看這三點</h3>
-            <ul class="list">
-              <li><b>名額</b>：幼兒園組 25 人／國小低年級組 25 人（額滿為止）</li>
-              <li><b>收件截止</b>：10:30 前繳交作品，逾時不列入評審</li>
-              <li><b>家長協助</b>：幼兒園可適度協助但不得代畫；國小低年級不得動手協助（違規取消評審資格）</li>
-            </ul>
-
-            <div class="notice" style="margin-top:12px">
-              想看完整規則：請往下到「參加辦法」區塊（可展開）。
-            </div>
-
-            <div class="ctaRow" style="margin-top:12px">
-              <a class="btn" href="#rules">查看參加辦法</a>
-              <a class="btn" href="#awards">查看獎項</a>
-              <a class="btn" href="#location">查看地點</a>
-            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 參加辦法（折疊） -->
+    <!-- 參加辦法 -->
     <section id="rules">
       <div class="wrap">
         <div class="secTitle">
-          <h2>參加辦法（點開查看）</h2>
-          <div class="hint">先看重點，需要再展開</div>
+          <h2>參加辦法</h2>
+          <div class="hint">點開查看細節</div>
         </div>
 
         <div class="card" style="padding:10px 14px">
@@ -653,7 +929,7 @@
           </details>
 
           <details>
-            <summary>作品規則與收件截止<span class="tag">重要</span></summary>
+            <summary>作品規則與收件截止 <span class="tag">重要</span></summary>
             <ul class="list">
               <li>必須使用主辦提供之著色底圖完成作品。</li>
               <li>畫材自備（蠟筆／彩色筆／色鉛筆／水彩等皆可）。</li>
@@ -662,7 +938,7 @@
           </details>
 
           <details>
-            <summary>家長陪同與協助界線<span class="tag">最常爭議</span></summary>
+            <summary>家長陪同與協助界線 <span class="tag">最常爭議</span></summary>
             <ul class="list">
               <li><b>幼兒園組</b>：家長可適度協助（口頭提醒、安撫、協助擺放畫具或轉動紙張等），但不得代為上色、描線或補色。</li>
               <li><b>國小低年級組</b>：家長可陪同但不得動手協助；違規者取消評審資格。</li>
@@ -699,10 +975,10 @@
           </details>
 
           <details>
-            <summary>作品發表、著作權與影像使用<span class="tag">重要</span></summary>
+            <summary>作品發表與影像使用 <span class="tag">重要</span></summary>
             <ul class="list">
               <li>得獎作品將公布於官方渠道（活動宣傳與成果展示）。</li>
-              <li>主辦單位得就作品進行公開展示、宣傳使用（以活動推廣為目的）。</li>
+              <li>主辦單位得就作品進行公開展示、宣傳使用。</li>
               <li>活動現場可能拍照/錄影作為活動紀錄與宣傳使用。</li>
             </ul>
           </details>
@@ -718,12 +994,12 @@
       </div>
     </section>
 
-    <!-- 獎項卡片（A：分兩張卡） -->
+    <!-- 獎項 -->
     <section id="awards">
       <div class="wrap">
         <div class="secTitle">
           <h2>獎項</h2>
-          <div class="hint">兩組各一套（看組別不會看錯）</div>
+          <div class="hint">兩組各一套</div>
         </div>
 
         <div class="grid twoCol">
@@ -754,11 +1030,12 @@
       </div>
     </section>
 
+    <!-- 地點 -->
     <section id="location">
       <div class="wrap">
         <div class="secTitle">
           <h2>地點</h2>
-          <div class="hint">地址可複製、可直接開地圖</div>
+          <div class="hint">可複製地址或開地圖</div>
         </div>
 
         <div class="grid twoCol">
@@ -768,8 +1045,8 @@
             <p class="muted" style="font-weight:900; margin-top:8px" id="addressText">臺南市南區新建路 12 號</p>
 
             <div class="ctaRow" style="margin-top:12px">
-              <button class="btn" id="copyAddrBtn" type="button">複製地址</button>
-              <a class="btn primary" id="mapBtn2" href="#" target="_blank" rel="noopener">用 Google 地圖開啟</a>
+              <button class="btn sm" id="copyAddrBtn" type="button">複製地址</button>
+              <a class="btn primary sm" id="mapBtn2" href="#" target="_blank" rel="noopener">開啟地圖</a>
             </div>
 
             <div class="notice" style="margin-top:12px">
@@ -777,24 +1054,22 @@
             </div>
           </div>
 
-          <div class="mapBox">
-            <iframe
-              id="mapFrame"
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-              src="https://www.google.com/maps?q=%E8%87%BA%E5%8D%97%E5%B8%82%E5%8D%97%E5%8D%80%E6%96%B0%E5%BB%BA%E8%B7%AF%2012%20%E8%99%9F%20%E5%BD%B0%E5%8D%97%E9%87%8C%E6%B4%BB%E5%8B%95%E4%B8%AD%E5%BF%83&output=embed"
-              title="Google 地圖">
-            </iframe>
+          <div class="mapBox" id="mapBox">
+            <div class="skeleton" style="height:250px;border-radius:18px" aria-hidden="true"></div>
+            <noscript>
+              <iframe src="https://www.google.com/maps?q=%E8%87%BA%E5%8D%97%E5%B8%82%E5%8D%97%E5%8D%80%E6%96%B0%E5%BB%BA%E8%B7%AF%2012%20%E8%99%9F%20%E5%BD%B0%E5%8D%97%E9%87%8C%E6%B4%BB%E5%8B%95%E4%B8%AD%E5%BF%83&output=embed" loading="lazy" title="Google 地圖"></iframe>
+            </noscript>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- 聯絡 -->
     <section id="contact">
       <div class="wrap">
         <div class="secTitle">
           <h2>主辦 / 協辦 / 聯絡</h2>
-          <div class="hint">如需取消/更改，請聯絡窗口</div>
+          <div class="hint">如需取消請聯絡窗口</div>
         </div>
 
         <div class="card infoCard">
@@ -814,7 +1089,7 @@
 
               <div style="height:10px"></div>
               <h3>提醒</h3>
-              <p class="muted" style="font-weight:800">若臨時無法到場，建議盡早通知，讓名額留給需要的家庭。</p>
+              <p class="muted" style="font-weight:700">若臨時無法到場，建議盡早通知，讓名額留給需要的家庭。</p>
             </div>
           </div>
         </div>
@@ -826,13 +1101,18 @@
         <div class="card footCard">
           <div>
             <div style="font-weight:900; color:#0b1220">乾淨世界我愛我家兒童著色畫比賽官網</div>
-            <div class="muted" style="font-weight:700"></div>
           </div>
           <div class="muted">© <span id="year"></span></div>
         </div>
       </div>
     </footer>
   </main>
+
+  <!-- 手機版底部固定按鈕 -->
+  <div class="fixedCta">
+    <a class="btn primary" href="#register">立即報名</a>
+    <a class="btn" href="tel:0913837389">撥打電話</a>
+  </div>
 
   <!-- 海報放大 Modal -->
   <div class="modal" id="modal" aria-hidden="true">
@@ -841,32 +1121,21 @@
         <div class="t">活動海報</div>
         <button class="iconBtn" id="closeModal" type="button">關閉</button>
       </div>
-      <img class="modalImg" id="modalImg" src="./assets/photo.png?v=20260314" alt="活動海報放大" />
+      <img class="modalImg" id="modalImg" src="./assets/photo.png?v=20260314" alt="活動海報放大" loading="lazy" />
     </div>
   </div>
 
   <script>
-    // ====== 只要改這裡（必改）======
-    // 1) GAS Web App URL（你的 Apps Script 部署網址 /exec）
+    // ====== 設定區 ======
     const GAS_WEBAPP_URL = "請貼上你的GAS部署網址";
-
-    // 2) 感謝頁（同一個 repo 的檔案名）
     const THANKS_URL = "thanks.html";
-
-    // 3) 活動代碼/名稱（會寫入試算表，方便你整理）
     const EVENT_CODE = "GJC2026";
     const EVENT_NAME = "乾淨世界我愛我家兒童著色畫比賽";
-
-    // 4) 報名網址（可給家長分享；若你用這頁表單，就填這頁的公開網址）
     const PUBLIC_REGISTER_URL = "（填你的GitHub Pages網址）";
-    // 5) Google 地圖「嵌入」網址（建議用：Google 地圖 → 分享 → 嵌入地圖 → 複製 src）
-    //    貼上類似：https://www.google.com/maps/embed?pb=... 的整串
     const GOOGLE_MAP_EMBED_SRC = "https://www.google.com/maps?q=%E8%87%BA%E5%8D%97%E5%B8%82%E5%8D%97%E5%8D%80%E6%96%B0%E5%BB%BA%E8%B7%AF%2012%20%E8%99%9F%20%E5%BD%B0%E5%8D%97%E9%87%8C%E6%B4%BB%E5%8B%95%E4%B8%AD%E5%BF%83&output=embed";
 
-    // =================================
-
     const EVENT = {
-      siteName: "乾淨世界我愛我家兒童著色畫比賽官網",
+      siteName: "乾淨世界我愛我家兒童著色畫比賽",
       title: "乾淨世界「我愛我家」兒童著色畫比賽",
       kicker: "現場提供底圖｜11:40 公布並頒獎",
       subtitle: "活動資訊、流程與規則都在這裡。請確定能到再報名（額滿即止）。",
@@ -880,9 +1149,10 @@
       phone: "陳小姐｜0913-837-389"
     };
 
+    // ====== 工具函數 ======
     const $ = (id) => document.getElementById(id);
 
-    // 基本文字
+    // ====== 初始化文字 ======
     $("siteName").textContent = EVENT.siteName;
     $("title").textContent = EVENT.title;
     $("kicker").textContent = EVENT.kicker;
@@ -897,81 +1167,118 @@
     $("phoneText").textContent = EVENT.phone;
     $("year").textContent = new Date().getFullYear();
 
-    // 地圖
+    // ====== 地圖 ======
     const mapUrl = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(EVENT.mapQuery);
     $("mapBtnTop").href = mapUrl;
     $("mapBtn2").href = mapUrl;
-    const iframe = $("mapFrame");
-    // 內嵌地圖：優先使用 GOOGLE_MAP_EMBED_SRC（最穩，手機也較不會被擋）
-    const embed = (GOOGLE_MAP_EMBED_SRC || "").trim();
-    if (embed && embed.startsWith("http")) {
-      iframe.src = embed;
+
+    // 延遲載入地圖（Intersection Observer）
+    const mapBox = $("mapBox");
+    const loadMap = () => {
+      const embed = (GOOGLE_MAP_EMBED_SRC || "").trim();
+      if (embed && embed.startsWith("http")) {
+        mapBox.innerHTML = `<iframe src="${embed}" loading="lazy" title="Google 地圖"></iframe>`;
+      } else {
+        mapBox.innerHTML = `<div style="padding:40px;text-align:center;color:var(--muted)">地圖載入中...</div>`;
+      }
+    };
+
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            loadMap();
+            observer.disconnect();
+          }
+        });
+      }, { rootMargin: '200px' });
+      observer.observe(mapBox);
     } else {
-      // 沒填 embed，就先隱藏內嵌框，避免手機顯示失敗
-      iframe.parentElement.style.display = "none";
+      loadMap();
     }
 
-    
-// 複製地址
-    $("copyAddrBtn").addEventListener("click", async () => {
-      try{
-        await navigator.clipboard.writeText(EVENT.address);
-        $("copyAddrBtn").textContent = "已複製 ✅";
-        setTimeout(()=> $("copyAddrBtn").textContent = "複製地址", 1200);
-      }catch(e){
-        alert("複製失敗，請手動複製：\n" + EVENT.address);
+    // ====== 手機選單 ======
+    const menuBtn = $("menuBtn");
+    const mobileNav = $("mobileNav");
+    const mobileNavClose = $("mobileNavClose");
+
+    menuBtn.addEventListener("click", () => {
+      mobileNav.classList.add("show");
+      mobileNav.setAttribute("aria-hidden", "false");
+    });
+
+    const closeMobileNav = () => {
+      mobileNav.classList.remove("show");
+      mobileNav.setAttribute("aria-hidden", "true");
+    };
+
+    mobileNavClose.addEventListener("click", closeMobileNav);
+    mobileNav.addEventListener("click", (e) => {
+      if (e.target === mobileNav || e.target.tagName === "A") {
+        closeMobileNav();
       }
     });
 
-    // 海報放大
+    // ====== 複製地址 ======
+    $("copyAddrBtn").addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(EVENT.address);
+        $("copyAddrBtn").textContent = "已複製 ✓";
+        setTimeout(() => $("copyAddrBtn").textContent = "複製地址", 1500);
+      } catch (e) {
+        // Fallback
+        const ta = document.createElement("textarea");
+        ta.value = EVENT.address;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        document.body.removeChild(ta);
+        $("copyAddrBtn").textContent = "已複製 ✓";
+        setTimeout(() => $("copyAddrBtn").textContent = "複製地址", 1500);
+      }
+    });
+
+    // ====== 海報放大 ======
     const modal = $("modal");
     const posterImg = $("posterImg");
-    const modalImg = $("modalImg");
     const closeModal = $("closeModal");
-    function openModal(){
+
+    const openModal = () => {
       modal.classList.add("show");
-      modal.setAttribute("aria-hidden","false");
-    }
-    function closeIt(){
+      modal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    };
+
+    const closeIt = () => {
       modal.classList.remove("show");
-      modal.setAttribute("aria-hidden","true");
-    }
+      modal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    };
+
     posterImg.addEventListener("click", openModal);
     closeModal.addEventListener("click", closeIt);
-    modal.addEventListener("click", (e)=>{ if(e.target === modal) closeIt(); });
-    window.addEventListener("keydown", (e)=>{ if(e.key === "Escape") closeIt(); });
+    modal.addEventListener("click", (e) => { if (e.target === modal) closeIt(); });
+    window.addEventListener("keydown", (e) => { if (e.key === "Escape") closeIt(); });
 
-    // 追蹤資訊（放進備註 hidden）
-    function getTrackingNote(){
+    // ====== 表單相關 ======
+    function getTrackingNote() {
       const p = new URLSearchParams(location.search);
-      const src = (p.get("src") || "").trim();
-      const utm_source = (p.get("utm_source") || "").trim();
-      const utm_medium = (p.get("utm_medium") || "").trim();
-      const utm_campaign = (p.get("utm_campaign") || "").trim();
-      const parts = [];
-      if (src) parts.push(`src=${src}`);
-      if (utm_source) parts.push(`utm_source=${utm_source}`);
-      if (utm_medium) parts.push(`utm_medium=${utm_medium}`);
-      if (utm_campaign) parts.push(`utm_campaign=${utm_campaign}`);
+      const keys = ["src", "utm_source", "utm_medium", "utm_campaign"];
+      const parts = keys.map(k => p.get(k)?.trim()).filter(Boolean).map((v, i) => `${keys[i]}=${v}`);
       return parts.length ? `【來源】${parts.join("&")}` : "";
     }
 
-    function makeRegId(){
-      // 簡單序號：年月日-4碼
+    function makeRegId() {
       const d = new Date();
-      const pad = (n)=> String(n).padStart(2,"0");
-      const y = d.getFullYear();
-      const m = pad(d.getMonth()+1);
-      const day = pad(d.getDate());
-      const rnd = Math.floor(Math.random()*9000)+1000;
-      return `${y}${m}${day}-${rnd}`;
+      const pad = (n) => String(n).padStart(2, "0");
+      return `${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}-${Math.floor(Math.random() * 9000) + 1000}`;
     }
 
-    // 全程參與 UI
     const fullJoin = $("full_join");
     const fullJoinAlert = $("fullJoinAlert");
     const submitBtn = $("submitBtn");
-    function setFullJoinUI(){
+
+    function setFullJoinUI() {
       const v = fullJoin.value || "";
       if (v.startsWith("否")) {
         fullJoinAlert.classList.add("show");
@@ -983,14 +1290,12 @@
     }
     fullJoin.addEventListener("change", setFullJoinUI);
 
-    // 表單送出：改成「直接 POST 到 GAS」，GAS 寫入成功才會導回 thanks
     const form = $("signupForm");
     form.action = GAS_WEBAPP_URL;
     form.method = "POST";
     form.target = "_self";
 
     form.addEventListener("submit", (ev) => {
-      // 擋「否」
       const v = fullJoin.value || "";
       if (v.startsWith("否")) {
         ev.preventDefault();
@@ -998,37 +1303,29 @@
         return;
       }
 
-      // 簡單防連點
       if (form.dataset.submitting === "1") {
         ev.preventDefault();
         return;
       }
       form.dataset.submitting = "1";
 
-      // UI
       $("submitHint").textContent = "正在送出…";
       $("progress").classList.add("show");
       submitBtn.disabled = true;
       submitBtn.textContent = "送出中…";
 
-      // hidden：活動代碼/名稱
       $("event_code").value = EVENT_CODE;
       $("event_name").value = EVENT_NAME;
 
-      // hidden：序號
       if (!$("reg_id").value) $("reg_id").value = makeRegId();
       const rid = $("reg_id").value;
 
-      // hidden：追蹤（合併家長備註）
       const tracking = getTrackingNote();
       const note = ($("note").value || "").trim();
-      const merged = [note, tracking].filter(Boolean).join(" | ");
-      $("note_hidden").value = merged;
+      $("note_hidden").value = [note, tracking].filter(Boolean).join(" | ");
 
-      // redirect：寫入成功後導回 thanks（帶 rid）
       const thanksAbs = new URL(THANKS_URL, location.href).href;
       $("redirect_url").value = `${thanksAbs}?rid=${encodeURIComponent(rid)}`;
-      // 不要 preventDefault：讓瀏覽器把表單送到 GAS
     });
   </script>
 </body>
