@@ -7,7 +7,7 @@
 
   <meta name="description" content="乾淨世界我愛我家兒童著色畫比賽官網｜報名、流程、辦法、獎項與地點資訊" />
   <meta property="og:title" content="乾淨世界我愛我家兒童著色畫比賽官網" />
-  <meta property="og:description" content="一頁式活動官網：報名、流程、參加辦法（可展開）、獎項與地點" />
+  <meta property="og:description" content="：報名、流程、參加辦法（可展開）、獎項與地點" />
   <meta property="og:type" content="website" />
   <meta name="theme-color" content="#0ea5e9" />
 
@@ -413,6 +413,7 @@
         <a href="#location">地點</a>
         <a href="#contact">聯絡</a>
       </nav>
+          <a class="btn primary" href="#register" aria-label="立即報名（跳到報名區）">立即報名</a>
 
       <a class="btn primary" href="#register">報名</a>
     </div>
@@ -423,11 +424,11 @@
       <div class="card heroCard">
         <div class="kicker" id="kicker">現場提供底圖｜11:40 公布並頒獎</div>
         <h1 id="title">乾淨世界「我愛我家」兒童著色畫比賽</h1>
-        <p class="sub" id="subtitle">一頁式活動官網：報名、流程、參加辦法（可展開）、獎項與地點。請確定能到再報名。</p>
+        <p class="sub" id="subtitle">活動資訊、流程與規則都在這裡。請確定能到再報名（額滿即止）。</p>
 
         <div class="heroLayout">
           <div>
-            <img class="poster" id="posterImg" src="assets/photo.png" alt="活動海報（點擊可放大）" loading="lazy" />
+            <img class="poster" id="posterImg" src="./assets/photo.png?v=20260314" alt="活動海報（點擊可放大）" loading="lazy" />
             <div class="notice">收件截止：10:30（作品繳交截止）｜公布並頒獎：11:40</div>
           </div>
 
@@ -435,7 +436,7 @@
             <div class="pillRow" aria-label="活動關鍵資訊">
               <div class="pill">
                 <div class="t">日期</div>
-                <div class="v" id="dateText">2026/03/15（日）</div>
+                <div class="v" id="dateText">2026/03/14（六）</div>
               </div>
               <div class="pill">
                 <div class="t">時間</div>
@@ -453,17 +454,6 @@
             </div>
 
             <div style="height:10px"></div>
-
-            <div class="linkBox" role="group" aria-label="報名網址">
-              <div class="muted" style="font-weight:900; font-size:13px">報名網址（可點）</div>
-              <a class="linkText" id="regUrlText" href="#" target="_blank" rel="noopener">（尚未設定）</a>
-              <button class="btn" id="copyLinkBtn" type="button">複製報名網址</button>
-            </div>
-
-            <div class="muted" style="font-weight:800; font-size:12px; margin-top:10px">
-              填寫資料僅用於活動聯絡，不作其他用途。
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -838,7 +828,7 @@
         <div class="card footCard">
           <div>
             <div style="font-weight:900; color:#0b1220">乾淨世界我愛我家兒童著色畫比賽官網</div>
-            <div class="muted" style="font-weight:700">一頁式活動官網｜GitHub Pages 發佈</div>
+            <div class="muted" style="font-weight:700"></div>
           </div>
           <div class="muted">© <span id="year"></span></div>
         </div>
@@ -853,7 +843,7 @@
         <div class="t">活動海報</div>
         <button class="iconBtn" id="closeModal" type="button">關閉</button>
       </div>
-      <img class="modalImg" id="modalImg" src="assets/photo.png" alt="活動海報放大" />
+      <img class="modalImg" id="modalImg" src="./assets/photo.png?v=20260314" alt="活動海報放大" />
     </div>
   </div>
 
@@ -881,8 +871,8 @@
       siteName: "乾淨世界我愛我家兒童著色畫比賽官網",
       title: "乾淨世界「我愛我家」兒童著色畫比賽",
       kicker: "現場提供底圖｜11:40 公布並頒獎",
-      subtitle: "一頁式活動官網：報名、流程、參加辦法（可展開）、獎項與地點。請確定能到再報名。",
-      dateText: "2026/03/15（日）",
+      subtitle: "活動資訊、流程與規則都在這裡。請確定能到再報名（額滿即止）。",
+      dateText: "2026/03/14（六）",
       timeText: "09:00–12:00",
       place: "彰南里活動中心｜大禮堂",
       address: "臺南市南區新建路 12 號",
@@ -923,32 +913,12 @@
       iframe.parentElement.style.display = "none";
     }
 
-    // 報名網址（可點 + 複製）
-    const regUrlText = $("regUrlText");
-    const copyLinkBtn = $("copyLinkBtn");
-    function setPublicUrlUI(){
-      const url = (PUBLIC_REGISTER_URL || "").trim();
-      if (!url || url.includes("（") || url.includes("填")) {
-        regUrlText.textContent = "（請先設定 PUBLIC_REGISTER_URL）";
-        regUrlText.href = "#";
-        copyLinkBtn.disabled = true;
-        copyLinkBtn.textContent = "請先設定網址";
-        return;
-      }
-      regUrlText.textContent = url;
-      regUrlText.href = url;
-      copyLinkBtn.disabled = false;
-      copyLinkBtn.textContent = "複製報名網址";
-    }
-    setPublicUrlUI();
-
-    copyLinkBtn.addEventListener("click", async () => {
+    
+// （已移除網址展示卡，故停用此段）
       const url = (PUBLIC_REGISTER_URL || "").trim();
       if (!url || url === "#" || url.includes("（")) return;
       try{
         await navigator.clipboard.writeText(url);
-        copyLinkBtn.textContent = "已複製 ✅";
-        setTimeout(()=> copyLinkBtn.textContent = "複製報名網址", 1200);
       }catch(e){
         alert("複製失敗，請手動複製：\n" + url);
       }
