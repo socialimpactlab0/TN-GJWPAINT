@@ -3,711 +3,287 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>乾淨世界我愛我家兒童著色畫比賽官網</title>
+  <title>乾淨校園我愛我家兒童著色畫比賽官網</title>
 
-  <meta name="description" content="乾淨世界我愛我家兒童著色畫比賽官網｜報名、流程、辦法、獎項與地點資訊" />
-  <meta property="og:title" content="乾淨世界我愛我家兒童著色畫比賽官網" />
-  <meta property="og:description" content="報名、流程、參加辦法（可展開）、獎項與地點" />
+  <meta name="description" content="乾淨校園我愛我家兒童著色畫比賽官網｜報名、流程、辦法、獎項與地點資訊" />
+  <meta property="og:title" content="乾淨校園我愛我家兒童著色畫比賽官網" />
+  <meta property="og:description" content="報名、流程、參加辦法、獎項與地點" />
   <meta property="og:type" content="website" />
   <meta name="theme-color" content="#0ea5e9" />
-
-  <!-- 預連接加速 Google 地圖載入 -->
-  <link rel="preconnect" href="https://www.google.com" />
-  <link rel="preconnect" href="https://maps.googleapis.com" />
 
   <style>
     :root{
       --bg:#f6f9fc;
-      --card:#ffffff;
+      --card:#fff;
       --text:#0f172a;
       --muted:#475569;
       --brand:#0ea5e9;
       --brand2:#22c55e;
       --border:#e2e8f0;
-      --shadow: 0 10px 30px rgba(2, 8, 23, .08);
-      --radius: 18px;
-      --max: 980px;
-      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --shadow:0 10px 30px rgba(2,8,23,.08);
+      --radius:16px;
+      --max:960px;
     }
-    *{box-sizing:border-box}
+    *{box-sizing:border-box;margin:0}
     body{
-      margin:0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
       color:var(--text);
-      background:
-        radial-gradient(900px 400px at 15% -10%, rgba(14,165,233,.14), transparent 60%),
-        radial-gradient(900px 420px at 100% 10%, rgba(34,197,94,.10), transparent 55%),
-        var(--bg);
+      background:linear-gradient(135deg,rgba(14,165,233,.08)0%,transparent 50%),linear-gradient(225deg,rgba(34,197,94,.06)0%,transparent 50%),var(--bg);
       line-height:1.6;
-      -webkit-text-size-adjust: 100%;
+      padding-bottom:72px;
     }
+    @media(min-width:768px){body{padding-bottom:0}}
     a{color:inherit}
-    .wrap{max-width:var(--max); margin:0 auto; padding:16px}
-    
-    @media (min-width: 600px){
-      .wrap{padding:22px}
-    }
+    .wrap{max-width:var(--max);margin:0 auto;padding:16px}
 
-    /* ===== 頂部導覽列 ===== */
+    /* 頂部導覽 */
     .topbar{
-      position:sticky; top:0; z-index:30;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      background: rgba(246,249,252,.85);
-      border-bottom:1px solid rgba(226,232,240,.85);
+      position:sticky;top:0;z-index:30;
+      background:rgba(255,255,255,.92);
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--border);
     }
     .topbar .wrap{
-      display:flex; align-items:center; justify-content:space-between;
-      padding:10px 16px;
-      gap:8px;
-    }
-    @media (min-width: 600px){
-      .topbar .wrap{padding:12px 22px; gap:10px}
+      display:flex;align-items:center;justify-content:space-between;
+      padding:10px 16px;gap:8px;
     }
     .brand{
-      display:flex; gap:8px; align-items:center;
-      font-weight:900;
-      letter-spacing:.3px;
-      font-size:13px;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
+      display:flex;align-items:center;gap:8px;
+      font-weight:900;font-size:13px;
+      white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
     }
-    @media (min-width: 600px){
-      .brand{font-size:14px; gap:10px}
-    }
+    @media(min-width:768px){.brand{font-size:14px}}
     .dot{
-      width:10px; height:10px; border-radius:999px;
-      background:linear-gradient(135deg, var(--brand), var(--brand2));
-      box-shadow: 0 6px 18px rgba(14,165,233,.20);
-      flex:0 0 auto;
+      width:10px;height:10px;border-radius:50%;flex-shrink:0;
+      background:linear-gradient(135deg,var(--brand),var(--brand2));
     }
-    
-    /* 桌面版導覽 */
-    nav.desktop{display:none; gap:8px; align-items:center; flex-wrap:wrap; justify-content:flex-end}
-    nav.desktop a{
-      text-decoration:none;
-      font-size:13px;
-      color:var(--muted);
-      padding:7px 9px;
-      border-radius:999px;
-    }
-    nav.desktop a:hover{background:rgba(14,165,233,.10); color:var(--text)}
-    @media (min-width: 900px){
-      nav.desktop{display:flex}
-    }
+    .topBtns{display:flex;gap:6px;align-items:center}
+    .topBtns .btn{padding:8px 12px;font-size:13px}
+    .topBtns .btn.secondary{display:none}
+    @media(min-width:768px){.topBtns .btn.secondary{display:inline-flex}}
 
-    /* 手機版漢堡選單 */
-    .menuBtn{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      width:40px;
-      height:40px;
-      border:1px solid var(--border);
-      background:var(--card);
-      border-radius:10px;
-      cursor:pointer;
-      font-size:18px;
-    }
-    @media (min-width: 900px){
-      .menuBtn{display:none}
-    }
-    
-    .mobileNav{
-      display:none;
-      position:fixed;
-      top:0; left:0; right:0; bottom:0;
-      background:rgba(2,8,23,.5);
-      z-index:40;
-      padding:16px;
-    }
-    .mobileNav.show{display:flex; align-items:flex-start; justify-content:center; padding-top:60px}
-    .mobileNavCard{
-      background:var(--card);
-      border-radius:16px;
-      padding:16px;
-      width:100%;
-      max-width:320px;
-      box-shadow: 0 20px 60px rgba(2,8,23,.25);
-    }
-    .mobileNavCard a{
-      display:block;
-      padding:12px 16px;
-      text-decoration:none;
-      font-weight:700;
-      font-size:15px;
-      border-radius:10px;
-      color:var(--text);
-    }
-    .mobileNavCard a:hover, .mobileNavCard a:active{
-      background:rgba(14,165,233,.10);
-    }
-    .mobileNavClose{
-      display:block;
-      width:100%;
-      margin-top:12px;
-      padding:12px;
-      border:1px solid var(--border);
-      background:var(--card);
-      border-radius:10px;
-      font-weight:800;
-      font-size:14px;
-      cursor:pointer;
-      text-align:center;
-    }
-
+    /* 按鈕 */
     .btn{
-      display:inline-flex; align-items:center; justify-content:center;
-      gap:6px;
-      border:1px solid var(--border);
-      background: var(--card);
-      padding:10px 14px;
-      border-radius:12px;
-      text-decoration:none;
-      font-weight:800;
-      cursor:pointer;
-      transition: transform .1s ease, box-shadow .1s ease;
-      font-size:14px;
-      -webkit-tap-highlight-color: transparent;
+      display:inline-flex;align-items:center;justify-content:center;gap:6px;
+      padding:10px 16px;border-radius:10px;font-size:14px;font-weight:700;
+      text-decoration:none;cursor:pointer;border:1px solid var(--border);
+      background:var(--card);transition:transform .1s,box-shadow .1s;
     }
-    .btn:hover{transform: translateY(-1px); box-shadow: 0 8px 20px rgba(2,8,23,.08)}
-    .btn:active{transform: scale(0.98)}
-    .btn.primary{
-      border-color: transparent;
-      background: linear-gradient(135deg, var(--brand), #38bdf8);
-      color: #fff;
-    }
-    .btn.primary:hover{box-shadow: 0 12px 30px rgba(14,165,233,.22)}
-    .btn:disabled{
-      opacity:.55;
-      cursor:not-allowed;
-      transform:none;
-      box-shadow:none;
-    }
-    .btn.sm{padding:8px 12px; font-size:13px}
+    .btn:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.08)}
+    .btn:active{transform:scale(.98)}
+    .btn.primary{background:linear-gradient(135deg,var(--brand),#38bdf8);color:#fff;border:none}
+    .btn.primary:hover{box-shadow:0 8px 20px rgba(14,165,233,.25)}
+    .btn.sm{padding:8px 12px;font-size:13px}
 
+    /* 卡片 */
     .card{
-      background:var(--card);
-      border:1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow:hidden;
+      background:var(--card);border:1px solid var(--border);
+      border-radius:var(--radius);box-shadow:var(--shadow);
     }
 
-    /* ===== Hero 區塊 ===== */
-    header.hero{padding:12px 0 8px}
-    @media (min-width: 600px){
-      header.hero{padding:18px 0 8px}
-    }
+    /* Hero */
+    header.hero{padding:12px 0}
     .heroCard{padding:16px}
-    @media (min-width: 600px){
-      .heroCard{padding:20px}
-    }
-
+    @media(min-width:768px){.heroCard{padding:24px}}
     .kicker{
-      display:inline-flex;
-      gap:8px;
-      align-items:center;
-      font-size:11px;
-      color:var(--muted);
-      background: rgba(14,165,233,.08);
-      border:1px solid rgba(14,165,233,.16);
-      padding:5px 10px;
-      border-radius:999px;
-      font-weight:800;
+      display:inline-block;padding:4px 10px;border-radius:20px;
+      font-size:11px;font-weight:700;color:var(--brand);
+      background:rgba(14,165,233,.1);
     }
-    @media (min-width: 600px){
-      .kicker{font-size:12px; padding:6px 10px}
-    }
-
-    h1{
-      margin:10px 0 6px;
-      font-size: 22px;
-      line-height:1.3;
-      letter-spacing:.2px;
-    }
-    @media (min-width: 600px){
-      h1{font-size:28px; margin:12px 0 8px}
-    }
-
-    .sub{
-      margin:0 0 12px;
-      color:var(--muted);
-      font-size:13px;
-      font-weight:650;
-    }
-    @media (min-width: 600px){
-      .sub{font-size:14px; margin:0 0 14px}
-    }
-
-    .heroLayout{
-      display:grid;
-      grid-template-columns: 1fr;
-      gap:16px;
-      align-items:start;
-    }
-    @media (min-width: 768px){
-      .heroLayout{
-        grid-template-columns: 1fr 1fr;
-        gap:20px;
-      }
-    }
-    @media (min-width: 900px){
-      .heroLayout{
-        grid-template-columns: 1.2fr .8fr;
-      }
-    }
-
-    /* 海報圖片優化 */
-    .posterWrap{
-      position:relative;
-      width:100%;
-      max-width:400px;
-      margin:0 auto;
-    }
-    @media (min-width: 768px){
-      .posterWrap{max-width:none; margin:0}
-    }
+    h1{font-size:22px;line-height:1.3;margin:10px 0 6px}
+    @media(min-width:768px){h1{font-size:28px}}
+    .sub{color:var(--muted);font-size:13px;margin-bottom:16px}
+    .heroGrid{display:grid;gap:16px}
+    @media(min-width:768px){.heroGrid{grid-template-columns:1fr 1fr;gap:24px}}
+    .posterWrap{max-width:360px;margin:0 auto}
+    @media(min-width:768px){.posterWrap{max-width:none;margin:0}}
     .poster{
-      width:100%;
-      height:auto;
-      border-radius:12px;
+      width:100%;height:auto;border-radius:12px;cursor:zoom-in;
       border:1px solid var(--border);
-      background:#f0f0f0;
-      display:block;
-      cursor:zoom-in;
-      aspect-ratio: 3 / 4;
-      object-fit:cover;
     }
-    @media (min-width: 600px){
-      .poster{border-radius:16px}
-    }
-
-    .pillRow{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:8px;
-      margin:0 0 12px;
-    }
-    .pillRow .pill:last-child{
-      grid-column: 1 / -1;
-    }
-    @media (min-width: 600px){
-      .pillRow{
-        grid-template-columns: 1fr;
-        gap:10px;
-      }
-      .pillRow .pill:last-child{
-        grid-column: auto;
-      }
-    }
-    .pill{
-      border:1px solid var(--border);
-      background: #fff;
-      border-radius: 12px;
-      padding:10px 12px;
-    }
-    .pill .t{font-size:11px; color:var(--muted); font-weight:800}
-    .pill .v{font-size:14px; font-weight:900; margin-top:2px}
-    @media (min-width: 600px){
-      .pill{border-radius:14px}
-      .pill .t{font-size:12px}
-      .pill .v{font-size:15px}
-    }
-
-    .ctaRow{
-      display:flex; gap:8px; flex-wrap:wrap;
-      margin-top: 10px;
-      align-items:center;
-    }
-
     .notice{
-      margin-top:12px;
-      padding:10px 12px;
-      border-radius:12px;
-      border:1px dashed rgba(2,8,23,.18);
-      background: rgba(2,8,23,.03);
-      color:var(--muted);
-      font-size:12px;
-      font-weight:700;
+      margin-top:12px;padding:10px 12px;border-radius:10px;
+      background:rgba(14,165,233,.06);border:1px dashed rgba(14,165,233,.2);
+      color:var(--muted);font-size:12px;font-weight:600;
     }
-    @media (min-width: 600px){
-      .notice{font-size:13px; border-radius:14px}
+    .pillRow{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+    .pillRow .pill:last-child{grid-column:1/-1}
+    @media(min-width:480px){.pillRow{grid-template-columns:1fr 1fr 1fr}.pillRow .pill:last-child{grid-column:auto}}
+    .pill{
+      padding:10px 12px;border-radius:10px;
+      background:#fff;border:1px solid var(--border);
     }
+    .pill .t{font-size:11px;color:var(--muted);font-weight:600}
+    .pill .v{font-size:14px;font-weight:800;margin-top:2px}
+    .ctaRow{display:flex;gap:8px;flex-wrap:wrap}
 
-    /* ===== 區塊共用 ===== */
+    /* 區塊 */
     section{padding:12px 0}
-    @media (min-width: 600px){
-      section{padding:14px 0}
-    }
-    .secTitle{
-      display:flex;
-      align-items:flex-end;
-      justify-content:space-between;
-      gap:10px;
-      margin: 8px 0 10px;
-    }
-    .secTitle h2{
-      margin:0;
-      font-size:17px;
-      letter-spacing:.2px;
-    }
-    @media (min-width: 600px){
-      .secTitle h2{font-size:18px}
-    }
-    .secTitle .hint{
-      color:var(--muted);
-      font-size:11px;
-      font-weight:650;
-    }
-    @media (min-width: 600px){
-      .secTitle .hint{font-size:12px}
-    }
+    .secTitle{margin-bottom:12px}
+    .secTitle h2{font-size:17px}
 
-    .grid{display:grid; gap:12px}
-    .cards3{grid-template-columns: 1fr}
-    @media (min-width: 600px){
-      .cards3{grid-template-columns: repeat(3, 1fr)}
-    }
-    .twoCol{grid-template-columns: 1fr; align-items:start}
-    @media (min-width: 768px){
-      .twoCol{grid-template-columns: 1fr 1fr}
-    }
+    /* 格線 */
+    .grid{display:grid;gap:12px}
+    .grid2{grid-template-columns:1fr}
+    @media(min-width:600px){.grid2{grid-template-columns:1fr 1fr}}
+    .grid3{grid-template-columns:1fr}
+    @media(min-width:600px){.grid3{grid-template-columns:repeat(3,1fr)}}
 
+    /* 卡片內容 */
     .infoCard{padding:14px}
-    .infoCard h3{margin:0 0 6px; font-size:15px}
-    .infoCard p{margin:0; color:var(--muted); font-size:13px; font-weight:650}
+    .infoCard h3{font-size:15px;margin-bottom:6px}
+    .infoCard p{color:var(--muted);font-size:13px}
 
-    /* ===== 時間軸 ===== */
-    .timeline{padding: 10px 14px 14px}
+    /* 時間軸 */
+    .timeline{padding:12px 14px}
     .tlItem{
-      display:grid;
-      grid-template-columns: 70px 1fr;
-      gap:10px;
-      padding:10px 0;
-      border-top:1px solid var(--border);
-    }
-    @media (min-width: 600px){
-      .tlItem{grid-template-columns: 98px 1fr; gap:12px}
+      display:grid;grid-template-columns:70px 1fr;gap:10px;
+      padding:10px 0;border-top:1px solid var(--border);
     }
     .tlItem:first-child{border-top:none}
-    .time{
-      font-family: var(--mono);
-      font-weight:900;
-      color:#0b1220;
-      font-size:13px;
-    }
-    .tlItem .desc{
-      color:var(--muted);
-      font-size:13px;
-      font-weight:700;
-    }
+    .time{font-weight:800;font-size:14px}
+    .tlItem .desc{color:var(--muted);font-size:13px}
 
-    .list{margin:0; padding-left:18px; color:var(--muted); font-weight:700; font-size:13px}
-    .list li{margin:7px 0}
+    /* 列表 */
+    .list{padding-left:18px;color:var(--muted);font-size:13px}
+    .list li{margin:6px 0}
 
-    /* ===== 折疊區 ===== */
-    details{border-top:1px solid var(--border); padding:10px 0}
+    /* 折疊 */
+    details{border-top:1px solid var(--border);padding:12px 0}
     details:first-child{border-top:none}
     summary{
-      cursor:pointer;
-      list-style:none;
-      font-weight:900;
-      padding:6px 0;
-      font-size:14px;
-      display:flex;
-      align-items:center;
-      gap:8px;
+      cursor:pointer;font-weight:700;font-size:14px;
+      display:flex;align-items:center;gap:8px;list-style:none;
     }
     summary::-webkit-details-marker{display:none}
-    summary::before{
-      content:"＋";
-      font-size:12px;
-      color:var(--muted);
-      width:20px;
-      text-align:center;
-    }
-    details[open] summary::before{
-      content:"－";
-    }
-    details p, details ul{margin:6px 0 0 28px; color:var(--muted); font-weight:700; font-size:13px}
+    summary::before{content:"＋";color:var(--muted);font-size:12px;width:16px}
+    details[open] summary::before{content:"－"}
+    details ul{margin:10px 0 0 24px}
     .tag{
-      display:inline-flex;
-      align-items:center;
-      gap:6px;
-      padding:2px 8px;
-      border-radius:999px;
-      font-size:10px;
-      font-weight:900;
-      border:1px solid rgba(244,63,94,.25);
-      background: rgba(244,63,94,.08);
-      color:#9f1239;
-      margin-left:auto;
-    }
-    @media (min-width: 600px){
-      .tag{font-size:11px}
+      margin-left:auto;padding:2px 8px;border-radius:20px;
+      font-size:10px;font-weight:700;
+      background:rgba(239,68,68,.1);color:#dc2626;
     }
 
-    /* ===== 地圖 ===== */
-    .mapBox{
-      border:1px solid var(--border);
-      border-radius: 12px;
-      overflow:hidden;
-      background:#f0f0f0;
-      min-height:200px;
+    /* 表單 */
+    .formCard{padding:16px}
+    .formGrid{display:grid;gap:14px}
+    .field label{display:block;font-size:13px;font-weight:700;margin-bottom:6px}
+    .field input,.field select,.field textarea{
+      width:100%;padding:12px;border:1px solid var(--border);border-radius:10px;
+      font-size:16px;background:#fff;
     }
-    @media (min-width: 600px){
-      .mapBox{border-radius:16px; min-height:300px}
-    }
-    .mapBox iframe{
-      width:100%; 
-      height:250px; 
-      border:0;
-      display:block;
-    }
-    @media (min-width: 600px){
-      .mapBox iframe{height:300px}
-    }
-
-    .muted{color:var(--muted)}
-
-    /* ===== 表單 ===== */
-    .formGrid{display:grid; gap:12px}
-    .field label{display:block; font-weight:900; font-size:13px; margin-bottom:6px}
-    .field input, .field select, .field textarea{
-      width:100%;
-      border:1px solid var(--border);
-      border-radius:10px;
-      padding:12px;
-      font-size:16px; /* 防止 iOS 放大 */
-      background:#fff;
-      outline:none;
-      -webkit-appearance: none;
-      appearance: none;
+    @media(min-width:768px){.field input,.field select,.field textarea{font-size:14px}}
+    .field input:focus,.field select:focus,.field textarea:focus{
+      outline:none;border-color:var(--brand);box-shadow:0 0 0 3px rgba(14,165,233,.1);
     }
     .field select{
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23475569' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 12px center;
-      padding-right: 36px;
+      appearance:none;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23475569'%3E%3Cpath d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+      background-repeat:no-repeat;background-position:right 12px center;
     }
-    .field input:focus, .field select:focus, .field textarea:focus{
-      border-color: var(--brand);
-      box-shadow: 0 0 0 3px rgba(14,165,233,.15);
-    }
-    @media (min-width: 600px){
-      .field input, .field select, .field textarea{
-        border-radius:12px;
-        font-size:14px;
-        padding:10px 12px;
-      }
-    }
-    .field textarea{min-height:80px; resize:vertical}
-    .field small{display:block; margin-top:6px; color:var(--muted); font-weight:650; font-size:12px}
+    .field textarea{min-height:80px;resize:vertical}
+    .field small{display:block;margin-top:4px;font-size:12px;color:var(--muted)}
     .inlineAlert{
-      display:none;
-      margin-top:10px;
-      padding:10px 12px;
-      border-radius:12px;
-      border:1px dashed rgba(244,63,94,.35);
-      background: rgba(244,63,94,.06);
-      color:#9f1239;
-      font-weight:900;
-      font-size:13px;
+      display:none;margin-top:8px;padding:10px;border-radius:8px;
+      background:rgba(239,68,68,.08);border:1px dashed rgba(239,68,68,.3);
+      color:#dc2626;font-size:13px;font-weight:600;
     }
     .inlineAlert.show{display:block}
-
     .progress{
-      display:none;
-      margin-top:10px;
-      padding:10px 12px;
-      border-radius:12px;
-      border:1px solid rgba(14,165,233,.20);
-      background: rgba(14,165,233,.06);
-      color: var(--muted);
-      font-weight:800;
-      font-size:13px;
+      display:none;margin-top:10px;padding:10px;border-radius:8px;
+      background:rgba(14,165,233,.08);color:var(--muted);font-size:13px;
     }
     .progress.show{display:block}
 
-    /* ===== 報名提示卡（手機版置頂） ===== */
-    .registerTips{
-      order: -1;
-      margin-bottom: 12px;
-    }
-    @media (min-width: 768px){
-      .registerTips{
-        order: 0;
-        margin-bottom: 0;
-      }
-    }
+    /* 報名提示 */
+    .registerTips{order:-1}
+    @media(min-width:600px){.registerTips{order:0}}
 
-    /* ===== 海報放大 Modal ===== */
+    /* 地圖區 */
+    .mapCard{
+      padding:20px;text-align:center;
+      background:linear-gradient(135deg,rgba(14,165,233,.05),rgba(34,197,94,.05));
+    }
+    .mapCard .addr{font-size:15px;font-weight:700;margin-bottom:4px}
+    .mapCard .place{color:var(--muted);font-size:13px;margin-bottom:16px}
+    .mapCard .btn{width:100%;max-width:280px}
+
+    /* Modal */
     .modal{
-      position:fixed; inset:0;
-      background: rgba(2,8,23,.70);
-      display:none;
-      align-items:center; justify-content:center;
-      padding:12px;
-      z-index:50;
+      position:fixed;inset:0;z-index:50;
+      display:none;align-items:center;justify-content:center;
+      padding:16px;background:rgba(0,0,0,.7);
     }
     .modal.show{display:flex}
     .modalCard{
-      max-width: 500px;
-      width: 100%;
-      border-radius: 16px;
-      overflow:hidden;
-      background:#fff;
-      border:1px solid rgba(226,232,240,.9);
-      box-shadow: 0 30px 80px rgba(2,8,23,.35);
-    }
-    @media (min-width: 600px){
-      .modalCard{max-width:700px; border-radius:18px}
-    }
-    @media (min-width: 900px){
-      .modalCard{max-width:980px}
+      width:100%;max-width:600px;background:#fff;border-radius:16px;overflow:hidden;
     }
     .modalTop{
-      display:flex; align-items:center; justify-content:space-between;
-      padding:10px 12px;
-      border-bottom:1px solid var(--border);
+      display:flex;align-items:center;justify-content:space-between;
+      padding:12px 16px;border-bottom:1px solid var(--border);
     }
-    .modalTop .t{font-weight:900; font-size:14px}
-    .modalImg{width:100%; display:block}
-    .iconBtn{
-      border:1px solid var(--border);
-      background:#fff;
-      border-radius:10px;
-      padding:8px 12px;
-      cursor:pointer;
-      font-weight:900;
-      font-size:13px;
-    }
+    .modalTop .t{font-weight:700}
+    .modalImg{width:100%;display:block}
 
-    /* ===== Footer ===== */
-    footer{padding:18px 0 36px; color:var(--muted); font-size:12px}
-    .footCard{
-      padding:14px;
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      align-items:center;
-      justify-content:space-between;
-    }
-
-    /* ===== 底部固定報名按鈕（手機版） ===== */
+    /* 底部固定按鈕 */
     .fixedCta{
-      display:flex;
-      position:fixed;
-      bottom:0; left:0; right:0;
-      padding:12px 16px;
+      position:fixed;bottom:0;left:0;right:0;z-index:25;
+      display:flex;gap:8px;padding:12px 16px;
       background:rgba(255,255,255,.95);
       backdrop-filter:blur(10px);
       -webkit-backdrop-filter:blur(10px);
       border-top:1px solid var(--border);
-      z-index:25;
-      gap:10px;
     }
-    .fixedCta .btn{flex:1; justify-content:center}
-    @media (min-width: 768px){
-      .fixedCta{display:none}
-    }
-    
-    /* 為底部固定按鈕留空間 */
-    body{padding-bottom:70px}
-    @media (min-width: 768px){
-      body{padding-bottom:0}
-    }
+    .fixedCta .btn{flex:1}
+    @media(min-width:768px){.fixedCta{display:none}}
 
-    
-    /* 桌機右上 CTA：手機版改用底部固定按鈕，避免重複 */
-    .desktopCTA{display:inline-flex}
-    @media (max-width: 767px){
-      .desktopCTA{display:none}
-    }
-
-/* ===== 載入優化：骨架屏 ===== */
-    .skeleton{
-      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-      background-size: 200% 100%;
-      animation: skeleton 1.5s infinite;
-    }
-    @keyframes skeleton{
-      0%{background-position: 200% 0}
-      100%{background-position: -200% 0}
-    }
+    /* Footer */
+    footer{padding:24px 0;color:var(--muted);font-size:12px}
+    .footCard{padding:14px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px}
   </style>
 </head>
 
 <body>
-  <!-- 頂部導覽列 -->
+  <!-- 頂部導覽 -->
   <div class="topbar">
     <div class="wrap">
-      <div class="brand" aria-label="網站標題">
-        <span class="dot" aria-hidden="true"></span>
-        <span id="siteName">乾淨世界我愛我家兒童著色畫比賽</span>
+      <div class="brand">
+        <span class="dot"></span>
+        <span id="siteName">乾淨校園我愛我家兒童著色畫比賽</span>
       </div>
-
-      <!-- 桌面版導覽 -->
-      <nav class="desktop" aria-label="導覽">
-        <a href="#highlights">亮點</a>
-        <a href="#schedule">流程</a>
-        <a href="#register">報名</a>
-        <a href="#rules">辦法</a>
-        <a href="#awards">獎項</a>
-        <a href="#location">地點</a>
-        <a href="#contact">聯絡</a>
-      </nav>
-
-      <!-- 手機版選單按鈕 -->
-      <button class="menuBtn" id="menuBtn" type="button" aria-label="開啟選單">☰</button>
-
-      <a class="btn primary sm desktopCTA" href="#register" aria-label="立即報名">立即報名</a>
+      <div class="topBtns">
+        <a class="btn sm secondary" href="#schedule">流程</a>
+        <a class="btn sm secondary" href="#rules">辦法</a>
+        <a class="btn sm primary" href="#register">立即報名</a>
+      </div>
     </div>
   </div>
 
-  <!-- 手機版導覽選單 -->
-  <div class="mobileNav" id="mobileNav" aria-hidden="true">
-    <div class="mobileNavCard">
-      <a href="#highlights">活動亮點</a>
-      <a href="#schedule">當日流程</a>
-      <a href="#register">立即報名</a>
-      <a href="#rules">參加辦法</a>
-      <a href="#awards">獎項說明</a>
-      <a href="#location">活動地點</a>
-      <a href="#contact">聯絡我們</a>
-      <button class="mobileNavClose" id="mobileNavClose" type="button">關閉選單</button>
-    </div>
-  </div>
-
-  <!-- Hero 區塊 -->
+  <!-- Hero -->
   <header class="hero">
     <div class="wrap">
       <div class="card heroCard">
         <div class="kicker" id="kicker">現場提供底圖｜11:40 公布並頒獎</div>
-        <h1 id="title">乾淨世界「我愛我家」兒童著色畫比賽</h1>
+        <h1 id="title">乾淨校園「我愛我家」兒童著色畫比賽</h1>
         <p class="sub" id="subtitle">活動資訊、流程與規則都在這裡。請確定能到再報名（額滿即止）。</p>
 
-        <div class="heroLayout">
-          <!-- 海報 -->
+        <div class="heroGrid">
           <div class="posterWrap">
             <img 
               class="poster" 
-              id="posterImg" 
-              src="./assets/photo.png?v=20260314" 
-              alt="活動海報（點擊可放大）" 
+              id="posterImg"
+              src="./assets/photo.jpg" 
+              alt="活動海報（點擊放大）"
+              width="600" height="800"
               loading="eager"
-              width="600"
-              height="800"
-              fetchpriority="high"
             />
             <div class="notice">收件截止：10:30｜公布並頒獎：11:40</div>
           </div>
 
-          <!-- 活動資訊 -->
           <div>
-            <div class="pillRow" aria-label="活動關鍵資訊">
+            <div class="pillRow">
               <div class="pill">
                 <div class="t">日期</div>
                 <div class="v" id="dateText">2026/03/14（六）</div>
@@ -718,10 +294,9 @@
               </div>
               <div class="pill">
                 <div class="t">地點</div>
-                <div class="v" id="placeText">彰南里活動中心｜大禮堂</div>
+                <div class="v" id="placeText">彰南里活動中心</div>
               </div>
             </div>
-
             <div class="ctaRow">
               <a class="btn primary" href="#register">立即報名</a>
               <a class="btn" id="mapBtnTop" href="#" target="_blank" rel="noopener">開啟地圖</a>
@@ -736,12 +311,8 @@
     <!-- 活動亮點 -->
     <section id="highlights">
       <div class="wrap">
-        <div class="secTitle">
-          <h2>活動亮點</h2>
-          <div class="hint">簡短、好讀</div>
-        </div>
-
-        <div class="grid cards3">
+        <div class="secTitle"><h2>活動亮點</h2></div>
+        <div class="grid grid3">
           <div class="card infoCard">
             <h3>現場提供底圖</h3>
             <p>到場領取底圖即可開始創作。</p>
@@ -761,11 +332,7 @@
     <!-- 當日流程 -->
     <section id="schedule">
       <div class="wrap">
-        <div class="secTitle">
-          <h2>當日流程</h2>
-          <div class="hint">一目了然</div>
-        </div>
-
+        <div class="secTitle"><h2>當日流程</h2></div>
         <div class="card timeline">
           <div class="tlItem">
             <div class="time">09:00</div>
@@ -787,16 +354,12 @@
       </div>
     </section>
 
-    <!-- 報名區塊 -->
+    <!-- 報名 -->
     <section id="register">
       <div class="wrap">
-        <div class="secTitle">
-          <h2>報名</h2>
-          <div class="hint">填完送出即可</div>
-        </div>
-
-        <div class="grid twoCol">
-          <!-- 報名提示（手機版會移到上面） -->
+        <div class="secTitle"><h2>報名</h2></div>
+        <div class="grid grid2">
+          <!-- 提示卡 -->
           <div class="card infoCard registerTips">
             <h3>報名前先看這三點</h3>
             <ul class="list">
@@ -804,11 +367,7 @@
               <li><b>收件截止</b>：10:30 前繳交作品，逾時不列入評審</li>
               <li><b>家長協助</b>：幼兒園可適度協助但不得代畫；國小低年級不得動手協助</li>
             </ul>
-
-            <div class="notice" style="margin-top:12px">
-              完整規則請看下方「參加辦法」區塊。
-            </div>
-
+            <div class="notice" style="margin-top:12px">完整規則請看下方「參加辦法」</div>
             <div class="ctaRow" style="margin-top:12px">
               <a class="btn sm" href="#rules">參加辦法</a>
               <a class="btn sm" href="#awards">獎項</a>
@@ -817,7 +376,7 @@
           </div>
 
           <!-- 表單 -->
-          <div class="card infoCard">
+          <div class="card formCard">
             <form id="signupForm" class="formGrid" autocomplete="on">
               <input type="hidden" name="活動代碼" id="event_code" />
               <input type="hidden" name="活動名稱" id="event_name" />
@@ -879,16 +438,14 @@
                 <textarea id="note" name="備註（家長）" placeholder="例如：需要無障礙動線"></textarea>
               </div>
 
-              <div class="ctaRow" style="margin-top:4px">
+              <div class="ctaRow">
                 <button class="btn primary" id="submitBtn" type="submit">送出報名</button>
-                <span class="muted" id="submitHint" style="font-weight:900; font-size:13px"></span>
+                <span class="muted" id="submitHint" style="font-size:13px"></span>
               </div>
 
               <div class="progress" id="progress">送出中…請稍等</div>
 
-              <div class="muted" style="font-weight:700; font-size:12px; margin-top:6px">
-                填寫資料僅用於活動聯絡，不作其他用途。
-              </div>
+              <p style="font-size:12px;color:var(--muted)">填寫資料僅用於活動聯絡，不作其他用途。</p>
             </form>
           </div>
         </div>
@@ -900,67 +457,66 @@
       <div class="wrap">
         <div class="secTitle">
           <h2>參加辦法</h2>
-          <div class="hint">點開查看細節</div>
+          <p style="font-size:12px;color:var(--muted);margin-top:4px">點開查看細節</p>
         </div>
-
-        <div class="card" style="padding:10px 14px">
+        <div class="card" style="padding:12px 16px">
           <details open>
             <summary>參賽組別與資格</summary>
             <ul class="list">
-              <li>分兩組：幼兒園組、國小低年級組（1–2 年級）。</li>
-              <li>每位參賽兒童需由一位家長陪同。</li>
+              <li>分兩組：幼兒園組、國小低年級組（1–2 年級）</li>
+              <li>每位參賽兒童需由一位家長陪同</li>
             </ul>
           </details>
 
           <details>
             <summary>名額與額滿規則</summary>
             <ul class="list">
-              <li>幼兒園組 25 人、國小低年級組 25 人，額滿為止。</li>
-              <li>額滿即停止受理（不接受現場加報）。</li>
+              <li>幼兒園組 25 人、國小低年級組 25 人，額滿為止</li>
+              <li>額滿即停止受理（不接受現場加報）</li>
             </ul>
           </details>
 
           <details>
             <summary>報到與領取底圖</summary>
             <ul class="list">
-              <li>09:00 起報到，建議 09:20 前完成報到。</li>
-              <li>報到後領取主辦提供之著色底圖，即可開始創作。</li>
+              <li>09:00 起報到，建議 09:20 前完成報到</li>
+              <li>報到後領取主辦提供之著色底圖，即可開始創作</li>
             </ul>
           </details>
 
           <details>
             <summary>作品規則與收件截止 <span class="tag">重要</span></summary>
             <ul class="list">
-              <li>必須使用主辦提供之著色底圖完成作品。</li>
-              <li>畫材自備（蠟筆／彩色筆／色鉛筆／水彩等皆可）。</li>
-              <li><b>10:30 前</b>完成並繳交作品；逾時視同放棄評審。</li>
+              <li>必須使用主辦提供之著色底圖完成作品</li>
+              <li>畫材自備（蠟筆／彩色筆／色鉛筆／水彩等皆可）</li>
+              <li><b>10:30 前</b>完成並繳交作品；逾時視同放棄評審</li>
             </ul>
           </details>
 
           <details>
             <summary>家長陪同與協助界線 <span class="tag">最常爭議</span></summary>
             <ul class="list">
-              <li><b>幼兒園組</b>：家長可適度協助（口頭提醒、安撫、協助擺放畫具或轉動紙張等），但不得代為上色、描線或補色。</li>
-              <li><b>國小低年級組</b>：家長可陪同但不得動手協助；違規者取消評審資格。</li>
+              <li><b>幼兒園組</b>：家長可適度協助（口頭提醒、安撫、協助擺放畫具或轉動紙張等），但不得代為上色、描線或補色</li>
+              <li><b>國小低年級組</b>：家長可陪同但不得動手協助；違規者取消評審資格</li>
             </ul>
           </details>
 
           <details>
             <summary>評審與評分方式</summary>
             <ul class="list">
-              <li>評審：青草國小 曾文欽 校長。</li>
-              <li>評分項目：配色與美感、整潔度與完成度、創意表現、主題符合度。</li>
-              <li>同分處理：以「整潔度與完成度」較佳者優先。</li>
+              <li>評審：青草國小 曾文欽 校長</li>
+              <li>評分項目：配色與美感、整潔度與完成度、創意表現、主題符合度</li>
+              <li>同分處理：以「整潔度與完成度」較佳者優先</li>
             </ul>
           </details>
 
           <details>
             <summary>獎項（兩組各一套）</summary>
             <ul class="list">
-              <li>金獎 1 名：<b>800</b> 元＋獎狀</li>
-              <li>銀獎 1 名：<b>500</b> 元＋獎狀</li>
-              <li>銅獎 1 名：<b>300</b> 元＋獎狀</li>
-              <li>佳作 3 名：<b>200</b> 元＋獎狀</li>
+              <li>金獎 1 名：800 元＋獎狀</li>
+              <li>銀獎 1 名：500 元＋獎狀</li>
+              <li>銅獎 1 名：300 元＋獎狀</li>
+              <li>佳作 3 名：200 元＋獎狀</li>
               <li>參加獎：完成作品即可獲得（數量有限，送完為止）</li>
             </ul>
           </details>
@@ -968,26 +524,26 @@
           <details>
             <summary>得獎公告與領獎</summary>
             <ul class="list">
-              <li>得獎名單現場公布並頒獎（11:40）。</li>
-              <li>唱名三次未上台者，視同放棄該獎項。</li>
-              <li>若需代領或補領，請依現場公告與窗口指引辦理。</li>
+              <li>得獎名單現場公布並頒獎（11:40）</li>
+              <li>唱名三次未上台者，視同放棄該獎項</li>
+              <li>若需代領或補領，請依現場公告與窗口指引辦理</li>
             </ul>
           </details>
 
           <details>
             <summary>作品發表與影像使用 <span class="tag">重要</span></summary>
             <ul class="list">
-              <li>得獎作品將公布於官方渠道（活動宣傳與成果展示）。</li>
-              <li>主辦單位得就作品進行公開展示、宣傳使用。</li>
-              <li>活動現場可能拍照/錄影作為活動紀錄與宣傳使用。</li>
+              <li>得獎作品將公布於官方渠道（活動宣傳與成果展示）</li>
+              <li>主辦單位得就作品進行公開展示、宣傳使用</li>
+              <li>活動現場可能拍照/錄影作為活動紀錄與宣傳使用</li>
             </ul>
           </details>
 
           <details>
             <summary>其他注意事項</summary>
             <ul class="list">
-              <li>無全程參與者，取消得獎資格及獎金。</li>
-              <li>主辦單位保留活動調整之權利，若有變動以現場公告為準。</li>
+              <li>無全程參與者，取消得獎資格及獎金</li>
+              <li>主辦單位保留活動調整之權利，若有變動以現場公告為準</li>
             </ul>
           </details>
         </div>
@@ -997,12 +553,8 @@
     <!-- 獎項 -->
     <section id="awards">
       <div class="wrap">
-        <div class="secTitle">
-          <h2>獎項</h2>
-          <div class="hint">兩組各一套</div>
-        </div>
-
-        <div class="grid twoCol">
+        <div class="secTitle"><h2>獎項</h2></div>
+        <div class="grid grid2">
           <div class="card infoCard">
             <h3>幼兒園組</h3>
             <ul class="list">
@@ -1012,7 +564,6 @@
               <li>佳作 3 名：<b>200</b> 元＋獎狀</li>
             </ul>
           </div>
-
           <div class="card infoCard">
             <h3>國小低年級組（1–2 年級）</h3>
             <ul class="list">
@@ -1023,42 +574,29 @@
             </ul>
           </div>
         </div>
-
-        <div class="notice" style="margin-top:12px">
-          參加獎：完成作品即可獲得（數量有限，送完為止）。
-        </div>
+        <div class="notice" style="margin-top:12px">參加獎：完成作品即可獲得（數量有限，送完為止）</div>
       </div>
     </section>
 
     <!-- 地點 -->
     <section id="location">
       <div class="wrap">
-        <div class="secTitle">
-          <h2>地點</h2>
-          <div class="hint">可複製地址或開地圖</div>
-        </div>
-
-        <div class="grid twoCol">
+        <div class="secTitle"><h2>地點</h2></div>
+        <div class="grid grid2">
           <div class="card infoCard">
             <h3>活動地點</h3>
-            <p class="muted" style="font-weight:900" id="placeFull">彰南里活動中心｜大禮堂</p>
-            <p class="muted" style="font-weight:900; margin-top:8px" id="addressText">臺南市南區新建路 12 號</p>
-
+            <p style="font-weight:800;color:var(--text);font-size:15px" id="placeFull">彰南里活動中心｜大禮堂</p>
+            <p style="margin-top:6px" id="addressText">臺南市南區新建路 12 號</p>
             <div class="ctaRow" style="margin-top:12px">
               <button class="btn sm" id="copyAddrBtn" type="button">複製地址</button>
-              <a class="btn primary sm" id="mapBtn2" href="#" target="_blank" rel="noopener">開啟地圖</a>
+              <a class="btn sm primary" id="mapBtn2" href="#" target="_blank" rel="noopener">開啟 Google 地圖</a>
             </div>
-
-            <div class="notice" style="margin-top:12px">
-              建議提早到場，避免卡到 10:30 收件截止。
-            </div>
+            <div class="notice" style="margin-top:12px">建議提早到場，避免卡到 10:30 收件截止</div>
           </div>
-
-          <div class="mapBox" id="mapBox">
-            <div class="skeleton" style="height:250px;border-radius:18px" aria-hidden="true"></div>
-            <noscript>
-              <iframe src="https://www.google.com/maps?q=%E8%87%BA%E5%8D%97%E5%B8%82%E5%8D%97%E5%8D%80%E6%96%B0%E5%BB%BA%E8%B7%AF%2012%20%E8%99%9F%20%E5%BD%B0%E5%8D%97%E9%87%8C%E6%B4%BB%E5%8B%95%E4%B8%AD%E5%BF%83&output=embed" loading="lazy" title="Google 地圖"></iframe>
-            </noscript>
+          <div class="card mapCard">
+            <div class="addr" id="addrDisplay">臺南市南區新建路 12 號</div>
+            <div class="place">彰南里活動中心｜大禮堂</div>
+            <a class="btn primary" id="mapBtn3" href="#" target="_blank" rel="noopener">點擊開啟 Google 地圖</a>
           </div>
         </div>
       </div>
@@ -1067,81 +605,70 @@
     <!-- 聯絡 -->
     <section id="contact">
       <div class="wrap">
-        <div class="secTitle">
-          <h2>主辦 / 協辦 / 聯絡</h2>
-          <div class="hint">如需取消請聯絡窗口</div>
-        </div>
-
+        <div class="secTitle"><h2>主辦／協辦／聯絡</h2></div>
         <div class="card infoCard">
-          <div class="grid twoCol">
+          <div class="grid grid2">
             <div>
               <h3>主辦單位</h3>
-              <p class="muted" style="font-weight:900" id="hostText">乾淨校園推廣團隊</p>
-
-              <div style="height:10px"></div>
-              <h3>協辦單位</h3>
-              <p class="muted" style="font-weight:900" id="cohostText">彰南里活動中心</p>
+              <p id="hostText">乾淨校園推廣團隊</p>
+              <h3 style="margin-top:12px">協辦單位</h3>
+              <p id="cohostText">彰南里活動中心</p>
             </div>
-
             <div>
               <h3>洽詢電話</h3>
-              <p class="muted" style="font-weight:900; font-size:16px" id="phoneText">陳小姐｜0913-837-389</p>
-
-              <div style="height:10px"></div>
-              <h3>提醒</h3>
-              <p class="muted" style="font-weight:700">若臨時無法到場，建議盡早通知，讓名額留給需要的家庭。</p>
+              <p style="font-size:16px;font-weight:800;color:var(--text)" id="phoneText">陳小姐｜0913-837-389</p>
+              <h3 style="margin-top:12px">提醒</h3>
+              <p>若臨時無法到場，建議盡早通知，讓名額留給需要的家庭。</p>
             </div>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- Footer -->
     <footer>
       <div class="wrap">
         <div class="card footCard">
-          <div>
-            <div style="font-weight:900; color:#0b1220">乾淨世界我愛我家兒童著色畫比賽官網</div>
-          </div>
-          <div class="muted">© <span id="year"></span></div>
+          <div style="font-weight:800">乾淨校園我愛我家兒童著色畫比賽官網</div>
+          <div>© <span id="year"></span></div>
         </div>
       </div>
     </footer>
   </main>
 
-  <!-- 手機版底部固定按鈕 -->
+  <!-- 底部固定按鈕（手機版） -->
   <div class="fixedCta">
     <a class="btn primary" href="#register">立即報名</a>
     <a class="btn" href="tel:0913837389">撥打電話</a>
   </div>
 
-  <!-- 海報放大 Modal -->
+  <!-- 海報 Modal -->
   <div class="modal" id="modal" aria-hidden="true">
-    <div class="modalCard" role="dialog" aria-modal="true" aria-label="海報放大">
+    <div class="modalCard">
       <div class="modalTop">
-        <div class="t">活動海報</div>
-        <button class="iconBtn" id="closeModal" type="button">關閉</button>
+        <span class="t">活動海報</span>
+        <button class="btn sm" id="closeModal" type="button">關閉</button>
       </div>
-      <img class="modalImg" id="modalImg" src="./assets/photo.png?v=20260314" alt="活動海報放大" loading="lazy" />
+      <img class="modalImg" id="modalImg" src="./assets/photo.jpg" alt="活動海報" loading="lazy" />
     </div>
   </div>
 
   <script>
-    // ====== 設定區 ======
+    // ====== 設定 ======
     const GAS_WEBAPP_URL = "請貼上你的GAS部署網址";
     const THANKS_URL = "thanks.html";
     const EVENT_CODE = "GJC2026";
-    const EVENT_NAME = "乾淨世界我愛我家兒童著色畫比賽";
-    const PUBLIC_REGISTER_URL = "（填你的GitHub Pages網址）";
-    const GOOGLE_MAP_EMBED_SRC = "https://www.google.com/maps?q=%E8%87%BA%E5%8D%97%E5%B8%82%E5%8D%97%E5%8D%80%E6%96%B0%E5%BB%BA%E8%B7%AF%2012%20%E8%99%9F%20%E5%BD%B0%E5%8D%97%E9%87%8C%E6%B4%BB%E5%8B%95%E4%B8%AD%E5%BF%83&output=embed";
+    const EVENT_NAME = "乾淨校園我愛我家兒童著色畫比賽";
 
     const EVENT = {
-      siteName: "乾淨世界我愛我家兒童著色畫比賽",
-      title: "乾淨世界「我愛我家」兒童著色畫比賽",
+      siteName: "乾淨校園我愛我家兒童著色畫比賽",
+      title: "乾淨校園「我愛我家」兒童著色畫比賽",
       kicker: "現場提供底圖｜11:40 公布並頒獎",
       subtitle: "活動資訊、流程與規則都在這裡。請確定能到再報名（額滿即止）。",
       dateText: "2026/03/14（六）",
       timeText: "09:00–12:00",
-      place: "彰南里活動中心｜大禮堂",
+      place: "彰南里活動中心",
+      placeFull: "彰南里活動中心｜大禮堂",
       address: "臺南市南區新建路 12 號",
       mapQuery: "臺南市南區新建路 12 號 彰南里活動中心",
       host: "乾淨校園推廣團隊",
@@ -1149,10 +676,9 @@
       phone: "陳小姐｜0913-837-389"
     };
 
-    // ====== 工具函數 ======
-    const $ = (id) => document.getElementById(id);
+    // ====== 初始化 ======
+    const $ = id => document.getElementById(id);
 
-    // ====== 初始化文字 ======
     $("siteName").textContent = EVENT.siteName;
     $("title").textContent = EVENT.title;
     $("kicker").textContent = EVENT.kicker;
@@ -1160,73 +686,27 @@
     $("dateText").textContent = EVENT.dateText;
     $("timeText").textContent = EVENT.timeText;
     $("placeText").textContent = EVENT.place;
-    $("placeFull").textContent = EVENT.place;
+    $("placeFull").textContent = EVENT.placeFull;
     $("addressText").textContent = EVENT.address;
+    $("addrDisplay").textContent = EVENT.address;
     $("hostText").textContent = EVENT.host;
     $("cohostText").textContent = EVENT.cohost;
     $("phoneText").textContent = EVENT.phone;
     $("year").textContent = new Date().getFullYear();
 
-    // ====== 地圖 ======
+    // 地圖連結
     const mapUrl = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(EVENT.mapQuery);
     $("mapBtnTop").href = mapUrl;
     $("mapBtn2").href = mapUrl;
+    $("mapBtn3").href = mapUrl;
 
-    // 延遲載入地圖（Intersection Observer）
-    const mapBox = $("mapBox");
-    const loadMap = () => {
-      const embed = (GOOGLE_MAP_EMBED_SRC || "").trim();
-      if (embed && embed.startsWith("http")) {
-        mapBox.innerHTML = `<iframe src="${embed}" loading="lazy" title="Google 地圖"></iframe>`;
-      } else {
-        mapBox.innerHTML = `<div style="padding:40px;text-align:center;color:var(--muted)">地圖載入中...</div>`;
-      }
-    };
-
-    if ('IntersectionObserver' in window) {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            loadMap();
-            observer.disconnect();
-          }
-        });
-      }, { rootMargin: '200px' });
-      observer.observe(mapBox);
-    } else {
-      loadMap();
-    }
-
-    // ====== 手機選單 ======
-    const menuBtn = $("menuBtn");
-    const mobileNav = $("mobileNav");
-    const mobileNavClose = $("mobileNavClose");
-
-    menuBtn.addEventListener("click", () => {
-      mobileNav.classList.add("show");
-      mobileNav.setAttribute("aria-hidden", "false");
-    });
-
-    const closeMobileNav = () => {
-      mobileNav.classList.remove("show");
-      mobileNav.setAttribute("aria-hidden", "true");
-    };
-
-    mobileNavClose.addEventListener("click", closeMobileNav);
-    mobileNav.addEventListener("click", (e) => {
-      if (e.target === mobileNav || e.target.tagName === "A") {
-        closeMobileNav();
-      }
-    });
-
-    // ====== 複製地址 ======
+    // 複製地址
     $("copyAddrBtn").addEventListener("click", async () => {
       try {
         await navigator.clipboard.writeText(EVENT.address);
         $("copyAddrBtn").textContent = "已複製 ✓";
         setTimeout(() => $("copyAddrBtn").textContent = "複製地址", 1500);
       } catch (e) {
-        // Fallback
         const ta = document.createElement("textarea");
         ta.value = EVENT.address;
         document.body.appendChild(ta);
@@ -1238,94 +718,71 @@
       }
     });
 
-    // ====== 海報放大 ======
+    // Modal
     const modal = $("modal");
-    const posterImg = $("posterImg");
-    const closeModal = $("closeModal");
+    const openModal = () => { modal.classList.add("show"); document.body.style.overflow = "hidden"; };
+    const closeModal = () => { modal.classList.remove("show"); document.body.style.overflow = ""; };
 
-    const openModal = () => {
-      modal.classList.add("show");
-      modal.setAttribute("aria-hidden", "false");
-      document.body.style.overflow = "hidden";
-    };
+    $("posterImg").addEventListener("click", openModal);
+    $("closeModal").addEventListener("click", closeModal);
+    modal.addEventListener("click", e => { if (e.target === modal) closeModal(); });
+    document.addEventListener("keydown", e => { if (e.key === "Escape") closeModal(); });
 
-    const closeIt = () => {
-      modal.classList.remove("show");
-      modal.setAttribute("aria-hidden", "true");
-      document.body.style.overflow = "";
-    };
-
-    posterImg.addEventListener("click", openModal);
-    closeModal.addEventListener("click", closeIt);
-    modal.addEventListener("click", (e) => { if (e.target === modal) closeIt(); });
-    window.addEventListener("keydown", (e) => { if (e.key === "Escape") closeIt(); });
-
-    // ====== 表單相關 ======
-    function getTrackingNote() {
-      const p = new URLSearchParams(location.search);
-      const keys = ["src", "utm_source", "utm_medium", "utm_campaign"];
-      const parts = keys.map(k => p.get(k)?.trim()).filter(Boolean).map((v, i) => `${keys[i]}=${v}`);
-      return parts.length ? `【來源】${parts.join("&")}` : "";
-    }
-
-    function makeRegId() {
-      const d = new Date();
-      const pad = (n) => String(n).padStart(2, "0");
-      return `${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}-${Math.floor(Math.random() * 9000) + 1000}`;
-    }
-
+    // 表單
+    const form = $("signupForm");
     const fullJoin = $("full_join");
-    const fullJoinAlert = $("fullJoinAlert");
     const submitBtn = $("submitBtn");
 
-    function setFullJoinUI() {
-      const v = fullJoin.value || "";
-      if (v.startsWith("否")) {
-        fullJoinAlert.classList.add("show");
-        submitBtn.disabled = true;
-      } else {
-        fullJoinAlert.classList.remove("show");
-        submitBtn.disabled = false;
-      }
-    }
+    const setFullJoinUI = () => {
+      const isNo = (fullJoin.value || "").startsWith("否");
+      $("fullJoinAlert").classList.toggle("show", isNo);
+      submitBtn.disabled = isNo;
+    };
     fullJoin.addEventListener("change", setFullJoinUI);
 
-    const form = $("signupForm");
+    const makeRegId = () => {
+      const d = new Date();
+      const pad = n => String(n).padStart(2, "0");
+      return `${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}-${Math.floor(Math.random() * 9000) + 1000}`;
+    };
+
+    const getTracking = () => {
+      const p = new URLSearchParams(location.search);
+      const keys = ["src", "utm_source", "utm_medium", "utm_campaign"];
+      const parts = keys.map(k => p.get(k)).filter(Boolean).map((v, i) => `${keys[i]}=${v}`);
+      return parts.length ? `【來源】${parts.join("&")}` : "";
+    };
+
     form.action = GAS_WEBAPP_URL;
     form.method = "POST";
-    form.target = "_self";
 
-    form.addEventListener("submit", (ev) => {
-      const v = fullJoin.value || "";
-      if (v.startsWith("否")) {
-        ev.preventDefault();
+    form.addEventListener("submit", e => {
+      if ((fullJoin.value || "").startsWith("否")) {
+        e.preventDefault();
         setFullJoinUI();
         return;
       }
-
       if (form.dataset.submitting === "1") {
-        ev.preventDefault();
+        e.preventDefault();
         return;
       }
       form.dataset.submitting = "1";
 
-      $("submitHint").textContent = "正在送出…";
+      $("submitHint").textContent = "送出中…";
       $("progress").classList.add("show");
       submitBtn.disabled = true;
       submitBtn.textContent = "送出中…";
 
       $("event_code").value = EVENT_CODE;
       $("event_name").value = EVENT_NAME;
-
       if (!$("reg_id").value) $("reg_id").value = makeRegId();
-      const rid = $("reg_id").value;
 
-      const tracking = getTrackingNote();
+      const tracking = getTracking();
       const note = ($("note").value || "").trim();
       $("note_hidden").value = [note, tracking].filter(Boolean).join(" | ");
 
-      const thanksAbs = new URL(THANKS_URL, location.href).href;
-      $("redirect_url").value = `${thanksAbs}?rid=${encodeURIComponent(rid)}`;
+      const thanksUrl = new URL(THANKS_URL, location.href).href;
+      $("redirect_url").value = `${thanksUrl}?rid=${encodeURIComponent($("reg_id").value)}`;
     });
   </script>
 </body>
