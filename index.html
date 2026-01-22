@@ -38,10 +38,8 @@
     a{color:inherit}
     .wrap{max-width:var(--max);margin:0 auto;padding:16px}
 
-    /* 錨點定位偏移 */
     section[id]{scroll-margin-top:var(--header-height)}
 
-    /* ===== 頂部區塊（品牌+報名按鈕） ===== */
     .topbar{
       position:sticky;top:0;z-index:31;
       background:rgba(255,255,255,.95);
@@ -74,7 +72,6 @@
       transform:scale(.9);
     }
 
-    /* ===== 導覽列（永遠固定） ===== */
     .navBar{
       position:sticky;top:50px;z-index:30;
       display:flex;
@@ -108,7 +105,6 @@
       color:var(--brand);
     }
 
-    /* ===== 按鈕 ===== */
     .btn{
       display:inline-flex;align-items:center;justify-content:center;gap:6px;
       padding:10px 16px;border-radius:10px;font-size:14px;font-weight:700;
@@ -123,13 +119,11 @@
     .btn.outline:hover{background:rgba(14,165,233,.1)}
     .btn.sm{padding:8px 12px;font-size:13px}
 
-    /* ===== 卡片 ===== */
     .card{
       background:var(--card);border:1px solid var(--border);
       border-radius:var(--radius);box-shadow:var(--shadow);
     }
 
-    /* ===== Hero ===== */
     header.hero{padding:12px 0}
     .heroCard{padding:16px}
     @media(min-width:768px){.heroCard{padding:24px}}
@@ -144,7 +138,6 @@
     .heroGrid{display:grid;gap:16px}
     @media(min-width:768px){.heroGrid{grid-template-columns:1fr 1fr;gap:24px}}
 
-    /* 海報 */
     .posterWrap{text-align:center}
     .poster{
       width:100%;
@@ -172,24 +165,20 @@
     .pill .v{font-size:14px;font-weight:800;margin-top:2px}
     .ctaRow{display:flex;gap:8px;flex-wrap:wrap}
 
-    /* ===== 區塊 ===== */
     section{padding:12px 0}
     .secTitle{margin-bottom:12px}
     .secTitle h2{font-size:17px}
 
-    /* ===== 格線 ===== */
     .grid{display:grid;gap:12px}
     .grid2{grid-template-columns:1fr}
     @media(min-width:600px){.grid2{grid-template-columns:1fr 1fr}}
     .grid3{grid-template-columns:1fr}
     @media(min-width:600px){.grid3{grid-template-columns:repeat(3,1fr)}}
 
-    /* ===== 卡片內容 ===== */
     .infoCard{padding:14px}
     .infoCard h3{font-size:15px;margin-bottom:6px}
     .infoCard p{color:var(--muted);font-size:13px}
 
-    /* ===== 時間軸 ===== */
     .timeline{padding:12px 14px}
     .tlItem{
       display:grid;grid-template-columns:70px 1fr;gap:10px;
@@ -199,11 +188,9 @@
     .time{font-weight:800;font-size:14px}
     .tlItem .desc{color:var(--muted);font-size:13px}
 
-    /* ===== 列表 ===== */
     .list{padding-left:18px;color:var(--muted);font-size:13px}
     .list li{margin:6px 0}
 
-    /* ===== 折疊 ===== */
     details{border-top:1px solid var(--border);padding:12px 0}
     details:first-child{border-top:none}
     summary{
@@ -220,7 +207,6 @@
       background:rgba(239,68,68,.1);color:#dc2626;
     }
 
-    /* ===== 表單 ===== */
     .formCard{padding:16px}
     .formGrid{display:grid;gap:14px}
     .field label{display:block;font-size:13px;font-weight:700;margin-bottom:6px}
@@ -251,11 +237,9 @@
     }
     .progress.show{display:block}
 
-    /* 報名提示 */
     .registerTips{order:-1}
     @media(min-width:600px){.registerTips{order:0}}
 
-    /* ===== Modal ===== */
     .modal{
       position:fixed;inset:0;z-index:50;
       display:none;align-items:center;justify-content:center;
@@ -272,7 +256,6 @@
     .modalTop .t{font-weight:700}
     .modalImg{width:100%;display:block}
 
-    /* ===== 底部固定按鈕（縮小版） ===== */
     .fixedCta{
       position:fixed;bottom:0;left:0;right:0;z-index:25;
       display:flex;gap:6px;padding:8px 12px;
@@ -288,14 +271,13 @@
     }
     @media(min-width:768px){.fixedCta{display:none}}
 
-    /* ===== Footer ===== */
     footer{padding:24px 0;color:var(--muted);font-size:12px}
     .footCard{padding:14px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px}
   </style>
 </head>
 
 <body>
-  <!-- 頂部（品牌+報名按鈕） -->
+  <!-- 頂部 -->
   <div class="topbar">
     <div class="wrap">
       <div class="brand">
@@ -306,7 +288,7 @@
     </div>
   </div>
 
-  <!-- 導覽列（永遠固定） -->
+  <!-- 導覽列 -->
   <nav class="navBar">
     <a href="#highlights">亮點</a>
     <a href="#schedule">流程</a>
@@ -434,15 +416,17 @@
           <!-- 表單 -->
           <div class="card formCard">
             <form id="signupForm" class="formGrid" autocomplete="on">
+              <!-- Hidden 欄位（與 GAS 欄位名稱一致） -->
               <input type="hidden" name="活動代碼" id="event_code" />
               <input type="hidden" name="活動名稱" id="event_name" />
               <input type="hidden" name="報名序號" id="reg_id" />
               <input type="hidden" name="備註" id="note_hidden" />
-              <input type="hidden" name="redirect" id="redirect_url" />
+              <input type="hidden" name="追蹤" id="tracking_hidden" />
+              <input type="hidden" name="thanks_url" id="thanks_url" />
 
               <div class="field">
                 <label for="full_join">是否能全程參與（必填）</label>
-                <select id="full_join" name="是否能全程參與" required>
+                <select id="full_join" name="是否能全程參與（9:00–12:00）" required>
                   <option value="" selected disabled>請選擇</option>
                   <option>是（我能全程參與）</option>
                   <option>否（我可能無法全程，請先不要報名）</option>
@@ -453,7 +437,7 @@
 
               <div class="field">
                 <label for="resident">是否為臺南市民（必填）</label>
-                <select id="resident" name="是否為臺南市民" required>
+                <select id="resident" name="是否為台南市民" required>
                   <option value="" selected disabled>請選擇</option>
                   <option>是</option>
                   <option>否</option>
@@ -467,12 +451,17 @@
 
               <div class="field">
                 <label for="phone">聯絡手機（必填）</label>
-                <input id="phone" name="聯絡手機" type="tel" inputmode="tel" required placeholder="例如：0912-345-678" autocomplete="tel" />
+                <input id="phone" name="聯絡電話（手機）" type="tel" inputmode="tel" required placeholder="例如：0912-345-678" autocomplete="tel" />
               </div>
 
               <div class="field">
                 <label for="child_name">孩子姓名（必填）</label>
                 <input id="child_name" name="孩子姓名" type="text" required placeholder="例如：小美" />
+              </div>
+
+              <div class="field">
+                <label for="child_age">孩子年級／年齡（必填）</label>
+                <input id="child_age" name="孩子年級／年齡" type="text" required placeholder="例如：大班、小一、6歲" />
               </div>
 
               <div class="field">
@@ -486,12 +475,12 @@
 
               <div class="field">
                 <label for="school">就讀學校（可填）</label>
-                <input id="school" name="就讀學校" type="text" placeholder="例如：成功國小" />
+                <input id="school" name="就讀學校（選填）" type="text" placeholder="例如：成功國小" />
               </div>
 
               <div class="field">
                 <label for="note">備註（可填）</label>
-                <textarea id="note" name="備註（家長）" placeholder="例如：需要無障礙動線"></textarea>
+                <textarea id="note" placeholder="例如：需要無障礙動線"></textarea>
               </div>
 
               <div class="ctaRow">
@@ -634,7 +623,7 @@
       </div>
     </section>
 
-    <!-- 地點（只保留一張卡片） -->
+    <!-- 地點 -->
     <section id="location">
       <div class="wrap">
         <div class="secTitle"><h2>地點</h2></div>
@@ -685,7 +674,7 @@
     </footer>
   </main>
 
-  <!-- 底部固定按鈕（手機版） -->
+  <!-- 底部固定按鈕 -->
   <div class="fixedCta">
     <a class="btn primary" href="#register">立即報名</a>
     <a class="btn outline" href="tel:0913837389">撥打電話</a>
@@ -703,8 +692,8 @@
   </div>
 
   <script>
-    // ====== 設定 ======
-    const GAS_WEBAPP_URL = "請貼上你的GAS部署網址";
+    // ====== 設定（請換成你的 GAS 網址） ======
+    const GAS_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbxDlJ8o8unlRefrLvJM22lPN7E4Z-TevdkT2Lq1O9ROunLKSVKliq8qylOo_jj-FyyDzQ/exec";
     const THANKS_URL = "thanks.html";
     const EVENT_CODE = "GJC2026";
     const EVENT_NAME = "乾淨校園我愛我家兒童著色畫比賽";
@@ -837,16 +826,22 @@
       submitBtn.disabled = true;
       submitBtn.textContent = "送出中…";
 
+      // 填入 hidden 欄位
       $("event_code").value = EVENT_CODE;
       $("event_name").value = EVENT_NAME;
       if (!$("reg_id").value) $("reg_id").value = makeRegId();
 
-      const tracking = getTracking();
-      const note = ($("note").value || "").trim();
-      $("note_hidden").value = [note, tracking].filter(Boolean).join(" | ");
+      // 追蹤
+      $("tracking_hidden").value = getTracking();
 
+      // 備註（使用者填的 + 追蹤）
+      const tracking = getTracking();
+      const userNote = ($("note").value || "").trim();
+      $("note_hidden").value = userNote;
+
+      // thanks_url
       const thanksUrl = new URL(THANKS_URL, location.href).href;
-      $("redirect_url").value = `${thanksUrl}?rid=${encodeURIComponent($("reg_id").value)}`;
+      $("thanks_url").value = `${thanksUrl}?rid=${encodeURIComponent($("reg_id").value)}`;
     });
   </script>
 </body>
