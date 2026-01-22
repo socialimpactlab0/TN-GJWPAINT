@@ -115,6 +115,7 @@
     .btn:active{transform:scale(.98)}
     .btn.primary{background:linear-gradient(135deg,var(--brand),#38bdf8);color:#fff;border:none}
     .btn.primary:hover{box-shadow:0 8px 20px rgba(14,165,233,.25)}
+    .btn.primary:disabled{opacity:0.6;cursor:not-allowed;transform:none}
     .btn.outline{border-color:var(--brand);color:var(--brand);background:rgba(14,165,233,.04)}
     .btn.outline:hover{background:rgba(14,165,233,.1)}
     .btn.sm{padding:8px 12px;font-size:13px}
@@ -218,6 +219,10 @@
     .field input:focus,.field select:focus,.field textarea:focus{
       outline:none;border-color:var(--brand);box-shadow:0 0 0 3px rgba(14,165,233,.1);
     }
+    .field input.error,.field select.error{
+      border-color:#dc2626;
+      box-shadow:0 0 0 3px rgba(239,68,68,.1);
+    }
     .field select{
       appearance:none;
       background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23475569'%3E%3Cpath d='M6 8L1 3h10z'/%3E%3C/svg%3E");
@@ -225,6 +230,8 @@
     }
     .field textarea{min-height:80px;resize:vertical}
     .field small{display:block;margin-top:4px;font-size:12px;color:var(--muted)}
+    .field .errorMsg{display:none;margin-top:4px;font-size:12px;color:#dc2626;font-weight:600}
+    .field .errorMsg.show{display:block}
     .inlineAlert{
       display:none;margin-top:8px;padding:10px;border-radius:8px;
       background:rgba(239,68,68,.08);border:1px dashed rgba(239,68,68,.3);
@@ -416,7 +423,7 @@
           <!-- 表單 -->
           <div class="card formCard">
             <form id="signupForm" class="formGrid" autocomplete="on">
-              <!-- Hidden 欄位（與 GAS 欄位名稱一致） -->
+              <!-- Hidden 欄位 -->
               <input type="hidden" name="活動代碼" id="event_code" />
               <input type="hidden" name="活動名稱" id="event_name" />
               <input type="hidden" name="報名序號" id="reg_id" />
@@ -428,49 +435,60 @@
                 <label for="full_join">是否能全程參與（必填）</label>
                 <select id="full_join" name="是否能全程參與（9:00–12:00）" required>
                   <option value="" selected disabled>請選擇</option>
-                  <option>是（我能全程參與）</option>
-                  <option>否（我可能無法全程，請先不要報名）</option>
+                  <option value="是（我能全程參與）">是（我能全程參與）</option>
+                  <option value="否（我可能無法全程，請先不要報名）">否（我可能無法全程，請先不要報名）</option>
                 </select>
                 <small>無法全程參與者請勿報名，避免佔用名額。</small>
                 <div class="inlineAlert" id="fullJoinAlert">這場活動需要全程參與，若無法配合建議先不要報名。</div>
               </div>
 
               <div class="field">
-                <label for="resident">是否為臺南市民（必填）</label>
+                <label for="resident">是否為台南市民（必填）</label>
                 <select id="resident" name="是否為台南市民" required>
                   <option value="" selected disabled>請選擇</option>
-                  <option>是</option>
-                  <option>否</option>
+                  <option value="是">是</option>
+                  <option value="否">否</option>
                 </select>
+                <div class="errorMsg" id="residentError">請選擇是否為台南市民</div>
               </div>
 
               <div class="field">
                 <label for="parent_name">家長姓名（必填）</label>
                 <input id="parent_name" name="家長姓名" type="text" required placeholder="例如：王小明" autocomplete="name" />
+                <div class="errorMsg" id="parentNameError">請填寫家長姓名</div>
               </div>
 
               <div class="field">
                 <label for="phone">聯絡手機（必填）</label>
-                <input id="phone" name="聯絡電話（手機）" type="tel" inputmode="tel" required placeholder="例如：0912-345-678" autocomplete="tel" />
+                <input id="phone" name="聯絡電話（手機）" type="tel" inputmode="tel" required placeholder="例如：0912345678" autocomplete="tel" />
+                <small>請填寫 10 碼手機號碼</small>
+                <div class="errorMsg" id="phoneError">請填寫正確的手機號碼（10碼數字）</div>
               </div>
 
               <div class="field">
                 <label for="child_name">孩子姓名（必填）</label>
                 <input id="child_name" name="孩子姓名" type="text" required placeholder="例如：小美" />
+                <div class="errorMsg" id="childNameError">請填寫孩子姓名</div>
               </div>
 
               <div class="field">
-                <label for="child_age">孩子年級／年齡（必填）</label>
-                <input id="child_age" name="孩子年級／年齡" type="text" required placeholder="例如：大班、小一、6歲" />
+                <label for="child_age">孩子年級（必填）</label>
+                <select id="child_age" name="孩子年級／年齡" required>
+                  <option value="" selected disabled>請選擇</option>
+                  <option value="幼兒園">幼兒園</option>
+                  <option value="國小低年級">國小低年級</option>
+                </select>
+                <div class="errorMsg" id="childAgeError">請選擇孩子年級</div>
               </div>
 
               <div class="field">
                 <label for="group">參賽組別（必填）</label>
                 <select id="group" name="參賽組別" required>
                   <option value="" selected disabled>請選擇</option>
-                  <option>幼兒園組</option>
-                  <option>國小低年級組（1–2年級）</option>
+                  <option value="幼兒園組">幼兒園組</option>
+                  <option value="國小低年級組（1–2年級）">國小低年級組（1–2年級）</option>
                 </select>
+                <div class="errorMsg" id="groupError">請選擇參賽組別</div>
               </div>
 
               <div class="field">
@@ -485,10 +503,10 @@
 
               <div class="ctaRow">
                 <button class="btn primary" id="submitBtn" type="submit">送出報名</button>
-                <span class="muted" id="submitHint" style="font-size:13px"></span>
               </div>
 
               <div class="progress" id="progress">送出中…請稍等</div>
+              <div class="inlineAlert" id="formError"></div>
 
               <p style="font-size:12px;color:var(--muted)">填寫資料僅用於活動聯絡，不作其他用途。</p>
             </form>
@@ -692,7 +710,7 @@
   </div>
 
   <script>
-    // ====== 設定（請換成你的 GAS 網址） ======
+    // ====== 設定 ======
     const GAS_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbxDlJ8o8unlRefrLvJM22lPN7E4Z-TevdkT2Lq1O9ROunLKSVKliq8qylOo_jj-FyyDzQ/exec";
     const THANKS_URL = "thanks.html";
     const EVENT_CODE = "GJC2026";
@@ -781,24 +799,120 @@
     modal.addEventListener("click", e => { if (e.target === modal) closeModalFn(); });
     document.addEventListener("keydown", e => { if (e.key === "Escape") closeModalFn(); });
 
-    // ====== 表單 ======
+    // ====== 表單驗證與送出 ======
     const form = $("signupForm");
     const fullJoin = $("full_join");
     const submitBtn = $("submitBtn");
 
-    const setFullJoinUI = () => {
+    // 清除所有錯誤狀態
+    const clearErrors = () => {
+      document.querySelectorAll(".field input, .field select").forEach(el => {
+        el.classList.remove("error");
+      });
+      document.querySelectorAll(".errorMsg").forEach(el => {
+        el.classList.remove("show");
+      });
+      $("formError").classList.remove("show");
+      $("fullJoinAlert").classList.remove("show");
+    };
+
+    // 顯示特定欄位錯誤
+    const showFieldError = (fieldId, errorId) => {
+      $(fieldId).classList.add("error");
+      $(errorId).classList.add("show");
+    };
+
+    // 全程參與選擇變更
+    fullJoin.addEventListener("change", () => {
       const isNo = (fullJoin.value || "").startsWith("否");
       $("fullJoinAlert").classList.toggle("show", isNo);
-      submitBtn.disabled = isNo;
-    };
-    fullJoin.addEventListener("change", setFullJoinUI);
+    });
 
+    // 驗證表單
+    const validateForm = () => {
+      clearErrors();
+      let isValid = true;
+      let firstErrorField = null;
+
+      // 1. 全程參與
+      if (!fullJoin.value) {
+        showFieldError("full_join", "fullJoinAlert");
+        isValid = false;
+        firstErrorField = firstErrorField || fullJoin;
+      } else if (fullJoin.value.startsWith("否")) {
+        $("fullJoinAlert").classList.add("show");
+        isValid = false;
+        firstErrorField = firstErrorField || fullJoin;
+      }
+
+      // 2. 台南市民
+      if (!$("resident").value) {
+        showFieldError("resident", "residentError");
+        isValid = false;
+        firstErrorField = firstErrorField || $("resident");
+      }
+
+      // 3. 家長姓名
+      if (!$("parent_name").value.trim()) {
+        showFieldError("parent_name", "parentNameError");
+        isValid = false;
+        firstErrorField = firstErrorField || $("parent_name");
+      }
+
+      // 4. 手機（10碼數字）
+      const phoneValue = $("phone").value.replace(/\D/g, "");
+      if (phoneValue.length < 10) {
+        showFieldError("phone", "phoneError");
+        isValid = false;
+        firstErrorField = firstErrorField || $("phone");
+      }
+
+      // 5. 孩子姓名
+      if (!$("child_name").value.trim()) {
+        showFieldError("child_name", "childNameError");
+        isValid = false;
+        firstErrorField = firstErrorField || $("child_name");
+      }
+
+      // 6. 孩子年級
+      if (!$("child_age").value) {
+        showFieldError("child_age", "childAgeError");
+        isValid = false;
+        firstErrorField = firstErrorField || $("child_age");
+      }
+
+      // 7. 參賽組別
+      if (!$("group").value) {
+        showFieldError("group", "groupError");
+        isValid = false;
+        firstErrorField = firstErrorField || $("group");
+      }
+
+      // 捲動到第一個錯誤欄位
+      if (firstErrorField) {
+        firstErrorField.scrollIntoView({ behavior: "smooth", block: "center" });
+        firstErrorField.focus();
+      }
+
+      return isValid;
+    };
+
+    // 重置表單狀態（驗證失敗或送出失敗時）
+    const resetFormState = () => {
+      form.dataset.submitting = "";
+      submitBtn.disabled = false;
+      submitBtn.textContent = "送出報名";
+      $("progress").classList.remove("show");
+    };
+
+    // 產生報名序號
     const makeRegId = () => {
       const d = new Date();
       const pad = n => String(n).padStart(2, "0");
       return `${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}-${Math.floor(Math.random() * 9000) + 1000}`;
     };
 
+    // 取得追蹤參數
     const getTracking = () => {
       const p = new URLSearchParams(location.search);
       const keys = ["src", "utm_source", "utm_medium", "utm_campaign"];
@@ -806,25 +920,29 @@
       return parts.length ? `【來源】${parts.join("&")}` : "";
     };
 
+    // 設定表單 action 與 method
     form.action = GAS_WEBAPP_URL;
     form.method = "POST";
 
+    // 表單送出
     form.addEventListener("submit", e => {
-      if ((fullJoin.value || "").startsWith("否")) {
-        e.preventDefault();
-        setFullJoinUI();
+      e.preventDefault();
+
+      // 驗證
+      if (!validateForm()) {
         return;
       }
+
+      // 防止重複送出
       if (form.dataset.submitting === "1") {
-        e.preventDefault();
         return;
       }
       form.dataset.submitting = "1";
 
-      $("submitHint").textContent = "送出中…";
-      $("progress").classList.add("show");
+      // 更新 UI
       submitBtn.disabled = true;
       submitBtn.textContent = "送出中…";
+      $("progress").classList.add("show");
 
       // 填入 hidden 欄位
       $("event_code").value = EVENT_CODE;
@@ -834,14 +952,16 @@
       // 追蹤
       $("tracking_hidden").value = getTracking();
 
-      // 備註（使用者填的 + 追蹤）
-      const tracking = getTracking();
+      // 備註
       const userNote = ($("note").value || "").trim();
       $("note_hidden").value = userNote;
 
       // thanks_url
       const thanksUrl = new URL(THANKS_URL, location.href).href;
       $("thanks_url").value = `${thanksUrl}?rid=${encodeURIComponent($("reg_id").value)}`;
+
+      // 用原生 form submit
+      form.submit();
     });
   </script>
 </body>
