@@ -23,7 +23,6 @@
       --shadow:0 10px 30px rgba(2,8,23,.08);
       --radius:16px;
       --max:960px;
-          --topbar-h:60px;
     }
     *{box-sizing:border-box;margin:0}
     html{scroll-behavior:smooth}
@@ -32,7 +31,7 @@
       color:var(--text);
       background:linear-gradient(135deg,rgba(14,165,233,.08)0%,transparent 50%),linear-gradient(225deg,rgba(34,197,94,.06)0%,transparent 50%),var(--bg);
       line-height:1.6;
-      padding-bottom:72px;
+      padding-bottom:56px;
     }
     @media(min-width:768px){body{padding-bottom:0}}
     a{color:inherit}
@@ -48,21 +47,28 @@
     }
     .topbar .wrap{
       display:flex;align-items:center;justify-content:space-between;
-      min-height:var(--topbar-h);
-      padding:10px 16px;gap:8px;
+      padding:12px 16px;gap:10px;
     }
     .brand{
       display:flex;align-items:center;gap:8px;
-      font-weight:900;font-size:13px;
-      white-space:nowrap;
+      font-weight:800;font-size:12px;
+      line-height:1.3;
     }
+    @media(min-width:400px){.brand{font-size:13px}}
+    @media(min-width:768px){.brand{font-size:14px}}
     .dot{
       width:10px;height:10px;border-radius:50%;flex-shrink:0;
       background:linear-gradient(135deg,var(--brand),var(--brand2));
     }
-    /* 頂部報名按鈕（滾到報名區會隱藏） */
+    .brandText{
+      display:-webkit-box;
+      -webkit-line-clamp:2;
+      -webkit-box-orient:vertical;
+      overflow:hidden;
+    }
+    /* 頂部報名按鈕 */
     #topRegisterBtn{
-      padding:8px 14px;font-size:13px;
+      padding:6px 12px;font-size:12px;flex-shrink:0;
       transition:opacity .2s,transform .2s;
     }
     #topRegisterBtn.hide{
@@ -73,12 +79,12 @@
 
     /* ===== 導覽列（永遠固定） ===== */
     .navBar{
-      position:sticky;top:var(--topbar-h);z-index:30;
+      position:sticky;top:54px;z-index:30;
       display:flex;
       overflow-x:auto;
       -webkit-overflow-scrolling:touch;
       gap:6px;
-      padding:8px 16px;
+      padding:10px 16px;
       background:rgba(255,255,255,.95);
       backdrop-filter:blur(10px);
       -webkit-backdrop-filter:blur(10px);
@@ -88,7 +94,7 @@
     .navBar::-webkit-scrollbar{display:none}
     .navBar a{
       flex-shrink:0;
-      padding:6px 14px;
+      padding:6px 12px;
       border-radius:20px;
       font-size:13px;
       font-weight:600;
@@ -140,10 +146,8 @@
     .heroGrid{display:grid;gap:16px}
     @media(min-width:768px){.heroGrid{grid-template-columns:1fr 1fr;gap:24px}}
 
-    /* 海報（縮小外框） */
-    .posterWrap{
-      text-align:center;
-    }
+    /* 海報 */
+    .posterWrap{text-align:center}
     .poster{
       width:100%;
       max-width:300px;
@@ -152,9 +156,7 @@
       cursor:zoom-in;
       border:1px solid var(--border);
     }
-    @media(min-width:768px){
-      .poster{max-width:100%}
-    }
+    @media(min-width:768px){.poster{max-width:100%}}
     .notice{
       margin-top:10px;padding:10px 12px;border-radius:10px;
       background:rgba(14,165,233,.06);border:1px dashed rgba(14,165,233,.2);
@@ -281,21 +283,19 @@
     .modalTop .t{font-weight:700}
     .modalImg{width:100%;display:block}
 
-    /* ===== 底部固定按鈕 ===== */
+    /* ===== 底部固定按鈕（縮小版） ===== */
     .fixedCta{
       position:fixed;bottom:0;left:0;right:0;z-index:25;
-      display:flex;gap:8px;padding:12px 16px;
+      display:flex;gap:6px;padding:8px 12px;
       background:rgba(255,255,255,.95);
       backdrop-filter:blur(10px);
       -webkit-backdrop-filter:blur(10px);
       border-top:1px solid var(--border);
     }
-    .fixedCta .btn{flex:1}
-
-    /* mobileCtaTight */
-    @media(max-width:767px){
-      .fixedCta{padding:10px 12px;gap:8px}
-      .fixedCta .btn{padding:9px 12px;font-size:13px;border-radius:9px}
+    .fixedCta .btn{
+      flex:1;
+      padding:8px 10px;
+      font-size:13px;
     }
     @media(min-width:768px){.fixedCta{display:none}}
 
@@ -311,7 +311,7 @@
     <div class="wrap">
       <div class="brand">
         <span class="dot"></span>
-        <span id="siteName">乾淨校園著色畫比賽</span>
+        <span class="brandText" id="siteName">乾淨校園我愛我家兒童著色畫比賽官網</span>
       </div>
       <a class="btn primary" id="topRegisterBtn" href="#register">立即報名</a>
     </div>
@@ -703,7 +703,7 @@
     </footer>
   </main>
 
-  <!-- 底部固定按鈕（手機版） -->
+  <!-- 底部固定按鈕（手機版，縮小版） -->
   <div class="fixedCta">
     <a class="btn primary" href="#register">立即報名</a>
     <a class="btn outline" href="tel:0913837389">撥打電話</a>
@@ -728,7 +728,7 @@
     const EVENT_NAME = "乾淨校園我愛我家兒童著色畫比賽";
 
     const EVENT = {
-      siteName: "乾淨校園著色畫比賽",
+      siteName: "乾淨校園我愛我家兒童著色畫比賽官網",
       title: "乾淨校園「我愛我家」兒童著色畫比賽",
       kicker: "現場提供底圖｜11:40 公布並頒獎",
       subtitle: "活動資訊、流程與規則都在這裡。請確定能到再報名（額滿即止）。",
@@ -773,7 +773,6 @@
 
     const checkRegisterVisible = () => {
       const rect = registerSection.getBoundingClientRect();
-      // 當報名區塊進入畫面（頂部進入視窗下半部）
       if (rect.top < window.innerHeight * 0.7) {
         topRegisterBtn.classList.add("hide");
       } else {
@@ -782,7 +781,7 @@
     };
 
     window.addEventListener("scroll", checkRegisterVisible, { passive: true });
-    checkRegisterVisible(); // 初始檢查
+    checkRegisterVisible();
 
     // ====== 複製地址 ======
     $("copyAddrBtn").addEventListener("click", async () => {
@@ -871,3 +870,4 @@
   </script>
 </body>
 </html>
+```
