@@ -76,29 +76,6 @@
       text-decoration: none;
     }
 
-    /* ========== 漂浮裝飾元素 ========== */
-    .floating-decor {
-      position: fixed;
-      pointer-events: none;
-      z-index: 0;
-      font-size: 1.8rem;
-      opacity: 0.12;
-      animation: floatAround 20s ease-in-out infinite;
-    }
-
-    .floating-decor:nth-child(1) { top: 10%; left: 5%; animation-delay: 0s; }
-    .floating-decor:nth-child(2) { top: 20%; right: 8%; animation-delay: -5s; }
-    .floating-decor:nth-child(3) { top: 60%; left: 3%; animation-delay: -10s; }
-    .floating-decor:nth-child(4) { top: 80%; right: 5%; animation-delay: -15s; }
-    .floating-decor:nth-child(5) { top: 40%; right: 3%; animation-delay: -7s; }
-
-    @keyframes floatAround {
-      0%, 100% { transform: translateY(0) rotate(0deg); }
-      25% { transform: translateY(-15px) rotate(5deg); }
-      50% { transform: translateY(0) rotate(0deg); }
-      75% { transform: translateY(15px) rotate(-5deg); }
-    }
-
     /* ========== 漢堡選單 ========== */
     .nav-toggle {
       position: fixed;
@@ -627,16 +604,6 @@
     .info-icon {
       font-size: 2.2rem;
       margin-bottom: 12px;
-      animation: iconBounce 2s ease-in-out infinite;
-    }
-
-    .info-card:nth-child(2) .info-icon { animation-delay: -0.5s; }
-    .info-card:nth-child(3) .info-icon { animation-delay: -1s; }
-    .info-card:nth-child(4) .info-icon { animation-delay: -1.5s; }
-
-    @keyframes iconBounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-5px); }
     }
 
     .info-label {
@@ -677,16 +644,6 @@
     .section-title::after {
       content: '⭐';
       font-size: 0.8em;
-      animation: twinkle 1.5s ease-in-out infinite;
-    }
-
-    .section-title::after {
-      animation-delay: -0.75s;
-    }
-
-    @keyframes twinkle {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(0.8); }
     }
 
     .section-subtitle {
@@ -730,16 +687,6 @@
       font-size: 2.5rem;
       margin-bottom: 14px;
       display: inline-block;
-      animation: iconWiggle 3s ease-in-out infinite;
-    }
-
-    .highlight-card:nth-child(2) .highlight-icon { animation-delay: -0.75s; }
-    .highlight-card:nth-child(3) .highlight-icon { animation-delay: -1.5s; }
-    .highlight-card:nth-child(4) .highlight-icon { animation-delay: -2.25s; }
-
-    @keyframes iconWiggle {
-      0%, 100% { transform: rotate(-5deg) scale(1); }
-      50% { transform: rotate(5deg) scale(1.1); }
     }
 
     .highlight-card h3 {
@@ -901,18 +848,6 @@
       display: inline-block;
     }
 
-    .prize-card.gold .prize-icon,
-    .prize-card.silver .prize-icon,
-    .prize-card.bronze .prize-icon {
-      animation: prizeBounce 1s ease-in-out infinite;
-    }
-
-    @keyframes prizeBounce {
-      0%, 100% { transform: translateY(0) rotate(0deg); }
-      25% { transform: translateY(-5px) rotate(-5deg); }
-      75% { transform: translateY(-5px) rotate(5deg); }
-    }
-
     .prize-name {
       font-weight: 700;
       margin-bottom: 6px;
@@ -936,6 +871,54 @@
     .register-container {
       max-width: 520px;
       margin: 0 auto;
+    }
+
+    /* ========== 報名須知 ========== */
+    .register-notice {
+      background: linear-gradient(135deg, #fff9e6 0%, #fff5f8 100%);
+      border: 2px dashed var(--secondary);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      margin-bottom: 24px;
+      text-align: left;
+    }
+
+    .register-notice-title {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .register-notice-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .register-notice-list li {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+      padding-left: 20px;
+      position: relative;
+      line-height: 1.6;
+    }
+
+    .register-notice-list li::before {
+      content: '•';
+      position: absolute;
+      left: 6px;
+      color: var(--primary);
+      font-weight: 900;
+    }
+
+    .register-notice-list li:last-child {
+      margin-bottom: 0;
     }
 
     .form-card {
@@ -1123,12 +1106,6 @@
     .location-icon {
       font-size: 3rem;
       margin-bottom: 16px;
-      animation: locationPulse 2s ease-in-out infinite;
-    }
-
-    @keyframes locationPulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.1); }
     }
 
     .location-name {
@@ -1195,8 +1172,15 @@
 
     .contact-value {
       font-weight: 700;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       color: var(--text);
+      line-height: 1.6;
+    }
+
+    .contact-value-sub {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 4px;
     }
 
     /* ========== Footer ========== */
@@ -1333,10 +1317,6 @@
 
     /* ========== 手機版 RWD ========== */
     @media (max-width: 767px) {
-      .floating-decor {
-        display: none;
-      }
-      
       .section {
         min-height: auto;
         padding: 50px 16px;
@@ -1548,6 +1528,19 @@
         font-size: 0.8rem;
       }
       
+      /* 報名須知 */
+      .register-notice {
+        padding: 16px 18px;
+      }
+      
+      .register-notice-title {
+        font-size: 0.95rem;
+      }
+      
+      .register-notice-list li {
+        font-size: 0.82rem;
+      }
+      
       /* 表單 */
       .form-card {
         padding: 28px 18px;
@@ -1614,17 +1607,18 @@
       .contact-card[style*="grid-column"] {
         grid-column: auto !important;
       }
+      
+      .contact-value {
+        font-size: 0.85rem;
+      }
+      
+      .contact-value-sub {
+        font-size: 0.8rem;
+      }
     }
   </style>
 </head>
 <body>
-
-  <!-- ========== 漂浮裝飾 ========== -->
-  <div class="floating-decor">🌸</div>
-  <div class="floating-decor">⭐</div>
-  <div class="floating-decor">💕</div>
-  <div class="floating-decor">☁️</div>
-  <div class="floating-decor">✨</div>
 
   <!-- ========== Logo ========== -->
   <div class="logo">乾淨校園</div>
@@ -1847,6 +1841,17 @@
   <section class="section register-section" id="register">
     <div class="register-container">
       <h2 class="section-title fade-in" style="margin-bottom: 24px;">立即報名</h2>
+      
+      <!-- 報名須知 -->
+      <div class="register-notice fade-in">
+        <div class="register-notice-title">📌 報名須知</div>
+        <ul class="register-notice-list">
+          <li>報名後需經工作人員確認，確認後才算報名成功</li>
+          <li>若本次名額已滿，將列為候補名單</li>
+          <li>未錄取者，下次舉辦時將優先通知</li>
+        </ul>
+      </div>
+      
       <div class="form-card fade-in">
         <div class="progress" id="progress">
           <div class="progress-bar"></div>
@@ -1963,7 +1968,11 @@
         </div>
         <div class="contact-card">
           <div class="contact-label">協辦單位</div>
-          <div class="contact-value">彰南里活動中心</div>
+          <div class="contact-value">
+            國際獅子會300E-1區<br>
+            第22分區主席林淑珍
+            <div class="contact-value-sub">明林蕾絲</div>
+          </div>
         </div>
         <div class="contact-card" style="grid-column: 1 / -1;">
           <div class="contact-label">洽詢電話</div>
