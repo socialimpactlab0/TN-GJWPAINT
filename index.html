@@ -2061,7 +2061,7 @@
 
   <!-- ========== JavaScript ========== -->
   <script>
-   (function() {
+  (function() {
   'use strict';
 
   // ========== 設定區 ==========
@@ -2138,7 +2138,6 @@
     const notice = document.querySelector('.register-notice');
     if (!notice) return;
 
-    // 移除既有的額外提示（避免重複）
     const existingExtra = document.querySelector('.register-notice-extra');
     if (existingExtra) existingExtra.remove();
 
@@ -2167,46 +2166,45 @@
   }
 
   // ========== 表單驗證 ==========
-  function validateForm(form) {
+  function validateForm() {
     const errors = [];
     
-    const parent = form.querySelector('[name="家長姓名"]');
-    const phone = form.querySelector('[name="聯絡電話"]');
-    const child = form.querySelector('[name="兒童姓名"]');
-    const age = form.querySelector('[name="兒童年齡"]');
-    const group = form.querySelector('[name="參賽組別"]');
-    const fullJoin = form.querySelector('[name="是否能全程參與"]');
+    const fullJoin = $('full_join');
+    const resident = $('resident');
+    const parentName = $('parent_name');
+    const phone = $('phone');
+    const childName = $('child_name');
+    const childAge = $('child_age');
+    const group = $('group');
 
-    if (!parent?.value.trim()) errors.push('請填寫家長姓名');
-    if (!phone?.value.trim()) errors.push('請填寫聯絡電話');
-    if (phone?.value && !/^09\d{8}$/.test(phone.value.trim())) {
-      errors.push('請填寫正確的手機號碼格式（09xxxxxxxx）');
-    }
-    if (!child?.value.trim()) errors.push('請填寫兒童姓名');
-    if (!age?.value) errors.push('請選擇兒童年齡');
-    if (!group?.value) errors.push('請選擇參賽組別');
-    if (!fullJoin?.value) errors.push('請確認是否能全程參與');
-    if (fullJoin?.value === '否') {
+    if (!fullJoin || !fullJoin.value) errors.push('請選擇是否能全程參與');
+    if (fullJoin && fullJoin.value === '否') {
       errors.push('本活動需全程參與（約 3.5 小時），若無法配合請等待下次活動');
     }
+    if (!resident || !resident.value) errors.push('請選擇是否為台南市民');
+    if (!parentName || !parentName.value.trim()) errors.push('請填寫家長姓名');
+    if (!phone || !phone.value.trim()) errors.push('請填寫聯絡手機');
+    if (phone && phone.value && !/^09\d{8}$/.test(phone.value.trim())) {
+      errors.push('請填寫正確的手機號碼格式（09xxxxxxxx）');
+    }
+    if (!childName || !childName.value.trim()) errors.push('請填寫孩子姓名');
+    if (!childAge || !childAge.value) errors.push('請選擇孩子年級');
+    if (!group || !group.value) errors.push('請選擇參賽組別');
 
     return errors;
   }
 
-  function showFormError(form, messages) {
-    let errorDiv = form.querySelector('.form-error');
-    if (!errorDiv) {
-      errorDiv = document.createElement('div');
-      errorDiv.className = 'form-error';
-      form.insertBefore(errorDiv, form.firstChild);
+  function showFormError(messages) {
+    const errorDiv = $('formError');
+    if (errorDiv) {
+      errorDiv.innerHTML = messages.map(m => `<p>⚠️ ${m}</p>`).join('');
+      errorDiv.style.display = 'block';
+      errorDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
-    errorDiv.innerHTML = messages.map(m => `<p>⚠️ ${m}</p>`).join('');
-    errorDiv.style.display = 'block';
-    errorDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 
-  function hideFormError(form) {
-    const errorDiv = form.querySelector('.form-error');
+  function hideFormError() {
+    const errorDiv = $('formError');
     if (errorDiv) errorDiv.style.display = 'none';
   }
 
@@ -2220,103 +2218,95 @@
     checkGroupStatus();
 
     // ===== 漢堡選單 =====
-    const hamburger = document.querySelector('.hamburger');
-    const navLinks = document.querySelector('.nav-links');
-    const overlay = document.querySelector('.nav-overlay');
+    const navToggle = $('navToggle');
+    const navMenu = $('navMenu');
+    const navOverlay = $('navOverlay');
 
-    if (hamburger && navLinks) {
-      hamburger.addEventListener('click', function() {
+    if (navToggle && navMenu) {
+      navToggle.addEventListener('click', function() {
         this.classList.toggle('active');
-        navLinks.classList.toggle('active');
-        if (overlay) overlay.classList.toggle('active');
-        document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+        navMenu.classList.toggle('active');
+        if (navOverlay) navOverlay.classList.toggle('active');
+        document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
       });
 
-      // 點擊連結後關閉選單
-      navLinks.querySelectorAll('a').forEach(link => {
+      navMenu.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => {
-          hamburger.classList.remove('active');
-          navLinks.classList.remove('active');
-          if (overlay) overlay.classList.remove('active');
+          navToggle.classList.remove('active');
+          navMenu.classList.remove('active');
+          if (navOverlay) navOverlay.classList.remove('active');
           document.body.style.overflow = '';
         });
       });
 
-      // 點擊遮罩關閉選單
-      if (overlay) {
-        overlay.addEventListener('click', () => {
-          hamburger.classList.remove('active');
-          navLinks.classList.remove('active');
-          overlay.classList.remove('active');
+      if (navOverlay) {
+        navOverlay.addEventListener('click', () => {
+          navToggle.classList.remove('active');
+          navMenu.classList.remove('active');
+          navOverlay.classList.remove('active');
           document.body.style.overflow = '';
         });
       }
     }
 
     // ===== 海報燈箱 =====
-    const posterTrigger = document.querySelector('.poster-trigger');
-    const lightbox = document.querySelector('.lightbox');
-    const lightboxClose = document.querySelector('.lightbox-close');
-    const lightboxOverlay = document.querySelector('.lightbox-overlay');
+    const posterTrigger = $('posterTrigger');
+    const lightbox = $('lightbox');
+    const lightboxClose = $('lightboxClose');
 
     if (posterTrigger && lightbox) {
       posterTrigger.addEventListener('click', () => {
-        lightbox.classList.add('active');
+        lightbox.classList.add('show');
         document.body.style.overflow = 'hidden';
       });
 
       const closeLightbox = () => {
-        lightbox.classList.remove('active');
+        lightbox.classList.remove('show');
         document.body.style.overflow = '';
       };
 
       if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
-      if (lightboxOverlay) lightboxOverlay.addEventListener('click', closeLightbox);
+      
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) closeLightbox();
+      });
 
       document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+        if (e.key === 'Escape' && lightbox.classList.contains('show')) {
           closeLightbox();
         }
       });
     }
 
     // ===== 複製地址按鈕 =====
-    const copyBtn = document.querySelector('.copy-btn');
+    const copyBtn = $('copyAddressBtn');
     if (copyBtn) {
       copyBtn.addEventListener('click', async function() {
-        const address = this.getAttribute('data-address');
+        const address = '台南市南區新建路12號';
         try {
           await navigator.clipboard.writeText(address);
           const originalText = this.textContent;
           this.textContent = '✅ 已複製';
-          this.style.background = 'var(--accent)';
           setTimeout(() => {
             this.textContent = originalText;
-            this.style.background = '';
           }, 2000);
         } catch (e) {
-          alert('複製失敗，請手動複製地址');
+          alert('複製失敗，請手動複製地址：' + address);
         }
       });
     }
 
-    // ===== 年齡與組別連動 =====
-    const ageSelect = $('age');
+    // ===== 年級與組別連動 =====
+    const childAgeSelect = $('child_age');
     const groupSelect = $('group');
 
-    if (ageSelect && groupSelect) {
-      ageSelect.addEventListener('change', function() {
-        const age = parseInt(this.value);
-        if (!isNaN(age)) {
-          // 取得原始組別名稱（不含狀態文字）
-          const targetGroup = age <= 6 ? '幼兒園組' : '國小低年級組';
-          
-          // 找到對應的 option
-          groupSelect.querySelectorAll('option').forEach(option => {
-            if (option.value === targetGroup) {
-              groupSelect.value = targetGroup;
-            }
-          });
+    if (childAgeSelect && groupSelect) {
+      childAgeSelect.addEventListener('change', function() {
+        const value = this.value;
+        if (value === '幼兒園') {
+          groupSelect.value = '幼兒園組';
+        } else if (value === '國小低年級') {
+          groupSelect.value = '國小低年級組';
         }
       });
     }
@@ -2339,30 +2329,33 @@
 
       fadeElements.forEach(el => observer.observe(el));
     } else {
-      // 不支援 IntersectionObserver 時直接顯示
       fadeElements.forEach(el => el.classList.add('visible'));
     }
 
     // ===== 表單提交 =====
-    const form = document.querySelector('.register-form');
+    const form = $('registerForm');
     
     if (form) {
       form.addEventListener('submit', async function(e) {
         e.preventDefault();
         
         // 驗證表單
-        const errors = validateForm(form);
+        const errors = validateForm();
         if (errors.length > 0) {
-          showFormError(form, errors);
+          showFormError(errors);
           return;
         }
-        hideFormError(form);
+        hideFormError();
 
         // 取得按鈕並顯示載入狀態
-        const submitBtn = form.querySelector('.submit-btn');
+        const submitBtn = $('submitBtn');
         const originalText = submitBtn.textContent;
         submitBtn.disabled = true;
         submitBtn.textContent = '報名中...';
+
+        // 顯示進度條
+        const progress = $('progress');
+        if (progress) progress.classList.add('show');
 
         // 準備資料
         const regId = makeRegId();
@@ -2372,22 +2365,19 @@
         formData.append('活動代碼', EVENT_CODE);
         formData.append('活動名稱', EVENT_NAME);
         formData.append('報名序號', regId);
-        formData.append('家長姓名', form.querySelector('[name="家長姓名"]').value.trim());
-        formData.append('聯絡電話', form.querySelector('[name="聯絡電話"]').value.trim());
-        formData.append('兒童姓名', form.querySelector('[name="兒童姓名"]').value.trim());
-        formData.append('兒童年齡', form.querySelector('[name="兒童年齡"]').value);
-        formData.append('參賽組別', form.querySelector('[name="參賽組別"]').value);
-        formData.append('是否能全程參與', form.querySelector('[name="是否能全程參與"]').value);
-        formData.append('學校/幼兒園', form.querySelector('[name="學校/幼兒園"]')?.value.trim() || '');
-        formData.append('居住區域', form.querySelector('[name="居住區域"]')?.value.trim() || '');
-        formData.append('備註', form.querySelector('[name="備註"]')?.value.trim() || '');
-        formData.append('utm_source', tracking.utm_source);
-        formData.append('utm_medium', tracking.utm_medium);
-        formData.append('utm_campaign', tracking.utm_campaign);
-        formData.append('referrer', tracking.referrer);
+        formData.append('家長姓名', $('parent_name').value.trim());
+        formData.append('聯絡電話（手機）', $('phone').value.trim());
+        formData.append('孩子姓名', $('child_name').value.trim());
+        formData.append('孩子年級／年齡', $('child_age').value);
+        formData.append('參賽組別', $('group').value);
+        formData.append('是否能全程參與（9:00–12:00）', $('full_join').value);
+        formData.append('就讀學校（選填）', $('school') ? $('school').value.trim() : '');
+        formData.append('是否為台南市民', $('resident').value);
+        formData.append('備註', $('note') ? $('note').value.trim() : '');
+        formData.append('追蹤', `utm_source=${tracking.utm_source}&utm_medium=${tracking.utm_medium}&utm_campaign=${tracking.utm_campaign}&referrer=${tracking.referrer}`);
         
         // 蜜罐欄位
-        const honeypot = form.querySelector('[name="website"]');
+        const honeypot = $('honeypot');
         formData.append('website', honeypot ? honeypot.value : '');
 
         try {
@@ -2400,6 +2390,7 @@
 
           if (response.ok) {
             const responseText = await response.text();
+            console.log('GAS 回應:', responseText);
             
             if (responseText.startsWith('OK:')) {
               const parts = responseText.split(':');
@@ -2409,6 +2400,8 @@
             } else if (responseText.startsWith('ERROR:')) {
               throw new Error(responseText.replace('ERROR:', ''));
             }
+          } else {
+            throw new Error('伺服器回應錯誤');
           }
 
           // 成功，跳轉感謝頁
@@ -2417,9 +2410,10 @@
 
         } catch (error) {
           console.error('報名失敗', error);
-          showFormError(form, ['報名過程發生錯誤，請稍後再試或聯繫主辦單位']);
+          showFormError(['報名過程發生錯誤：' + error.message + '，請稍後再試或聯繫主辦單位']);
           submitBtn.disabled = false;
           submitBtn.textContent = originalText;
+          if (progress) progress.classList.remove('show');
         }
       });
     }
