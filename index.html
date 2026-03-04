@@ -1899,17 +1899,17 @@
   <!-- ========== 報名區 ========== -->
   <section class="section register-section" id="register">
     <div class="register-container">
-      <h2 class="section-title fade-in" style="margin-bottom: 24px;">立即報名</h2>
+      <h2 class="section-title fade-in" style="margin-bottom: 24px;">已額滿｜候補登記</h2>
       
-      <!-- 報名須知 -->
-      <div class="register-notice fade-in">
-        <div class="register-notice-title">📌 報名須知</div>
-        <ul class="register-notice-list">
-          <li>報名後需經工作人員確認，確認後才算報名成功</li>
-          <li>若本次名額已滿，將列為候補名單</li>
-          <li>未錄取者，下次舉辦時將優先通知</li>
-        </ul>
-      </div>
+      <!-- 候補登記須知 -->
+<div class="register-notice fade-in">
+  <div class="register-notice-title">📌 候補登記須知</div>
+  <ul class="register-notice-list">
+    <li>送出即完成候補登記，無需另行確認</li>
+    <li>3/10（一）將通知補位結果</li>
+    <li>未遞補者仍會保留資料，下一場優先通知</li>
+  </ul>
+</div>
       
       <div class="form-card fade-in">
         <div class="progress" id="progress">
@@ -2135,36 +2135,9 @@
   }
 
   function updateFormNotice() {
-    const notice = document.querySelector('.register-notice');
-    if (!notice) return;
-
-    const existingExtra = document.querySelector('.register-notice-extra');
-    if (existingExtra) existingExtra.remove();
-
-    const hasWaitlist = Object.values(groupStatusData).some(g => g.status === 'waitlist');
-    const hasNextround = Object.values(groupStatusData).some(g => g.status === 'nextround');
-
-    if (hasWaitlist || hasNextround) {
-      const extra = document.createElement('div');
-      extra.className = 'register-notice-extra';
-      
-      let html = '<div class="register-notice-title">📢 名額狀態說明</div>';
-      html += '<ul class="register-notice-list">';
-      
-      if (hasWaitlist) {
-        html += '<li>標示「接受候補」的組別，正取已滿，報名將列入候補名單</li>';
-      }
-      if (hasNextround) {
-        html += '<li>標示「報名下一場」的組別，本次已額滿，報名將列入下一場優先通知名單</li>';
-      }
-      
-      html += '</ul>';
-      extra.innerHTML = html;
-      
-      notice.parentNode.insertBefore(extra, notice.nextSibling);
-    }
-  }
-
+  // 不再動態新增「名額狀態說明」區塊
+  return;
+}
   // ========== 表單驗證 ==========
   function validateForm() {
     const errors = [];
