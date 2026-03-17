@@ -1,0 +1,490 @@
+/**
+ * Code.gs（綁定在你的 Google Sheet）
+ * 含防灌機制：蜜罐欄位 + 智慧節流（同手機+同孩子才擋）
+ * 
+ * Sheet 欄位（A~N）：
+ * A 活動代碼
+ * B 活動名稱
+ * C 家長姓名
+ * D 聯絡電話（手機）
+ * E 孩子姓名
+ * F 孩子年級／年齡
+ * G 參賽組別
+ * H 是否能全程參與（9:00–12:00）
+ * I 就讀學校（選填）
+ * J 是否為台南市民
+ * K 備註（含追蹤）
+ * L 狀態
+ * M 報名序號
+ * N 建檔時間
+ */
+
+// ========== 設定區 ==========
+const SHEET_NAME = '名單總表';
+const STATUS_DEFAULT = '已報名';
+const STATUS_WAITLIST = '候補';
+const STATUS_NEXTROUND = '預約下一場';
+const THROTTLE_SECONDS = 60;
+
+// 各組名額設定
+const GROUP_LIMIT = {
+  '幼兒園組': 25,
+  '國小低年級組': 25
+};
+
+// 候補名額設定
+const WAITLIST_LIMIT = {
+  '幼兒園組': 10,
+  '國小低年級組': 10
+};
+
+// ========== 計算各組人數 ==========
+function getGroupCounts() {
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_NAME);
+  if (!sheet) return { '幼兒園組': { confirmed: 0, waitlist: 0, nextround: 0 }, '國小低年級組': { confirmed: 0, waitlist: 0, nextround: 0 } };
+  
+  const data = sheet.getDataRange().getValues();
+  const counts = {
+    '幼兒園組': { confirmed: 0, waitlist: 0, nextround: 0 },
+    '國小低年級組': { confirmed: 0, waitlist: 0, nextround: 0 }
+  };
+  
+  // G 欄 = 參賽組別（index 6），L 欄 = 狀態（index 11）
+  for (let i = 1; i < data.length; i++) {
+    const group = data[i][6];
+    const status = String(data[i][11] || '');
+    
+    if (counts[group]) {
+      // 已報名 或 確認報名
+      if (status === STATUS_DEFAULT || status === '確認報名' || status === '已報名') {
+        counts[group].confirmed++;
+      // 候補（包含有編號的，如「候補1」「候補2」）
+      } else if (status === STATUS_WAITLIST || status.startsWith('候補')) {
+        counts[group].waitlist++;
+      // 預約下一場（包含有編號的）
+      } else if (status === STATUS_NEXTROUND || status.startsWith('預約下一場')) {
+        counts[group].nextround++;
+      }
+    }
+  }
+  
+  return counts;
+}
+
+// ========== 取得組別狀態 ==========
+function getGroupStatus(groupName) {
+  const counts = getGroupCounts();
+  const groupCount = counts[groupName];
+  
+  if (!groupCount) return { status: 'open', count: 0 };
+  
+  const confirmedCount = groupCount.confirmed;
+  const waitlistCount = groupCount.waitlist;
+  const limit = GROUP_LIMIT[groupName] || 25;
+  const waitlistLimit = WAITLIST_LIMIT[groupName] || 10;
+  
+  if (confirmedCount < limit) {
+    return { status: 'open', count: confirmedCount };
+  } else if (waitlistCount < waitlistLimit) {
+    return { status: 'waitlist', count: confirmedCount, waitlistCount: waitlistCount };
+  } else {
+    return { status: 'nextround', count: confirmedCount, waitlistCount: waitlistCount };
+  }
+}
+
+// ========== 取得所有組別狀態（給前端用）==========
+function getAllGroupStatus() {
+  const groups = ['幼兒園組', '國小低年級組'];
+  const result = {};
+  
+  groups.forEach(group => {
+    const statusInfo = getGroupStatus(group);
+    result[group] = statusInfo;
+  });
+  
+  return result;
+}
+
+// ========== doGet：查詢狀態 ==========
+function doGet(e) {
+  const action = e.parameter.action;
+  
+  // 記錄瀏覽次數
+  if (action === 'logView') {
+    logPageView();
+    return ContentService.createTextOutput('OK');
+  }
+  
+  if (action === 'checkStatus') {
+    const status = getAllGroupStatus();
+    return ContentService.createTextOutput(JSON.stringify(status))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+  
+  return ContentService.createTextOutput('OK - GAS 運作正常');
+}
+
+
+// ========== doPost：處理報名 ==========
+function doPost(e) {
+  try {
+    // 1. 蜜罐檢查
+    const honeypot = e.parameter.website || '';
+    if (honeypot !== '') {
+      return ContentService.createTextOutput('OK:SPAM:blocked');
+    }
+    
+    // 2. 取得欄位
+    const eventCode = e.parameter['活動代碼'] || '';
+    const eventName = e.parameter['活動名稱'] || '';
+    const regId = e.parameter['報名序號'] || '';
+    const parentName = e.parameter['家長姓名'] || '';
+    const phone = e.parameter['聯絡電話（手機）'] || '';
+    const childName = e.parameter['孩子姓名'] || '';
+    const childAge = e.parameter['孩子年級／年齡'] || '';
+    const group = e.parameter['參賽組別'] || '';
+    const fullJoin = e.parameter['是否能全程參與（9:00–12:00）'] || '';
+    const school = e.parameter['就讀學校（選填）'] || '';
+    const resident = e.parameter['是否為台南市民'] || '';
+    const note = e.parameter['備註'] || '';
+    const tracking = e.parameter['追蹤'] || '';
+    
+    // 3. 必填驗證
+    if (!parentName || !phone || !childName || !group) {
+      return ContentService.createTextOutput('ERROR:必填欄位不完整');
+    }
+    
+    // 4. 手機格式驗證
+    const phoneDigits = phone.replace(/\D/g, '');
+    if (phoneDigits.length < 10) {
+      return ContentService.createTextOutput('ERROR:手機號碼格式錯誤');
+    }
+    
+    // 5. 防灌機制：同手機 + 同孩子 60 秒內
+    const cacheKey = 'REG_' + phoneDigits + '_' + childName;
+    const cache = CacheService.getScriptCache();
+    const cached = cache.get(cacheKey);
+    if (cached) {
+      return ContentService.createTextOutput('ERROR:請勿重複送出，請稍後再試');
+    }
+    cache.put(cacheKey, 'true', THROTTLE_SECONDS);
+    
+    // 6. 取得工作表
+    const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_NAME);
+    if (!sheet) {
+      return ContentService.createTextOutput('ERROR:找不到工作表：' + SHEET_NAME);
+    }
+    
+    // 7. 判斷報名狀態
+    const groupStatusInfo = getGroupStatus(group);
+    let regStatus = STATUS_DEFAULT;
+    
+    if (groupStatusInfo.status === 'waitlist') {
+      regStatus = STATUS_WAITLIST;
+    } else if (groupStatusInfo.status === 'nextround') {
+      regStatus = STATUS_NEXTROUND;
+    }
+    
+    // 8. 寫入資料（使用鎖定機制）
+    const lock = LockService.getScriptLock();
+    lock.waitLock(10000);
+    
+    const timestamp = new Date();
+    const formattedTime = Utilities.formatDate(timestamp, 'Asia/Taipei', 'yyyy/MM/dd HH:mm:ss');
+    
+    // A-N 欄位（14 欄）
+    const rowData = [
+      eventCode,      // A: 活動代碼
+      eventName,      // B: 活動名稱
+      parentName,     // C: 家長姓名
+      phone,          // D: 聯絡電話
+      childName,      // E: 孩子姓名
+      childAge,       // F: 孩子年級／年齡
+      group,          // G: 參賽組別
+      fullJoin,       // H: 是否能全程參與
+      school,         // I: 就讀學校
+      resident,       // J: 是否為台南市民
+      note,           // K: 備註
+      regStatus,      // L: 狀態
+      regId,          // M: 報名序號
+      formattedTime   // N: 建檔時間
+    ];
+    
+    sheet.appendRow(rowData);
+lock.releaseLock();
+
+// 9. 更新統計
+updateStatistics();
+
+// 10. 回傳成功（包含狀態）
+return ContentService.createTextOutput('OK:' + regId + ':' + regStatus);
+    
+  } catch (err) {
+    return ContentService.createTextOutput('ERROR:' + err.message);
+  }
+}
+
+// ========== 自動更新統計 + 編號 + 顏色標示 ==========
+function updateStatistics() {
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_NAME);
+  if (!sheet) return;
+  
+  const data = sheet.getDataRange().getValues();
+  const lastCol = sheet.getLastColumn();
+  
+  // 初始化統計
+  const stats = {
+    '幼兒園組': { '已報名': 0, '候補': 0, '預約下一場': 0, '確認報名': 0, '取消': 0 },
+    '國小低年級組': { '已報名': 0, '候補': 0, '預約下一場': 0, '確認報名': 0, '取消': 0 }
+  };
+  
+  // 顏色定義（淡色）
+  const colorWaitlist = '#FFF9E6';    // 淡黃色（候補）
+  const colorNextround = '#E8F5E9';   // 淡綠色（預約下一場）
+  const colorNormal = '#FFFFFF';       // 白色（一般）
+  
+  // 第一次掃描：找出各組目前最大的編號
+  const maxWaitlistNum = { '幼兒園組': 0, '國小低年級組': 0 };
+  const maxNextroundNum = { '幼兒園組': 0, '國小低年級組': 0 };
+  
+  for (let i = 1; i < data.length; i++) {
+    const group = data[i][6];  // G 欄 = 參賽組別
+    const status = String(data[i][11] || '');  // L 欄 = 狀態
+    
+    if (!group) continue;
+    
+    // 檢查是否已有編號的候補
+    const waitlistMatch = status.match(/^候補(\d+)$/);
+    if (waitlistMatch && maxWaitlistNum[group] !== undefined) {
+      const num = parseInt(waitlistMatch[1], 10);
+      if (num > maxWaitlistNum[group]) {
+        maxWaitlistNum[group] = num;
+      }
+    }
+    
+    // 檢查是否已有編號的預約下一場
+    const nextroundMatch = status.match(/^預約下一場(\d+)$/);
+    if (nextroundMatch && maxNextroundNum[group] !== undefined) {
+      const num = parseInt(nextroundMatch[1], 10);
+      if (num > maxNextroundNum[group]) {
+        maxNextroundNum[group] = num;
+      }
+    }
+  }
+  
+  // 第二次掃描：處理每一列
+  for (let i = 1; i < data.length; i++) {
+    const group = data[i][6];  // G 欄 = 參賽組別
+    const status = String(data[i][11] || '');  // L 欄 = 狀態
+    const rowNum = i + 1;  // 實際列號
+    
+    if (!group) continue;
+    
+    // 統計（包含有編號的）
+    if (status === '已報名' || status === '確認報名') {
+      if (stats[group]) stats[group]['已報名']++;
+    } else if (status.startsWith('候補')) {
+      if (stats[group]) stats[group]['候補']++;
+    } else if (status.startsWith('預約下一場')) {
+      if (stats[group]) stats[group]['預約下一場']++;
+    } else if (status === '取消') {
+      if (stats[group]) stats[group]['取消']++;
+    }
+    
+    // 設定整列顏色 + 編號
+    const range = sheet.getRange(rowNum, 1, 1, lastCol);
+    
+    // 只處理「純候補」（沒有編號的）
+    if (status === '候補') {
+      maxWaitlistNum[group]++;
+      range.setBackground(colorWaitlist);
+      sheet.getRange(rowNum, 12).setValue('候補' + maxWaitlistNum[group]);
+      
+    // 只處理「純預約下一場」（沒有編號的）
+    } else if (status === '預約下一場') {
+      maxNextroundNum[group]++;
+      range.setBackground(colorNextround);
+      sheet.getRange(rowNum, 12).setValue('預約下一場' + maxNextroundNum[group]);
+      
+    // 已有編號的候補，只設定顏色
+    } else if (status.startsWith('候補')) {
+      range.setBackground(colorWaitlist);
+      
+    // 已有編號的預約下一場，只設定顏色
+    } else if (status.startsWith('預約下一場')) {
+      range.setBackground(colorNextround);
+      
+    // 一般狀態
+    } else {
+      range.setBackground(colorNormal);
+    }
+  }
+  
+  // 寫入統計結果到 P 欄
+  const statsData = [
+    ['📊 報名統計', '人數'],
+    ['─────────', '────'],
+    ['幼兒園組-已報名', stats['幼兒園組']['已報名']],
+    ['幼兒園組-候補', stats['幼兒園組']['候補']],
+    ['幼兒園組-預約下一場', stats['幼兒園組']['預約下一場']],
+    ['幼兒園組-取消', stats['幼兒園組']['取消']],
+    ['─────────', '────'],
+    ['國小低年級組-已報名', stats['國小低年級組']['已報名']],
+    ['國小低年級組-候補', stats['國小低年級組']['候補']],
+    ['國小低年級組-預約下一場', stats['國小低年級組']['預約下一場']],
+    ['國小低年級組-取消', stats['國小低年級組']['取消']],
+    ['─────────', '────'],
+    ['總報名人數', data.length - 1],
+    ['', ''],
+    ['最後更新', Utilities.formatDate(new Date(), 'Asia/Taipei', 'MM/dd HH:mm')]
+  ];
+  
+  sheet.getRange('P1:Q15').setValues(statsData);
+}
+
+// ========== 網站瀏覽統計 ==========
+function logPageView() {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  let sheet = ss.getSheetByName('瀏覽統計');
+  
+  // 如果工作表不存在，建立一個
+  if (!sheet) {
+    sheet = ss.insertSheet('瀏覽統計');
+    // 設定標題列
+    sheet.getRange('A1:D1').setValues([['日期', '時間', '瀏覽次數', '備註']]);
+    sheet.getRange('F1:H1').setValues([['📊 每日統計', '日期', '當日總次數']]);
+    // 設定標題格式
+    sheet.getRange('A1:D1').setFontWeight('bold').setBackground('#ffe4ef');
+    sheet.getRange('F1:H1').setFontWeight('bold').setBackground('#e8f5e9');
+    // 設定欄寬
+    sheet.setColumnWidth(1, 100);  // 日期
+    sheet.setColumnWidth(2, 80);   // 時間
+    sheet.setColumnWidth(3, 80);   // 瀏覽次數
+    sheet.setColumnWidth(4, 100);  // 備註
+    sheet.setColumnWidth(6, 100);  // 每日統計標題
+    sheet.setColumnWidth(7, 100);  // 日期
+    sheet.setColumnWidth(8, 100);  // 當日總次數
+  }
+  
+  const now = new Date();
+  const today = Utilities.formatDate(now, 'Asia/Taipei', 'yyyy/MM/dd');
+  const timeStr = Utilities.formatDate(now, 'Asia/Taipei', 'HH:mm:ss');
+  
+  // 新增一筆瀏覽記錄（每次瀏覽都記錄）
+  const lastRow = sheet.getLastRow();
+  sheet.getRange(lastRow + 1, 1, 1, 3).setValues([[today, timeStr, 1]]);
+  
+  // 更新每日統計（F-H 欄）
+  updateDailyStats(sheet);
+}
+
+// ========== 更新每日統計 ==========
+function updateDailyStats(sheet) {
+  if (!sheet) {
+    sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('瀏覽統計');
+  }
+  if (!sheet) return;
+  
+  const data = sheet.getDataRange().getValues();
+  
+  // 統計每日瀏覽次數
+  const dailyCounts = {};
+  for (let i = 1; i < data.length; i++) {
+    const date = data[i][0];  // A 欄 = 日期
+    const count = data[i][2] || 0;  // C 欄 = 瀏覽次數
+    
+    if (date && date !== '📊 每日統計') {
+      const dateStr = (date instanceof Date) 
+        ? Utilities.formatDate(date, 'Asia/Taipei', 'yyyy/MM/dd')
+        : String(date);
+      
+      if (!dailyCounts[dateStr]) {
+        dailyCounts[dateStr] = 0;
+      }
+      dailyCounts[dateStr] += count;
+    }
+  }
+  
+  // 整理成陣列並排序（新的在前）
+  const sortedDates = Object.keys(dailyCounts).sort().reverse();
+  
+  // 清除舊的每日統計（F-H 欄）
+  const statsLastRow = Math.max(sheet.getLastRow(), sortedDates.length + 1);
+  if (statsLastRow > 1) {
+    sheet.getRange(2, 6, statsLastRow - 1, 3).clearContent();
+  }
+  
+  // 寫入新的每日統計
+  let totalViews = 0;
+  const statsData = [];
+  
+  for (let i = 0; i < sortedDates.length; i++) {
+    const date = sortedDates[i];
+    const count = dailyCounts[date];
+    totalViews += count;
+    statsData.push(['', date, count]);
+  }
+  
+  // 加入總計列
+  statsData.push(['', '─────', '────']);
+  statsData.push(['', '總瀏覽次數', totalViews]);
+  statsData.push(['', '統計天數', sortedDates.length + ' 天']);
+  statsData.push(['', '日平均', Math.round(totalViews / sortedDates.length) + ' 次']);
+  
+  if (statsData.length > 0) {
+    sheet.getRange(2, 6, statsData.length, 3).setValues(statsData);
+  }
+}
+
+// ========== 手動整理瀏覽統計（將重複日期合併）==========
+function consolidatePageViews() {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const sheet = ss.getSheetByName('瀏覽統計');
+  if (!sheet) return;
+  
+  const data = sheet.getDataRange().getValues();
+  
+  // 統計每日瀏覽次數
+  const dailyCounts = {};
+  for (let i = 1; i < data.length; i++) {
+    const date = data[i][0];
+    const count = data[i][2] || 1;
+    
+    if (date) {
+      const dateStr = (date instanceof Date) 
+        ? Utilities.formatDate(date, 'Asia/Taipei', 'yyyy/MM/dd')
+        : String(date);
+      
+      if (!dailyCounts[dateStr]) {
+        dailyCounts[dateStr] = 0;
+      }
+      dailyCounts[dateStr] += count;
+    }
+  }
+  
+  // 清除所有資料
+  if (sheet.getLastRow() > 1) {
+    sheet.getRange(2, 1, sheet.getLastRow() - 1, sheet.getLastColumn()).clearContent();
+  }
+  
+  // 重新設定標題
+  sheet.getRange('A1:D1').setValues([['日期', '時間', '瀏覽次數', '備註']]);
+  sheet.getRange('F1:H1').setValues([['📊 每日統計', '日期', '當日總次數']]);
+  
+  // 寫入整理後的資料（每日一列）
+  const sortedDates = Object.keys(dailyCounts).sort();
+  const consolidatedData = [];
+  
+  for (const date of sortedDates) {
+    consolidatedData.push([date, '(已整理)', dailyCounts[date], '']);
+  }
+  
+  if (consolidatedData.length > 0) {
+    sheet.getRange(2, 1, consolidatedData.length, 4).setValues(consolidatedData);
+  }
+  
+  // 更新每日統計
+  updateDailyStats(sheet);
+  
+  Logger.log('已整理 ' + consolidatedData.length + ' 天的瀏覽記錄');
+}
