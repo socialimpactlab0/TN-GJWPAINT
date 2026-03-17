@@ -335,16 +335,16 @@
       position: relative;
     }
 
-  .hero-message::before {
-  content: '💕';
-  position: absolute;
-  top: -15px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 1.1rem;
-  background: linear-gradient(135deg, #fff5f8 0%, #ffeef4 100%);
-  padding: 2px 12px;
-  border-radius: 10px;
+    .hero-message::before {
+      content: '💕';
+      position: absolute;
+      top: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1.1rem;
+      background: linear-gradient(135deg, #fff5f8 0%, #ffeef4 100%);
+      padding: 2px 12px;
+      border-radius: 10px;
     }
 
     .hero-message p {
@@ -623,13 +623,72 @@
     }
 
     .info-sub {
-  margin-top: 8px;
-  padding-top: 8px;
-  border-top: 1px dashed var(--border-dashed);
-  font-size: 0.75rem;
-  color: var(--primary-dark);
-  font-weight: 700;
-}
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px dashed var(--border-dashed);
+      font-size: 0.75rem;
+      color: var(--primary-dark);
+      font-weight: 700;
+    }
+
+    /* ========== 名額即時狀態 ========== */
+    .quota-status {
+      max-width: 500px;
+      margin: 20px auto 0;
+      padding: 16px 20px;
+      background: var(--card);
+      border: 2px dashed var(--border-dashed);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .quota-status-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      text-align: center;
+    }
+
+    .quota-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .quota-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .quota-label {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .quota-badge {
+      padding: 4px 14px;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    .quota-badge.open {
+      background: #dcfce7;
+      color: #16a34a;
+    }
+
+    .quota-badge.almost-full {
+      background: #fef3c7;
+      color: #d97706;
+    }
+
+    .quota-badge.waitlist {
+      background: #fee2e2;
+      color: #dc2626;
+    }
+
     /* ========== 亮點區 ========== */
     .highlights-section {
       background: var(--bg-alt);
@@ -711,22 +770,21 @@
     }
 
     .highlight-note {
-  margin-top: 10px;
-  padding-top: 10px;
-  border-top: 1px dashed var(--border-dashed);
-  font-size: 0.8rem;
-  color: var(--primary-dark);
-  line-height: 1.6;
-}
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px dashed var(--border-dashed);
+      font-size: 0.8rem;
+      color: var(--primary-dark);
+      line-height: 1.6;
+    }
 
-    
     /* ========== 流程區 ========== */
     .schedule-section {
-  background: var(--bg);
-  min-height: auto;
-  padding: 60px 20px;
-  padding-bottom: 80px;
-}
+      background: var(--bg);
+      min-height: auto;
+      padding: 60px 20px;
+      padding-bottom: 80px;
+    }
 
     .timeline {
       max-width: 500px;
@@ -903,22 +961,23 @@
       text-align: left;
     }
 
-   .register-notice-extra {
-  background: linear-gradient(135deg, #fef3c7 0%, #fff5f8 100%);
-  border: 2px dashed #f59e0b;
-  border-radius: var(--radius);
-  padding: 16px 20px;
-  margin-bottom: 20px;
-  text-align: left;
-}
+    .register-notice-extra {
+      background: linear-gradient(135deg, #fef3c7 0%, #fff5f8 100%);
+      border: 2px dashed #f59e0b;
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      margin-bottom: 20px;
+      text-align: left;
+    }
 
-.register-notice-title {
-  color: var(--primary-dark);  /* 粉色 */
-}
-
-.register-notice-extra .register-notice-title {
-  color: #d97706;  /* 橘色 */
-}
+    .register-notice-confirm {
+      background: linear-gradient(135deg, #ecfdf5 0%, #f0fdf4 100%);
+      border: 2px dashed #86efac;
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      margin-bottom: 20px;
+      text-align: left;
+    }
 
     .register-notice-title {
       font-size: 1rem;
@@ -928,6 +987,14 @@
       display: flex;
       align-items: center;
       gap: 8px;
+    }
+
+    .register-notice-extra .register-notice-title {
+      color: #d97706;
+    }
+
+    .register-notice-confirm .register-notice-title {
+      color: #16a34a;
     }
 
     .register-notice-list {
@@ -954,6 +1021,14 @@
       font-weight: 900;
     }
 
+    .register-notice-extra .register-notice-list li::before {
+      color: #d97706;
+    }
+
+    .register-notice-confirm .register-notice-list li::before {
+      color: #16a34a;
+    }
+
     .register-notice-list li:last-child {
       margin-bottom: 0;
     }
@@ -967,18 +1042,18 @@
       position: relative;
     }
 
-   .form-card::before {
-  content: '📝';
-  position: absolute;
-  top: -20px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 1.5rem;
-  background: linear-gradient(135deg, #fff5f8 0%, #ffeef4 100%);
-  padding: 4px 14px;
-  border-radius: 12px;
-  z-index: 1;
-}
+    .form-card::before {
+      content: '📝';
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1.5rem;
+      background: linear-gradient(135deg, #fff5f8 0%, #ffeef4 100%);
+      padding: 4px 14px;
+      border-radius: 12px;
+      z-index: 1;
+    }
 
     .form-group {
       margin-bottom: 18px;
@@ -1217,11 +1292,11 @@
     }
 
     .contact-value-sub {
-  font-size: 0.85rem;
-  color: var(--text);
-  margin-top: 8px;
-  font-weight: 700;
-   }
+      font-size: 0.85rem;
+      color: var(--text);
+      margin-top: 8px;
+      font-weight: 700;
+    }
 
     /* ========== Footer ========== */
     .footer {
@@ -1312,25 +1387,13 @@
 
     /* ========== 動畫 ========== */
     @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(25px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(25px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     @keyframes fadeInDown {
-      from {
-        opacity: 0;
-        transform: translateY(-25px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(-25px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     @keyframes bounce {
@@ -1440,7 +1503,6 @@
         margin-bottom: 28px;
       }
       
-      /* 理念文字 */
       .hero-message {
         padding: 18px 20px;
         margin-bottom: 24px;
@@ -1455,7 +1517,6 @@
         font-size: 0.88rem;
       }
       
-      /* 底圖展示區 */
       .coloring-section {
         padding: 40px 14px;
       }
@@ -1472,7 +1533,6 @@
         font-size: 0.85rem;
       }
       
-      /* 資訊卡片 */
       .info-grid {
         gap: 12px;
       }
@@ -1494,7 +1554,6 @@
         font-size: 0.85rem;
       }
       
-      /* 亮點卡片 */
       .highlights-grid {
         gap: 12px;
       }
@@ -1517,7 +1576,6 @@
         font-size: 0.75rem;
       }
       
-      /* 時間軸 */
       .timeline::before {
         left: 16px;
         width: 3px;
@@ -1545,7 +1603,6 @@
         font-size: 0.75rem;
       }
       
-      /* 獎項 */
       .prizes-grid {
         grid-template-columns: repeat(3, 1fr);
         gap: 10px;
@@ -1568,7 +1625,6 @@
         font-size: 0.8rem;
       }
       
-      /* 報名須知 */
       .register-notice {
         padding: 16px 18px;
       }
@@ -1581,7 +1637,6 @@
         font-size: 0.82rem;
       }
       
-      /* 表單 */
       .form-card {
         padding: 28px 18px;
       }
@@ -1617,7 +1672,6 @@
         font-size: 1rem;
       }
       
-      /* 地點 */
       .location-card {
         padding: 26px 20px;
       }
@@ -1634,7 +1688,6 @@
         font-size: 0.85rem;
       }
       
-      /* 聯絡 */
       .contact-grid {
         grid-template-columns: 1fr;
         gap: 12px;
@@ -1654,6 +1707,18 @@
       
       .contact-value-sub {
         font-size: 0.8rem;
+      }
+
+      .quota-status {
+        padding: 14px 16px;
+      }
+
+      .quota-label {
+        font-size: 0.8rem;
+      }
+
+      .quota-badge {
+        font-size: 0.7rem;
       }
     }
   </style>
@@ -1741,7 +1806,7 @@
         <div class="info-card">
           <div class="info-icon">📅</div>
           <div class="info-label">日期</div>
-          <div class="info-value">2026/3/14（六）</div>
+          <div class="info-value">2026/5/30（六）</div>
         </div>
         <div class="info-card">
           <div class="info-icon">⏰</div>
@@ -1757,7 +1822,21 @@
         <div class="info-card">
           <div class="info-icon">👥</div>
           <div class="info-label">名額</div>
-          <div class="info-value">限額 50 名</div>
+          <div class="info-value" id="quotaDisplay">限額 50 名</div>
+          <div class="info-sub" id="quotaSub">額滿開放候補</div>
+        </div>
+      </div>
+
+      <!-- 名額即時狀態 -->
+      <div class="quota-status fade-in" id="quotaStatus" style="display: none;">
+        <div class="quota-status-title">📊 即時名額狀態</div>
+        <div class="quota-row">
+          <span class="quota-label">幼兒園組</span>
+          <span class="quota-badge open" id="quotaBadgeK">載入中...</span>
+        </div>
+        <div class="quota-row">
+          <span class="quota-label">國小低年級組</span>
+          <span class="quota-badge open" id="quotaBadgeE">載入中...</span>
         </div>
       </div>
     </div>
@@ -1799,67 +1878,67 @@
     <div class="section-content">
       <h2 class="section-title fade-in">當日流程</h2>
       <p class="section-subtitle fade-in">活動安排一目瞭然</p>
-      <p class="section-note fade-in">（主辦方視當時情況，會適度調整時間）</p>
+      <p class="section-note fade-in" style="color: var(--text-muted); font-size: 0.8rem; margin-bottom: 24px;">（主辦方視當時情況，會適度調整時間）</p>
       <div class="timeline fade-in">
-  <div class="timeline-item">
-    <div class="timeline-dot">📋</div>
-    <div class="timeline-content">
-      <div class="timeline-time">08:30-09:00</div>
-      <div class="timeline-title">報到</div>
-      <div class="timeline-desc">請準時報到</div>
+        <div class="timeline-item">
+          <div class="timeline-dot">📋</div>
+          <div class="timeline-content">
+            <div class="timeline-time">08:30-09:00</div>
+            <div class="timeline-title">報到</div>
+            <div class="timeline-desc">請準時報到</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot">📢</div>
+          <div class="timeline-content">
+            <div class="timeline-time">09:00-09:20</div>
+            <div class="timeline-title">活動說明</div>
+            <div class="timeline-desc">活動流程與注意事項</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot">🎨</div>
+          <div class="timeline-content">
+            <div class="timeline-time">09:20-10:30</div>
+            <div class="timeline-title">親子陪伴・繪畫創作</div>
+            <div class="timeline-desc">大人陪伴，孩子專心創作</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot">💕</div>
+          <div class="timeline-content">
+            <div class="timeline-time">10:30-10:45</div>
+            <div class="timeline-title">親子互動・感恩時刻</div>
+            <div class="timeline-desc">說出和寫下最想對家人說的話</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot">🌍</div>
+          <div class="timeline-content">
+            <div class="timeline-time">10:45-11:40</div>
+            <div class="timeline-title">乾淨世界頻道介紹</div>
+            <div class="timeline-desc">認識乾淨世界平台</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot">🏆</div>
+          <div class="timeline-content">
+            <div class="timeline-time">11:40-12:00</div>
+            <div class="timeline-title">公布得獎／頒獎</div>
+            <div class="timeline-desc">評審結果公布，進行頒獎</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot">🎉</div>
+          <div class="timeline-content">
+            <div class="timeline-time">12:00</div>
+            <div class="timeline-title">活動結束</div>
+            <div class="timeline-desc">感謝參與，期待下次再見</div>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="timeline-item">
-    <div class="timeline-dot">📢</div>
-    <div class="timeline-content">
-      <div class="timeline-time">09:00-09:20</div>
-      <div class="timeline-title">活動說明</div>
-      <div class="timeline-desc">活動流程與注意事項</div>
-    </div>
-  </div>
-  <div class="timeline-item">
-    <div class="timeline-dot">🎨</div>
-    <div class="timeline-content">
-      <div class="timeline-time">09:20-10:30</div>
-      <div class="timeline-title">親子陪伴・繪畫創作</div>
-      <div class="timeline-desc">大人陪伴，孩子專心創作</div>
-    </div>
-  </div>
-  <div class="timeline-item">
-    <div class="timeline-dot">💕</div>
-    <div class="timeline-content">
-      <div class="timeline-time">10:30-10:45</div>
-      <div class="timeline-title">親子互動・感恩時刻</div>
-      <div class="timeline-desc">說出和寫下最想對家人說的話</div>
-    </div>
-  </div>
-  <div class="timeline-item">
-    <div class="timeline-dot">🌍</div>
-    <div class="timeline-content">
-      <div class="timeline-time">10:45-11:40</div>
-      <div class="timeline-title">乾淨世界頻道介紹</div>
-      <div class="timeline-desc">認識乾淨世界平台</div>
-    </div>
-  </div>
-  <div class="timeline-item">
-    <div class="timeline-dot">🏆</div>
-    <div class="timeline-content">
-      <div class="timeline-time">11:40-12:00</div>
-      <div class="timeline-title">公布得獎／頒獎</div>
-      <div class="timeline-desc">評審結果公布，進行頒獎</div>
-    </div>
-  </div>
-  <div class="timeline-item">
-    <div class="timeline-dot">🎉</div>
-    <div class="timeline-content">
-      <div class="timeline-time">12:00</div>
-      <div class="timeline-title">活動結束</div>
-      <div class="timeline-desc">感謝參與，期待下次再見</div>
-    </div>
-  </div>
-</div>
- </div>
-  </section> 
+  </section>
   
   <!-- ========== 獎項區 ========== -->
   <section class="section prizes-section" id="prizes">
@@ -1899,17 +1978,39 @@
   <!-- ========== 報名區 ========== -->
   <section class="section register-section" id="register">
     <div class="register-container">
-      <h2 class="section-title fade-in" style="margin-bottom: 23px; font-size: 1.3rem; white-space: nowrap;">目前已額滿｜候補與下一場通知</h2>
+      <h2 class="section-title fade-in" id="registerTitle" style="margin-bottom: 23px; font-size: 1.3rem;">開放報名中</h2>
       
-      <!-- 本場活動已額滿 -->
-<div class="register-notice fade-in">
-  <div class="register-notice-title">📌 本場活動已額滿</div>
-  <ul class="register-notice-list">
-    <li>由於報名非常踴躍，本場 50名已額滿</li>
-    <li>若有家長臨時取消，將依候補順序通知</li>
-    <li>未遞補者資料會保留，下一場活動將優先通知</li>
-  </ul>
-</div>
+      <!-- 報名須知 -->
+      <div class="register-notice fade-in">
+        <div class="register-notice-title">📌 報名須知</div>
+        <ul class="register-notice-list">
+          <li>本活動免費參加，名額有限（每組 25 名）</li>
+          <li>需家長陪同，全程參與（約 3 小時）</li>
+          <li>畫材請自備（蠟筆、彩色筆、色鉛筆、水彩皆可）</li>
+          <li>每位孩子限報名一次，請勿重複報名</li>
+        </ul>
+      </div>
+
+      <!-- 出席確認機制說明 -->
+      <div class="register-notice-confirm fade-in">
+        <div class="register-notice-title">✅ 出席確認機制</div>
+        <ul class="register-notice-list">
+          <li>活動前 3 天（5/27）我們會發送確認簡訊</li>
+          <li>請於 5/28 晚上 9 點前回覆確認是否出席</li>
+          <li>逾時未回覆將視為取消，名額釋出給候補家庭</li>
+          <li>名額珍貴，請確認能到場再報名，把機會留給需要的家庭</li>
+        </ul>
+      </div>
+
+      <!-- 候補說明（額滿後才顯示）-->
+      <div class="register-notice-extra fade-in" id="waitlistNotice" style="display: none;">
+        <div class="register-notice-title">📋 候補說明</div>
+        <ul class="register-notice-list">
+          <li>本場名額已滿，目前開放候補登記</li>
+          <li>若有家長取消釋出名額，我們將以簡訊通知候補家庭</li>
+          <li>届時先回覆先錄取，請保持手機暢通</li>
+        </ul>
+      </div>
       
       <div class="form-card fade-in">
         <div class="progress" id="progress">
@@ -2067,15 +2168,20 @@
   // ========== 設定區 ==========
   const GAS_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbxDlJ8o8unlRefrLvJM22lPN7E4Z-TevdkT2Lq1O9ROunLKSVKliq8qylOo_jj-FyyDzQ/exec';
   const THANKS_URL = 'thanks.html';
-  const EVENT_CODE = 'GJC2026';
+  const EVENT_CODE = 'GJC2026-0530';
   const EVENT_NAME = '乾淨校園我愛我家 - 兒童著色畫比賽';
+
+  // 報名截止日（5/26 23:59）
+  const REGISTRATION_DEADLINE = new Date('2026-05-26T23:59:59+08:00');
 
   // ========== 組別狀態 ==========
   let groupStatusData = {};
-  const STATUS_TEXT = {
-    open: '（限 25 名）',
-    waitlist: '（已額滿，接受候補）',
-    nextround: '（已額滿，報名下一場）'
+
+  // 前端顯示文字對照
+  const STATUS_DISPLAY = {
+    open: '尚有名額',
+    almostFull: '即將額滿',
+    waitlist: '已額滿（候補中）'
   };
 
   // ========== 工具函式 ==========
@@ -2099,6 +2205,11 @@
     };
   }
 
+  // ========== 檢查是否已截止報名 ==========
+  function isRegistrationClosed() {
+    return new Date() > REGISTRATION_DEADLINE;
+  }
+
   // ========== 組別狀態檢查 ==========
   async function checkGroupStatus() {
     try {
@@ -2106,7 +2217,8 @@
       if (response.ok) {
         groupStatusData = await response.json();
         updateGroupOptions();
-        updateFormNotice();
+        updateQuotaDisplay();
+        updateRegistrationUI();
       }
     } catch (e) {
       console.log('無法取得組別狀態', e);
@@ -2122,22 +2234,96 @@
       const info = groupStatusData[value];
       
       if (info) {
-        const statusText = STATUS_TEXT[info.status] || '';
-        option.textContent = value + statusText;
-        
-        if (info.status === 'waitlist') {
-          option.style.color = '#f59e0b';
-        } else if (info.status === 'nextround') {
-          option.style.color = '#8b5cf6';
+        let statusText = '';
+        if (info.status === 'open') {
+          statusText = '（限 25 名）';
+          option.style.color = '';
+        } else if (info.status === 'almostFull') {
+          statusText = '（即將額滿）';
+          option.style.color = '#d97706';
+        } else if (info.status === 'waitlist') {
+          statusText = '（已額滿，接受候補）';
+          option.style.color = '#dc2626';
         }
+        option.textContent = value + statusText;
       }
     });
   }
 
-  function updateFormNotice() {
-  // 不再動態新增「名額狀態說明」區塊
-  return;
-}
+  // ========== 更新名額即時狀態顯示 ==========
+  function updateQuotaDisplay() {
+    const quotaStatus = $('quotaStatus');
+    const quotaBadgeK = $('quotaBadgeK');
+    const quotaBadgeE = $('quotaBadgeE');
+    
+    if (!quotaStatus) return;
+    quotaStatus.style.display = 'block';
+
+    // 幼兒園組
+    const kInfo = groupStatusData['幼兒園組'];
+    if (kInfo && quotaBadgeK) {
+      quotaBadgeK.textContent = STATUS_DISPLAY[kInfo.status] || '載入中...';
+      quotaBadgeK.className = 'quota-badge';
+      if (kInfo.status === 'open') quotaBadgeK.classList.add('open');
+      else if (kInfo.status === 'almostFull') quotaBadgeK.classList.add('almost-full');
+      else if (kInfo.status === 'waitlist') quotaBadgeK.classList.add('waitlist');
+    }
+
+    // 國小低年級組
+    const eInfo = groupStatusData['國小低年級組'];
+    if (eInfo && quotaBadgeE) {
+      quotaBadgeE.textContent = STATUS_DISPLAY[eInfo.status] || '載入中...';
+      quotaBadgeE.className = 'quota-badge';
+      if (eInfo.status === 'open') quotaBadgeE.classList.add('open');
+      else if (eInfo.status === 'almostFull') quotaBadgeE.classList.add('almost-full');
+      else if (eInfo.status === 'waitlist') quotaBadgeE.classList.add('waitlist');
+    }
+  }
+
+  // ========== 根據狀態更新報名區 UI ==========
+  function updateRegistrationUI() {
+    const registerTitle = $('registerTitle');
+    const waitlistNotice = $('waitlistNotice');
+    const submitBtn = $('submitBtn');
+
+    // 檢查是否已截止
+    if (isRegistrationClosed()) {
+      if (registerTitle) registerTitle.textContent = '報名已截止';
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = '報名已截止';
+      }
+      return;
+    }
+
+    // 檢查兩組是否都已滿（進入候補）
+    const kInfo = groupStatusData['幼兒園組'];
+    const eInfo = groupStatusData['國小低年級組'];
+    
+    const bothWaitlist = kInfo && eInfo && 
+      kInfo.status === 'waitlist' && eInfo.status === 'waitlist';
+
+    const anyWaitlist = (kInfo && kInfo.status === 'waitlist') || 
+      (eInfo && eInfo.status === 'waitlist');
+
+    if (bothWaitlist) {
+      // 兩組都額滿
+      if (registerTitle) registerTitle.textContent = '已額滿｜開放候補登記';
+      if (waitlistNotice) waitlistNotice.style.display = 'block';
+      if (submitBtn) submitBtn.textContent = '登記候補';
+    } else if (anyWaitlist) {
+      // 其中一組額滿
+      if (registerTitle) registerTitle.textContent = '部分組別已額滿';
+      if (waitlistNotice) waitlistNotice.style.display = 'block';
+      if (submitBtn) submitBtn.textContent = '確認報名';
+    } else {
+      // 都還有名額
+      if (registerTitle) registerTitle.textContent = '開放報名中';
+      if (waitlistNotice) waitlistNotice.style.display = 'none';
+      if (submitBtn) submitBtn.textContent = '確認報名';
+    }
+  }
+
   // ========== 表單驗證 ==========
   function validateForm() {
     const errors = [];
@@ -2152,7 +2338,7 @@
 
     if (!fullJoin || !fullJoin.value) errors.push('請選擇是否能全程參與');
     if (fullJoin && fullJoin.value === '否') {
-      errors.push('本活動需全程參與（約 3.5 小時），若無法配合請等待下次活動');
+      errors.push('本活動需全程參與（約 3 小時），若無法配合請等待下次活動');
     }
     if (!resident || !resident.value) errors.push('請選擇是否為台南市民');
     if (!parentName || !parentName.value.trim()) errors.push('請填寫家長姓名');
@@ -2189,6 +2375,9 @@
 
     // 檢查組別狀態
     checkGroupStatus();
+
+    // 定期更新狀態（每 30 秒）
+    setInterval(checkGroupStatus, 30000);
 
     // ===== 漢堡選單 =====
     const navToggle = $('navToggle');
@@ -2311,6 +2500,12 @@
     if (form) {
       form.addEventListener('submit', async function(e) {
         e.preventDefault();
+
+        // 檢查是否已截止
+        if (isRegistrationClosed()) {
+          showFormError(['報名已截止，感謝您的關注，敬請期待下一場活動！']);
+          return;
+        }
         
         // 驗證表單
         const errors = validateForm();
